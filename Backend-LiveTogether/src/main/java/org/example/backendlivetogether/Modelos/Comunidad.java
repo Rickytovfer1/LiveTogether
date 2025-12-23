@@ -34,7 +34,7 @@ public class Comunidad {
     private String codigoComunidad;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "presidenteId")
+    @JoinColumn(name = "idPresidente")
     private Vecino presidente;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
