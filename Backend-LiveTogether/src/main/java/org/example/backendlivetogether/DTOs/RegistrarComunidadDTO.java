@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistrarVecinoDTO {
+public class RegistrarComunidadDTO {
     private String nombre;
-    private String apellidos;
-    private String telefono;
-    private String fechaNacimiento;
-    private String dni;
+    private String direccion;
+    private String cif;
+    private Integer idPresidente;
 
     private String correo;
     private String contrasena;

@@ -2,9 +2,11 @@ package org.example.backendlivetogether.Servicios;
 
 import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.LoginDTO;
+import org.example.backendlivetogether.DTOs.RegistrarComunidadDTO;
 import org.example.backendlivetogether.DTOs.RegistrarVecinoDTO;
 import org.example.backendlivetogether.DTOs.RespuestaDTO;
 import org.example.backendlivetogether.Enumerados.Rol;
+import org.example.backendlivetogether.Modelos.Comunidad;
 import org.example.backendlivetogether.Modelos.Usuario;
 import org.example.backendlivetogether.Modelos.Vecino;
 import org.example.backendlivetogether.Modelos.VerificationToken;
@@ -95,18 +97,37 @@ public class UsuarioServicio implements UserDetailsService{
         vecino.setFechaNacimiento(fechaNacimiento);
 
         vecino.setTelefono(dto.getTelefono());
-        vecino.setNumCuenta(dto.getNumeroCuenta());
 
         vecino.setUsuario(nuevoUsuario);
         iVecinoRepositorio.save(vecino);
 
-//        String token = UUID.randomUUID().toString();
-//        LocalDateTime expiryDate = LocalDateTime.now().plusHours(24);
-//        VerificationToken verificationToken = new VerificationToken(token, nuevoUsuario, expiryDate);
-//        iVerificationTokenRepositorio.save(verificationToken);
-//
-//        emailServicio.sendVerificationEmail(nuevoUsuario.getCorreo(), token);
-
         return nuevoUsuario;
     }
+
+    public Usuario registrarComunidad(RegistrarComunidadDTO dto){
+
+        Usuario nuevoUsuario = new Usuario();
+        Comunidad comunidad = new Comunidad();
+
+        nuevoUsuario.setCorreo(dto.getCorreo());
+        nuevoUsuario.setContrasena(passwordEncoder.encode(dto.getContrasena()));
+        nuevoUsuario.setRol(Rol.COMUNIDAD);
+
+        comunidad.setNombre(dto.getNombre());
+        comunidad.setDireccion(dto.getDireccion());
+        comunidad.setCIF(dto.getCif());
+
+        Vecino presidente = iVecinoRepositorio.findById(dto.getIdPresidente())
+                .orElseThrow(() -> new RuntimeException("No existe un presidente con este ID."));
+
+        comunidad.setPresidente(presidente);
+
+        Usuario usuarioGuardado = usuarioRepositorio.save(nuevoUsuario);
+        comunidad.setUsuario(usuarioGuardado);
+
+        iComunidadRepositorio.save(comunidad);
+
+        return usuarioGuardado;
+    }
+
 }

@@ -34,9 +34,6 @@ public class Vecino {
     @Column(name = "fecha_nacimiento", nullable = false)
     private LocalDate fechaNacimiento;
 
-    @Column(name = "numero_cuenta", nullable = false)
-    private String numCuenta;
-
     @Column(name = "dni", nullable = false)
     private String dni;
 
