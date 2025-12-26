@@ -1,0 +1,9 @@
+<ion-content>
+  <ng-container *ngIf="isDesktop">
+    <app-todo-registro></app-todo-registro>
+  </ng-container>
+
+  <ng-container *ngIf="!isDesktop">
+    <app-registro></app-registro>
+  </ng-container>
+</ion-content>

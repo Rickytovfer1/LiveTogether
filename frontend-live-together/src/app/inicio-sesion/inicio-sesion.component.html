@@ -1,0 +1,57 @@
+<ion-content>
+  <div class="layout">
+
+    <div class="contenido">
+      <ion-img src="assets/icon/header/logo.png" class="logo"></ion-img>
+      <h1 class="titulo">BIENVENIDO A LIVETOGETHER</h1>
+    </div>
+
+    <div class="fondo">
+      <div class="input-container">
+        <ion-text>Email</ion-text>
+        <ion-input type="email" placeholder="Introduce tu email"></ion-input>
+      </div>
+
+      <div class="input-container">
+        <ion-text>Contraseña</ion-text>
+        <ion-input type="password" placeholder="Introduce tu contraseña"></ion-input>
+      </div>
+
+      <div class="registro-container">
+        <ion-text class="registro-texto">¿No tienes una cuenta?</ion-text>
+        <ion-text (click)="navigateToRegistro()">Crear cuenta</ion-text>
+      </div>
+
+      <div class="registro-container2">
+        <ion-text>¿Has olvidado tu contraseña?</ion-text>
+      </div>
+
+      <ion-button expand="block">INICIO SESIÓN</ion-button>
+    </div>
+
+  </div>
+</ion-content>
+
+<ion-toast
+  id="toastCamposVacios"
+  message="Por favor, ingrese ambos campos."
+  duration="3000"
+  position="top"
+  color="warning"
+></ion-toast>
+
+<ion-toast
+  id="toastLoginIncorrecto"
+  message="Correo o contraseña incorrectos."
+  duration="3000"
+  position="top"
+  color="danger"
+></ion-toast>
+
+<ion-toast
+  id="toastExito"
+  message="¡Bienvenido a LiveTogether!"
+  duration="3000"
+  position="top"
+  color="success"
+></ion-toast>

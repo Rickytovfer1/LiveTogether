@@ -1,0 +1,66 @@
+<ion-content>
+  <div class="formulario">
+    <div class="titulo-container">
+      <h2 class="title">Configurar perfil</h2>
+      <h3 class="subtitle">Rellena los siguientes datos personales</h3>
+    </div>
+
+    <div class="inputs-grid">
+      <!-- Columna izquierda -->
+      <div class="col">
+
+        <div>
+          <ion-text>Nombre</ion-text>
+          <ion-input type="text" placeholder="Introduce tu nombre" required></ion-input>
+        </div>
+        <div>
+          <ion-text>Apellidos</ion-text>
+          <ion-input type="text" placeholder="Introduce tus apellidos" required></ion-input>
+        </div>
+
+        <div>
+          <ion-text>Teléfono</ion-text>
+          <ion-input type="tel" placeholder="Introduce tu teléfono" required maxlength="9" minlength="9" pattern="[0-9]{9}"></ion-input>
+        </div>
+        <div>
+          <ion-text>Fecha de nacimiento</ion-text>
+          <ion-input type="date" placeholder="Introduce tu fecha de nacimiento" required></ion-input>
+        </div>
+      </div>
+
+      <!-- Columna derecha -->
+      <div class="col">
+
+
+        <div>
+          <ion-text>DNI</ion-text>
+          <ion-input type="text" placeholder="Introduce tu DNI" required maxlength="9" minlength="9" pattern="^[0-9]{8}[A-Za-z]$"></ion-input>
+        </div>
+        <div>
+          <ion-text>Email</ion-text>
+          <ion-input type="email" placeholder="Introduce tu email" required></ion-input>
+        </div>
+        <div>
+          <ion-text>Contraseña</ion-text>
+          <ion-input type="password" placeholder="Introduce tu contraseña" minlength="6" required></ion-input>
+        </div>
+        <div>
+          <ion-text>Confirmar contraseña</ion-text>
+          <ion-input type="password" placeholder="Vuelva a introducir tu contaseña" required></ion-input>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="checkbox-container">
+        <ion-checkbox required></ion-checkbox>
+        <ion-text class="checkbox-text">Acepto las políticas y condiciones</ion-text>
+      </div>
+    </div>
+    <div class="registro-container">
+      <ion-text class="registro-texto">¿Ya tienes una cuenta?</ion-text>
+      <ion-text class="iniciar-sesion">Iniciar Sesión</ion-text>
+    </div>
+
+    <ion-button expand="block">TERMINAR REGISTRO</ion-button>
+  </div>
+</ion-content>
