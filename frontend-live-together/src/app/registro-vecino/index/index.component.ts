@@ -14,9 +14,8 @@ import {TodoRegistroComponent} from "../todo-registro/todo-registro.component";
   imports: [
     NgIf,
     IonContent,
-    ConfigPerfilVecinoComponent,
     RegistroComponent,
-    TodoRegistroComponent
+    TodoRegistroComponent,
   ]
 })
 export class IndexComponent  implements OnInit {

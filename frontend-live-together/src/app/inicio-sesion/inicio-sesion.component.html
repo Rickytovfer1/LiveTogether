@@ -9,12 +9,12 @@
     <div class="fondo">
       <div class="input-container">
         <ion-text>Email</ion-text>
-        <ion-input type="email" placeholder="Introduce tu email"></ion-input>
+        <ion-input [(ngModel)]="formLogin.correo" type="email" placeholder="Introduce tu email"></ion-input>
       </div>
 
       <div class="input-container">
         <ion-text>Contraseña</ion-text>
-        <ion-input type="password" placeholder="Introduce tu contraseña"></ion-input>
+        <ion-input [(ngModel)]="formLogin.contrasena" type="password" placeholder="Introduce tu contraseña"></ion-input>
       </div>
 
       <div class="registro-container">
@@ -26,7 +26,7 @@
         <ion-text>¿Has olvidado tu contraseña?</ion-text>
       </div>
 
-      <ion-button expand="block">INICIO SESIÓN</ion-button>
+      <ion-button expand="block" (click)="login()">INICIO SESIÓN</ion-button>
     </div>
 
   </div>

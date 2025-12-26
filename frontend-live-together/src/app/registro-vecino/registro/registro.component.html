@@ -6,22 +6,22 @@
 
   <div class="input-container">
     <ion-text>Email</ion-text>
-    <ion-input type="email" placeholder="Introduce tu email" required></ion-input>
+    <ion-input [(ngModel)]="datosRegistro.correo" type="email" placeholder="Introduce tu email" required></ion-input>
   </div>
 
   <div class="input-container">
     <ion-text>Contraseña</ion-text>
-    <ion-input type="password" placeholder="Introduce tu contraseña" minlength="6" required></ion-input>
+    <ion-input [(ngModel)]="datosRegistro.contrasena" type="password" placeholder="Introduce tu contraseña" minlength="6" required></ion-input>
   </div>
 
   <div class="input-container">
     <ion-text>Confirmar contraseña</ion-text>
-    <ion-input type="password" placeholder="Vuelva a introducir tu contaseña" required></ion-input>
+    <ion-input [(ngModel)]="repetirContrasena" type="password" placeholder="Vuelva a introducir tu contaseña" required></ion-input>
   </div>
 
   <div class="input-container">
     <div class="checkbox-container">
-      <ion-checkbox required></ion-checkbox>
+      <ion-checkbox [(ngModel)]="aceptaPoliticas" required></ion-checkbox>
       <ion-text class="checkbox-text">Acepto las políticas y condiciones</ion-text>
     </div>
   </div>

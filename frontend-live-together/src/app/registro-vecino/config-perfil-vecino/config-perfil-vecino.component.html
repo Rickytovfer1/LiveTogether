@@ -6,58 +6,27 @@
 
   <div class="input-container">
     <ion-text>Nombre</ion-text>
-    <ion-input
-
-      type="text"
-      placeholder="Introduce tu nombre"
-      required
-    ></ion-input>
+    <ion-input [(ngModel)]="registroVecino.nombre" type="text" placeholder="Introduce tu nombre" required></ion-input>
   </div>
 
   <div class="input-container">
     <ion-text>Apellidos</ion-text>
-    <ion-input
-
-      type="text"
-      placeholder="Introduce tus apellidos"
-      required
-    ></ion-input>
+    <ion-input [(ngModel)]="registroVecino.apellidos" type="text" placeholder="Introduce tus apellidos" required></ion-input>
   </div>
 
   <div class="input-container">
     <ion-text>Teléfono</ion-text>
-    <ion-input
-
-      type="tel"
-      placeholder="Introduce tu teléfono"
-      required
-      maxlength="9"
-      minlength="9"
-      pattern="[0-9]{9}"
-    ></ion-input>
+    <ion-input [(ngModel)]="registroVecino.telefono" type="tel" placeholder="Introduce tu teléfono" required maxlength="9" minlength="9" pattern="[0-9]{9}"></ion-input>
   </div>
 
   <div class="input-container">
     <ion-text>Fecha de nacimiento</ion-text>
-    <ion-input
-
-      type="date"
-      placeholder="Introduce tu fecha de nacimiento"
-      required
-    ></ion-input>
+    <ion-input [(ngModel)]="registroVecino.fechaNacimiento" type="date" placeholder="Introduce tu fecha de nacimiento" required></ion-input>
   </div>
 
   <div class="input-container">
     <ion-text>DNI</ion-text>
-    <ion-input
-
-      type="text"
-      placeholder="Introduce tu DNI"
-      required
-      maxlength="9"
-      minlength="9"
-      pattern="^[0-9]{8}[A-Za-z]$"
-    ></ion-input>
+    <ion-input [(ngModel)]="registroVecino.dni" type="text" placeholder="Introduce tu DNI" required maxlength="9" minlength="9" pattern="^[0-9]{8}[A-Za-z]$"></ion-input>
   </div>
 
   <div class="registro-container">
