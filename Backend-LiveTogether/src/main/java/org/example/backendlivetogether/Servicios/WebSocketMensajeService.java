@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@EnableWebSocketMessageBroker
 public class WebSocketMensajeService {
     private final SimpMessagingTemplate messagingTemplate;
 
