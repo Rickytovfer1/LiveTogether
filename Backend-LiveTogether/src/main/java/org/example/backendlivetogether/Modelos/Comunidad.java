@@ -37,6 +37,11 @@ public class Comunidad {
     @JoinColumn(name = "idPresidente")
     private Vecino presidente;
 
+    @OneToMany(mappedBy = "comunidad", cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Vivienda> viviendas = new HashSet<>(0);
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
