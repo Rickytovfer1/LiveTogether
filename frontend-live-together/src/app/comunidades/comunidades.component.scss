@@ -1,0 +1,86 @@
+ion-toolbar {
+  --background: #339F28;
+}
+
+ion-content {
+  --background: #E7F4E7;
+}
+
+.searchbar-blanco {
+  --background: #FFFFFF;
+  --box-shadow: none;
+  --border: none;
+  border-radius: 40px;
+}
+
+.buscador {
+  background-color: white;
+  border-radius: 40px;
+  margin: 20px;
+  margin-block: 35px;
+}
+
+.logo {
+  width: 60px;
+  height: auto;
+  margin: 10px;
+}
+
+.logo-circulo {
+  background-color: white;
+  border-radius: 50%;
+  padding: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.salir {
+  width: 60px;
+}
+
+.footer-center {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.añadir {
+  width: 50px;
+}
+
+.tarjeta {
+  background-color: #57BF48;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px;
+  color: white;
+  position: relative;
+}
+
+.tarjeta-titulo {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 5px 5px 10px;
+}
+
+.tarjeta-subtitulo {
+  font-size: 17px;
+  margin: 5px;
+}
+
+.div-sin {
+  margin-block: 50px;
+  margin-inline: 20px;
+  text-align: center;
+
+  span {
+    font-weight: bold
+  }
+}
+
+.salir-comunidad {
+  width: 30px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

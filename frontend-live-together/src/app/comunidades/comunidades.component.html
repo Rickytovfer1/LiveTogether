@@ -1,0 +1,38 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral></app-nav-lateral>
+    </ion-col>
+
+    <!-- CONTENIDO -->
+    <ion-col size="12" size-md="9.5" class="contenido-principal">
+      <ion-content>
+        <div class="buscador">
+          <ion-searchbar
+            class="searchbar-blanco"
+            placeholder="Buscar en LiveTogether..."
+            showCancelButton="focus">
+          </ion-searchbar>
+        </div>
+
+        <div class="tarjeta">
+          <p class="tarjeta-titulo">Nombre</p>
+          <p class="tarjeta-subtitulo">Direccion</p>
+          <img class="salir-comunidad" src="assets/icon/salir.png"/>
+        </div>
+
+        <div class="tarjeta">
+          <p class="tarjeta-titulo">Nombre</p>
+          <p class="tarjeta-subtitulo">Direccion</p>
+          <img class="salir-comunidad" src="assets/icon/salir.png"/>
+        </div>
+      </ion-content>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer></app-footer>

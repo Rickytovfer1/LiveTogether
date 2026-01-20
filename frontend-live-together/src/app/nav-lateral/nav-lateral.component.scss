@@ -1,0 +1,39 @@
+ion-toolbar {
+  --background: #339F28;
+}
+ion-grid,
+body {
+  background: #339F28;
+  height: 100%;
+}
+
+ion-img {
+  height: 50px;
+  width: 50px;
+  margin: 0 25px 0 auto;
+}
+
+ion-text {
+  color: #ffffff;
+  font-size: 25px;
+  margin-left: 25px;
+}
+
+
+.despg {
+  display: flex;
+  align-items: center;
+}
+
+.icono {
+  width: 60px;
+  height: 60px;
+  margin: 0 25px 0 15px;
+}
+
+ion-row {
+  margin-top: 20%;
+  margin-bottom: 40px;
+  margin-left: 25px;
+}
+

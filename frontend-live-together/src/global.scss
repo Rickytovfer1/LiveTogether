@@ -35,3 +35,71 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+ion-content {
+  --keyboard-offset: none !important;
+}
+
+ion-menu-button {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  ion-menu-button {
+    display: block;
+  }
+}
+
+ion-footer {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  ion-footer {
+    display: none;
+  }
+}
+
+app-nav-lateral, app-nav-lateral-empresa {
+  display: none;
+  height: 100vh;
+}
+
+@media (min-width: 768px) {
+  app-nav-lateral, app-nav-lateral-empresa {
+    display: block;
+  }
+}
+
+.menu-lateral {
+  margin: 0;
+  padding: 0
+}
+
+.contenido-principal {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.fila_menus {
+  height: 100%;
+  margin: 0;
+  padding: 0
+}
+
+.grid_menus {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0
+}
+
+@media (max-width: 768px) {
+  .menu-lateral {
+    display: none;
+  }
+
+  .contenido-principal {
+    width: 100%;
+  }
+}

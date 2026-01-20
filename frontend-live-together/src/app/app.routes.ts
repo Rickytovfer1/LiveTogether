@@ -25,4 +25,8 @@ export const routes: Routes = [
     path: 'registro-vecino-index',
     loadComponent: () => import('./registro-vecino/index/index.component').then((m) => m.IndexComponent),
   },
+  {
+    path: 'comunidades',
+    loadComponent: () => import('./comunidades/comunidades.component').then((m) => m.ComunidadesComponent),
+  },
 ];

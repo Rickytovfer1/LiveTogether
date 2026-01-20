@@ -53,6 +53,7 @@ export class InicioSesionComponent  implements OnInit {
           if (rol === "VECINO") {
             const toast = document.getElementById("toastExito") as any;
             toast.present();
+            this.router.navigate(['/comunidades']);
             console.log("Logueado correctamente")
           }
       },
