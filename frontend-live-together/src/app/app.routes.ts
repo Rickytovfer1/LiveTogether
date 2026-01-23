@@ -29,4 +29,8 @@ export const routes: Routes = [
     path: 'comunidades',
     loadComponent: () => import('./comunidades/comunidades.component').then((m) => m.ComunidadesComponent),
   },
+  {
+    path: 'comunidad/perfil',
+    loadComponent: () => import('./perfil-comunidad/perfil-comunidad.component').then((m) => m.PerfilComunidadComponent),
+  },
 ];

@@ -10,25 +10,45 @@
     <!-- CONTENIDO -->
     <ion-col size="12" size-md="9.5" class="contenido-principal">
       <ion-content>
+
         <div class="buscador">
           <ion-searchbar
             class="searchbar-blanco"
             placeholder="Buscar en LiveTogether..."
-            showCancelButton="focus">
+            showCancelButton="focus"
+            (ionInput)="filtrarComunidades($event)">
           </ion-searchbar>
         </div>
 
-        <div class="tarjeta">
-          <p class="tarjeta-titulo">Nombre</p>
-          <p class="tarjeta-subtitulo">Direccion</p>
-          <img class="salir-comunidad" src="assets/icon/salir.png"/>
-        </div>
+        @for (comunidad of listaComunidades; track comunidad.id) {
+          <div class="tarjeta" (click)="navigateToComunidad(comunidad)">
+            <p class="tarjeta-titulo">{{ comunidad.nombre }}</p>
+            <p class="tarjeta-subtitulo">{{ comunidad.direccion }}</p>
+            <img
+              class="salir-comunidad"
+              src="assets/icon/salir.png"
+              alt="Salir comunidad"
+            />
+          </div>
+        }
 
-        <div class="tarjeta">
-          <p class="tarjeta-titulo">Nombre</p>
-          <p class="tarjeta-subtitulo">Direccion</p>
-          <img class="salir-comunidad" src="assets/icon/salir.png"/>
-        </div>
+        @if (listaComunidades.length === 0 && todasComunidades.length !== 0) {
+          <div class="div-sin">
+            <span>No se ha encontrado ninguna comunidad.</span>
+          </div>
+        }
+
+        @if (todasComunidades.length === 0) {
+          <div class="div-sin">
+            <span>
+              No estás en ninguna comunidad ahora mismo.
+              Pulsa el botón de
+              <b style="color: #0E8008; font-size: 24px">+</b>
+              para descubrir nuevas comunidades.
+            </span>
+          </div>
+        }
+
       </ion-content>
     </ion-col>
 

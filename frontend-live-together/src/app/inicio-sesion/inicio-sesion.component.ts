@@ -3,7 +3,7 @@ import {IonicModule} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {Login} from "../modelos/Login";
 import {AuthService} from "../servicios/auth-service";
-import {TokenData} from "../modelos/TokenData";
+import {TokenDataDTO} from "../modelos/TokenDataDTO";
 import {jwtDecode} from "jwt-decode";
 import {FormsModule} from "@angular/forms";
 
@@ -47,7 +47,7 @@ export class InicioSesionComponent  implements OnInit {
         sessionStorage.setItem("authToken", token);
         this.authService.setAuthState(true);
 
-          const decodedToken = jwtDecode(token) as { tokenDataDTO: TokenData };
+          const decodedToken = jwtDecode(token) as { tokenDataDTO: TokenDataDTO };
           const rol = decodedToken?.tokenDataDTO.rol;
 
           if (rol === "VECINO") {
