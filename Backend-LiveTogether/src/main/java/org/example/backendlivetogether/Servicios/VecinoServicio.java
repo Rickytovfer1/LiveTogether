@@ -4,17 +4,22 @@ import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.VecinoDTO;
 import org.example.backendlivetogether.DTOs.VecinoUsuarioDTO;
 import org.example.backendlivetogether.Modelos.Vecino;
+import org.example.backendlivetogether.Modelos.Vivienda;
 import org.example.backendlivetogether.Repositorios.IVecinoRepositorio;
+import org.example.backendlivetogether.Repositorios.IViviendaRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
 public class VecinoServicio {
 
     private IVecinoRepositorio iVecinoRepositorio;
+
+    private IViviendaRepositorio iViviendaRepositorio;
 
     public VecinoDTO verVecinoID(Integer idVecino){
         Vecino vecino = iVecinoRepositorio.findById(idVecino)
@@ -38,6 +43,20 @@ public class VecinoServicio {
 
         return  vecinosDTOS;
 
+    }
+
+    public List<VecinoUsuarioDTO> listarVecinosIdComunidad(Integer idComunidad){
+        List<Vivienda> viviendas = iViviendaRepositorio.findByComunidad_Id(idComunidad);
+        List<VecinoUsuarioDTO> vecinoDTOS = new ArrayList<>();
+        for (Vivienda vivienda: viviendas){
+            Set<Vecino> residentes = vivienda.getVecinos();
+
+            for (Vecino vecino: residentes){
+                vecinoDTOS.add(getVecinoUsuarioDTO(vecino));
+            }
+        }
+
+        return vecinoDTOS;
     }
 
     public VecinoUsuarioDTO getVecinoUsuarioDTO(Vecino vecino){

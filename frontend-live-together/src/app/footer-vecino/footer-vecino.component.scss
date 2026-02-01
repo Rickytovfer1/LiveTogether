@@ -1,0 +1,16 @@
+ion-toolbar {
+  --background: #339F28;
+
+  ion-col {
+    display: flex;
+    align-items: center;
+
+
+    ion-img {
+      width: 55px;
+      height: 55px;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+  }
+}

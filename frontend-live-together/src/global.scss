@@ -53,19 +53,25 @@ ion-footer {
   display: block;
 }
 
-@media (min-width: 768px) {
-  ion-footer {
-    display: none;
+@media (min-width: 992px) {
+  .ocultarFooter {
+    display: none !important;
   }
+
+  .ocultarHeader {
+    display: none !important;
+  }
+
 }
 
-app-nav-lateral, app-nav-lateral-empresa {
+
+app-nav-lateral, {
   display: none;
   height: 100vh;
 }
 
 @media (min-width: 768px) {
-  app-nav-lateral, app-nav-lateral-empresa {
+  app-nav-lateral, {
     display: block;
   }
 }

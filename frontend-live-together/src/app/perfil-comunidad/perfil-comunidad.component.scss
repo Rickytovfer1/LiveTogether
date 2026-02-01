@@ -1,0 +1,208 @@
+ion-content {
+  --background: #E7F4E7;
+}
+
+/* =========================
+   BASE
+   ========================= */
+
+.grid-principal {
+  padding: 0;
+}
+
+img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin: 0 auto;
+}
+
+
+
+.row-usuario,
+.row-residente {
+  background: white;
+  border: 1px solid black;
+  padding: 15px;
+  align-items: center;
+}
+
+.nombre-usuario {
+  color: #339F28;
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
+}
+
+.info-usuario {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* =========================
+   TARJETAS
+   ========================= */
+
+.card {
+  background: white;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+/* =========================
+   SANCIONES
+   ========================= */
+
+.card-sancion {
+  background: #7CDF68;
+}
+
+.sancion-div {
+  background: red;
+  color: white;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 12px;
+  text-align: center;
+}
+
+.motivo-div {
+  margin-top: 15px;
+  background: #57BF48;
+  color: white;
+  border-radius: 30px;
+  padding: 12px;
+  text-align: center;
+}
+
+/* =========================
+   DEUDAS
+   ========================= */
+
+.card-deuda {
+  background: #57BF48;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* =========================
+   INTERLINEADO
+   ========================= */
+
+.interlineado {
+  display: flex;
+  align-items: center;
+  margin: 40px 0 30px;
+  color: #0E8008;
+  font-weight: bold;
+}
+
+.interlineado::before,
+.interlineado::after {
+  content: "";
+  flex: 1;
+  border-bottom: 2px solid black;
+}
+
+.interlineado::before {
+  margin-right: 10px;
+}
+
+.interlineado::after {
+  margin-left: 10px;
+}
+
+.perfil-derecha {
+  display: none;
+}
+.perfil-contenido {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+/* =========================
+   DESKTOP
+   ========================= */
+
+@media (min-width: 768px) {
+
+  ion-content {
+    --background: #f4f8f4;
+  }
+
+  .tarjetas ion-row {
+    row-gap: 25px;
+  }
+
+  .card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    transition: all .25s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 35px rgba(0,0,0,.25);
+    }
+  }
+
+  .row-usuario,
+  .row-residente {
+    border: none;
+    background: transparent;
+  }
+
+  img {
+    width: 100px;
+    height: 50px;
+  }
+
+  .nombre-usuario {
+    font-size: 18px;
+  }
+
+  .interlineado {
+    margin: 20px 0 30px;
+  }
+
+  .perfil-contenido {
+    justify-content: space-between;
+    img{
+      height: 100%;
+    }
+  }
+
+  .perfil-derecha {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .perfil-comunidad {
+    font-size: 14px;
+    color: #333;
+    opacity: .8;
+    white-space: nowrap;
+  }
+
+  .btn-salir {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: #d9534f;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+
+  .btn-salir:hover {
+    background: #c9302c;
+  }
+}

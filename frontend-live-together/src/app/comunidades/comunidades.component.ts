@@ -13,6 +13,7 @@ import {ComunidadService} from "../servicios/comunidad-service";
 import {UsuarioService} from "../servicios/usuario-service";
 import {Vecino} from "../modelos/Vecino";
 import {Usuario} from "../modelos/Usuario";
+import {FooterVecinoComponent} from "../footer-vecino/footer-vecino.component";
 
 @Component({
   selector: 'app-comunidades',
@@ -26,7 +27,8 @@ import {Usuario} from "../modelos/Usuario";
     NgForOf,
     NgOptimizedImage,
     NavLateralComponent,
-    NgIf
+    NgIf,
+    FooterVecinoComponent
   ]
 })
 export class ComunidadesComponent  implements OnInit {

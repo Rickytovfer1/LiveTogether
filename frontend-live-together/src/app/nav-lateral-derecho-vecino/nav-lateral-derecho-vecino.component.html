@@ -1,0 +1,17 @@
+
+  <!-- LISTA DE VECINOS -->
+  <ng-container *ngIf="!chatAbierto">
+    <app-lista-vecinos
+      (abrirChatDesktop)="abrirChat($event)">
+    </app-lista-vecinos>
+  </ng-container>
+
+  <!-- CHAT -->
+  <ng-container *ngIf="chatAbierto">
+    <app-chat
+      [vecinoInput]="vecinoSeleccionado"
+      (cerrar)="cerrarChat()">
+    </app-chat>
+  </ng-container>
+
+

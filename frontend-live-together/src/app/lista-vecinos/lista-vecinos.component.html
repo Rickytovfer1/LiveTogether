@@ -1,0 +1,31 @@
+@if (!isDesktop) {
+  <ion-header>
+    <app-header></app-header>
+  </ion-header>
+}
+<app-header-vecino></app-header-vecino>
+
+<ion-content>
+  @if(listaVecinos.length > 0) {
+    <div class="notificaciones">
+      <ion-list>
+        @for (vecino of listaVecinos; track vecino.id) {
+          <ion-item (click)="navigateToChat(vecino)">
+            <img [ngSrc]="getImageUrlVecino(vecino)" width="100" height="100" class="imagen-redonda" alt="">
+            <ion-label>
+              <h2>{{ vecino.nombre }} {{ vecino.apellidos }}</h2>
+              <p>{{ ultimosMensajes[vecino.idUsuario] }}</p>
+            </ion-label>
+          </ion-item>
+        }
+      </ion-list>
+    </div>
+  }
+  @if (listaVecinos.length === 0) {
+    <div class="div-sin">
+      <span>Actualmente no hay vecinos en esta comunidad.</span>
+    </div>
+  }
+</ion-content>
+
+<app-footer-vecino></app-footer-vecino>

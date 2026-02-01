@@ -33,4 +33,12 @@ export const routes: Routes = [
     path: 'comunidad/perfil',
     loadComponent: () => import('./perfil-comunidad/perfil-comunidad.component').then((m) => m.PerfilComunidadComponent),
   },
+  {
+    path: 'chat/:id',
+    loadComponent: () => import('./chat/chat.component').then((m) => m.ChatComponent),
+  },
+  {
+    path: 'lista-vecinos',
+    loadComponent: () => import('./lista-vecinos/lista-vecinos.component').then((m) => m.ListaVecinosComponent)
+  },
 ];

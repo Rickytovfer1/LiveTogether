@@ -1,0 +1,160 @@
+ion-toolbar {
+  --background: #339F28;
+  height: 80px;
+  --min-height: 80px;
+}
+
+.chat-header {
+  padding: 0 10px;
+
+  .btn-back {
+    width: 100%;
+  }
+
+  .icono-foto {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+
+  ion-col {
+    display: flex;
+    align-items: center;
+
+    .username {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: white;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.salir {
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+}
+
+ion-content.chat-content {
+  --background: #E7F4E7;
+}
+
+.mensajes {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.emisor {
+  position: relative;
+  padding: 15px;
+  background-color: #57BF48;
+  color: white;
+  border-radius: 25px 25px 0 25px;
+  display: inline-block;
+  float: right;
+  max-width: 90%;
+  margin-bottom: 5px;
+}
+
+.receptor {
+  position: relative;
+  padding: 15px;
+  background-color: #339F28;
+  color: white;
+  border-radius: 25px 25px 25px 0;
+  display: inline-block;
+  float: left;
+  max-width: 90%;
+  margin-bottom: 5px;
+}
+
+hr {
+  width: 40%;
+  border: 1px solid black;
+}
+
+.div_dia {
+  display: flex;
+}
+
+.editado {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.message-time {
+  font-size: 10px;
+  color: #ffffff;
+  margin-top: 5px;
+}
+
+.emisor .message-time {
+  text-align: right;
+}
+
+.receptor .message-time {
+  text-align: left;
+}
+
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #339F28;
+
+  .chat-input {
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 1rem;
+    background: #fff;
+    color: black;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    input {
+      border: none;
+      width: 100%;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    ion-img {
+      width: 40px;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  ion-img {
+    width: 8%;
+    margin: 0 5px 0 auto;
+    padding: 0;
+  }
+}
+@media (min-width: 768px) {
+  ion-content.chat-content {
+    height: 75%;
+  }
+  ion-toolbar {
+    --background: #7CDF68;
+  }
+}
+ion-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}

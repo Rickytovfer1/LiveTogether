@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid class="chat-header">
+      <ion-row>
+        <ion-col size="2">
+          <ion-img class="btn-back" (click)="salirDelChat()" src="assets/icon/header-vecino/atras-white.png"></ion-img>
+        </ion-col>
+        <ion-col size="3">
+          <img [ngSrc]="getImageUrlVecino(vecino)" width="100" height="100" class="icono-foto" alt="">
+        </ion-col>
+        <ion-col size="7">
+          <ion-label class="username">{{ vecino.nombre }} {{vecino.apellidos}}</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="chat-content" #content>
+  <div class="mensajes">
+    <div *ngFor="let grupo of gruposMensajes; trackBy: trackByGrupo">
+      <ion-row>
+        <ion-col>
+          <div class="div_dia texto-dia">
+            <hr />
+            <ion-text>{{ grupo.fecha }}</ion-text>
+            <hr />
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let mensaje of grupo.mensajes; trackBy: trackByMensaje">
+        <ion-col>
+          <div
+            [ngClass]="mensaje.idEmisor === usuario.id ? 'emisor' : 'receptor'"
+            (click)="!mensaje.borrado && mensaje.idEmisor === usuario.id ? mostrarOpciones(mensaje) : null"
+            (press)="!mensaje.borrado && mensaje.idEmisor === usuario.id ? mostrarOpciones(mensaje) : null">
+            <ng-container *ngIf="mensaje.borrado; else normalMessage">
+              <strong>Este mensaje ha sido borrado</strong>
+            </ng-container>
+            <ng-template #normalMessage>
+              <div class="message-content">
+                <div class="message-text">
+                  {{ mensaje.texto }}
+                  <span *ngIf="mensaje.editado" class="editado"> (editado)</span>
+                </div>
+                <div class="message-time">
+                  {{ mensaje.hora ? (mensaje.hora | slice:0:5) : '' }}
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="chat-input-container">
+    <div class="chat-input">
+      <input [(ngModel)]="nuevoTexto" placeholder="Envía un mensaje..."
+             (keydown.enter)="enviar()">
+      <ion-img (click)="enviar()" src="assets/icon/chat/botonEnviar.png"></ion-img>
+    </div>
+  </div>
+</ion-footer>

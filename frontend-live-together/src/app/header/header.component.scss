@@ -18,3 +18,28 @@ ion-toolbar {
 .salir {
   width: 60px;
 }
+ion-text {
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 20px;
+  margin-right: 25px;
+}
+
+#botonSalir{
+  display: none;
+}
+
+@media (max-width: 992px) {
+  #botonSalir{
+    display: block;
+  }
+
+  ion-text {
+    display: none;
+  }
+}
+@media (min-width: 992px) {
+  .logo{
+    margin-left: 35px;
+  }
+}

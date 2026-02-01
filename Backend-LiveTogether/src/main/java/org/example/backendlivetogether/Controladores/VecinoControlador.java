@@ -2,6 +2,7 @@ package org.example.backendlivetogether.Controladores;
 
 import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.VecinoDTO;
+import org.example.backendlivetogether.DTOs.VecinoUsuarioDTO;
 import org.example.backendlivetogether.Modelos.Usuario;
 import org.example.backendlivetogether.Seguridad.UsuarioAdapter;
 import org.example.backendlivetogether.Servicios.UsuarioServicio;
@@ -46,4 +47,10 @@ public class VecinoControlador {
         }
         throw new RuntimeException("El usuario autenticado no es del tipo esperado.");
     }
+
+    @GetMapping("/listar/vecinos/comunidad/{idComunidad}")
+    public List<VecinoUsuarioDTO> listarVecinoComunidad(@PathVariable Integer idComunidad){
+        return vecinoServicio.listarVecinosIdComunidad(idComunidad);
+    }
+
 }

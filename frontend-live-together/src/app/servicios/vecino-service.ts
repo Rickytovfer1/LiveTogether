@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {ComunService} from "./comun-service";
 import {Observable} from "rxjs";
 import {Vecino} from "../modelos/Vecino";
+import {VecinoUsuarioDTO} from "../modelos/VecinoUsuarioDTO";
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,10 @@ export class VecinoService {
   cargarVecinoPorIdVecino(idVecino: number): Observable<Vecino> {
     const options = this.comunService.autorizarPeticion();
     return this.http.get<Vecino>(`${this.apiUrl}/vecino/ver/vecino/${idVecino}`, options)
+  }
+
+  listarVecinosComunidad(idComunidad: number): Observable<VecinoUsuarioDTO[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<VecinoUsuarioDTO[]>(`${this.apiUrl}/vecino/listar/vecinos/comunidad/${idComunidad}`, options)
   }
 }
