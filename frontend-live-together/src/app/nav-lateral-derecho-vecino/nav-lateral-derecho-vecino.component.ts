@@ -5,6 +5,7 @@ import {ChatComponent} from "../chat/chat.component";
 import {ListaVecinosComponent} from "../lista-vecinos/lista-vecinos.component";
 import {VecinoUsuarioDTO} from "../modelos/VecinoUsuarioDTO";
 import {NgIf} from "@angular/common";
+import {NotificacionesComponent} from "../notificaciones/notificaciones.component";
 
 @Component({
     selector: 'app-nav-lateral-derecho-vecino',
@@ -16,23 +17,36 @@ import {NgIf} from "@angular/common";
     HeaderVecinoComponent,
     ChatComponent,
     ListaVecinosComponent,
-    NgIf
+    NgIf,
+    NotificacionesComponent
   ]
 })
 export class NavLateralDerechoVecinoComponent  implements OnInit {
-  chatAbierto = false;
-  vecinoSeleccionado!: VecinoUsuarioDTO;
+  lateralActivo: 'vecinos' | 'chat' | 'notificaciones' = 'vecinos';
+  vecinoSeleccionado?: VecinoUsuarioDTO;
+
   constructor() { }
 
   ngOnInit() {}
 
   abrirChat(vecino: VecinoUsuarioDTO) {
     this.vecinoSeleccionado = vecino;
-    this.chatAbierto = true;
+    this.lateralActivo = 'chat';
   }
 
   cerrarChat() {
-    this.chatAbierto = false;
+    this.lateralActivo = 'vecinos';
+    this.vecinoSeleccionado = undefined;
   }
+
+  mostrarNotificaciones() {
+    this.lateralActivo = 'notificaciones';
+  }
+
+  mostrarListaVecinos() {
+    console.log('Evento chat recibido: mostrar lista vecinos');
+    this.lateralActivo = 'vecinos';
+  }
+
 
 }

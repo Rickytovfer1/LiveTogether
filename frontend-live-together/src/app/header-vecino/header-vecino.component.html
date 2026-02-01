@@ -1,7 +1,7 @@
 <ion-grid>
   <ion-row>
     <ion-col size="2">
-      <ion-img class="btn-back" src="assets/icon/header-vecino/atras.png"></ion-img>
+      <ion-img class="btn-back" (click)="navigateToComunidades()" src="assets/icon/header-vecino/atras.png"></ion-img>
     </ion-col>
     <ion-col size="6">
       <ion-text>Comunidad</ion-text>
@@ -10,7 +10,7 @@
       <div class="notif-wrapper">
         <ion-img
           class="btn-notif"
-
+          (click)="navigateToNotificaciones()"
           src="assets/icon/header-vecino/notificacion.png">
         </ion-img>
         <div class="notif-badge">
@@ -19,7 +19,7 @@
       </div>
     </ion-col>
     <ion-col size="2">
-      <ion-img class="btn-chat"  src="assets/icon/header-vecino/chat.png"></ion-img>
+      <ion-img class="btn-chat" (click)="navigateToChat()" src="assets/icon/header-vecino/chat.png"></ion-img>
     </ion-col>
   </ion-row>
 </ion-grid>
