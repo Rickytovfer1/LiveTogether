@@ -1,0 +1,36 @@
+<app-header></app-header>
+<app-header-vecino class="ocultarHeader"></app-header-vecino>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+    <!-- MENÚ IZQUIERDO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-vecino></app-nav-lateral-vecino>
+    </ion-col>
+
+    <ion-content>
+      @for (gasto of listaGastos; track gasto.id) {
+        <div class="gastos" >
+          <div class="gasto" (click)="navigateToGasto(gasto.id)">
+            <span>{{ gasto.concepto }}</span>
+            <div class="estado" [ngClass]="comprobarEstado(gasto)">
+              <span>{{ comprobarEstado(gasto) }}</span>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (listaGastos.length === 0) {
+        <div class="div-sin">
+          <span>No hay gastos registrados en tu comunidad.</span>
+        </div>
+      }
+    </ion-content>
+
+    <!-- MENÚ DERECHO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<app-footer-vecino class="ocultarFooter"></app-footer-vecino>

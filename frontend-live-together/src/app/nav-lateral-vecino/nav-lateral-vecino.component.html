@@ -7,7 +7,7 @@
       <ion-text>Propiedades</ion-text>
     </ion-col>
   </ion-row>
-  <ion-row >
+  <ion-row (click)="navigateToGastos()">
     <ion-col size="3">
       <ion-img [src]="gastosImgSrc"></ion-img>
     </ion-col>
@@ -15,7 +15,7 @@
       <ion-text>Gastos</ion-text>
     </ion-col>
   </ion-row>
-  <ion-row>
+  <ion-row (click)="navigateToPerfil()">
     <ion-col size="3">
       <ion-img [src]="perfilImgSrc"></ion-img>
     </ion-col>
