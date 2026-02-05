@@ -38,3 +38,11 @@ ion-row {
   cursor: pointer;
 }
 
+ion-row {
+  transition: background 0.3s ease, border-radius 0.3s ease;
+}
+
+ion-row:hover {
+  background: #7ad07a;
+  border-radius: 10px;
+}
