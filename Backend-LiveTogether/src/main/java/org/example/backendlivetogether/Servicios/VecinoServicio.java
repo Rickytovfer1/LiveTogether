@@ -1,19 +1,17 @@
 package org.example.backendlivetogether.Servicios;
 
 import lombok.AllArgsConstructor;
-import org.example.backendlivetogether.DTOs.VecinoDTO;
-import org.example.backendlivetogether.DTOs.VecinoUsuarioDTO;
-import org.example.backendlivetogether.DTOs.ViviendaDTO;
+import org.example.backendlivetogether.DTOs.*;
+import org.example.backendlivetogether.Modelos.Comunidad;
 import org.example.backendlivetogether.Modelos.Vecino;
 import org.example.backendlivetogether.Modelos.Vivienda;
+import org.example.backendlivetogether.Repositorios.IComunidadRepositorio;
 import org.example.backendlivetogether.Repositorios.IVecinoRepositorio;
 import org.example.backendlivetogether.Repositorios.IViviendaRepositorio;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +22,8 @@ public class VecinoServicio {
     private IViviendaRepositorio iViviendaRepositorio;
 
     private ViviendaServicio viviendaServicio;
+
+    private IComunidadRepositorio iComunidadRepositorio;
 
     public VecinoDTO verVecinoID(Integer idVecino){
         Vecino vecino = iVecinoRepositorio.findById(idVecino)
@@ -76,6 +76,52 @@ public class VecinoServicio {
         }
 
         return propietarios;
+    }
+
+    public void insertarCodigoComunidad(InsertarCodigoDTO insertarCodigoDTO) {
+        Vecino vecino = iVecinoRepositorio.findById(insertarCodigoDTO.getIdVecino())
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        boolean encontrado = false;
+
+        for (Comunidad comunidad : iComunidadRepositorio.findAll()) {
+            if (comunidad.getCodigoComunidad() != null &&
+                    comunidad.getCodigoComunidad().equals(insertarCodigoDTO.getCodigoComunidad())) {
+
+                String dirViviendaEncoded = insertarCodigoDTO.getCodigoComunidad().substring(6);
+                byte[] decodedBytes = Base64.getDecoder().decode(dirViviendaEncoded);
+                String dirVivienda = new String(decodedBytes, StandardCharsets.UTF_8);
+
+                System.out.println(dirVivienda);
+
+                for (Vivienda vivienda : iViviendaRepositorio.findAll()) {
+                    if (vivienda.getDireccionPersonal().equals(dirVivienda)) {
+                        System.out.println("encontrado");
+                        vivienda.getVecinos().add(vecino);
+                        iViviendaRepositorio.save(vivienda);
+
+                        vecino.getViviendas().add(vivienda);
+                        iVecinoRepositorio.save(vecino);
+
+                        comunidad.setCodigoComunidad(null);
+                        iComunidadRepositorio.save(comunidad);
+
+                        encontrado = true;
+                        break;
+                    }
+                }
+
+                if (encontrado) break;
+            }
+        }
+
+        if (!encontrado) {
+            throw new RuntimeException("Código incorrecto.");
+        }
+    }
+
+    public ComunidadDTO buscarComunidadPorCodigo(String codigo) {
+        return ComunidadServicio.getComunidadDTO(iComunidadRepositorio.findByCodigoComunidad(codigo));
     }
 
     public VecinoUsuarioDTO getVecinoUsuarioDTO(Vecino vecino){

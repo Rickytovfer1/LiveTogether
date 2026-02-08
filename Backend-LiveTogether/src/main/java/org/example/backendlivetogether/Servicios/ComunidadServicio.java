@@ -7,11 +7,11 @@ import org.example.backendlivetogether.Modelos.Vecino;
 import org.example.backendlivetogether.Modelos.Vivienda;
 import org.example.backendlivetogether.Repositorios.IComunidadRepositorio;
 import org.example.backendlivetogether.Repositorios.IVecinoRepositorio;
+import org.example.backendlivetogether.Repositorios.IViviendaRepositorio;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -20,6 +20,8 @@ public class ComunidadServicio {
     private IComunidadRepositorio iComunidadRepositorio;
 
     private IVecinoRepositorio iVecinoRepositorio;
+
+    private IViviendaRepositorio iViviendaRepositorio;
 
     public ComunidadDTO verComunnidadID(Integer idComunidad){
         Comunidad comunidad = iComunidadRepositorio.findById(idComunidad)
@@ -67,6 +69,30 @@ public class ComunidadServicio {
         }
 
         return comunidades;
+    }
+
+    public String generarCodigo(Integer idVivienda, Integer idComunidad) {
+        Random random = new Random();
+        StringBuilder resultado = new StringBuilder();
+
+        for (int i = 0; i < 6; i++) {
+            int number = random.nextInt(10);
+            resultado.append(number);
+        }
+
+        Comunidad comunidad = iComunidadRepositorio.findById(idComunidad)
+                .orElseThrow(() -> new RuntimeException("No existe una comunidad con este ID."));
+
+        Vivienda vivienda = iViviendaRepositorio.findById(idVivienda)
+                .orElseThrow(() -> new RuntimeException("No existe una vivienda con este ID."));
+
+        String direccionEncoded = Base64.getEncoder().encodeToString(vivienda.getDireccionPersonal().getBytes(StandardCharsets.UTF_8));
+        String codigoFinal = resultado + direccionEncoded;
+
+        comunidad.setCodigoComunidad(codigoFinal);
+        iComunidadRepositorio.save(comunidad);
+
+        return codigoFinal;
     }
 
     public static ComunidadDTO getComunidadDTO(Comunidad c) {

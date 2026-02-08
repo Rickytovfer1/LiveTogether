@@ -5,6 +5,7 @@ import {ComunService} from "./comun-service";
 import {Observable} from "rxjs";
 import {Vecino} from "../modelos/Vecino";
 import {VecinoUsuarioDTO} from "../modelos/VecinoUsuarioDTO";
+import {Comunidad} from "../modelos/Comunidad";
 
 @Injectable({
   providedIn: 'root',
@@ -28,4 +29,10 @@ export class VecinoService {
     const options = this.comunService.autorizarPeticion();
     return this.http.get<VecinoUsuarioDTO[]>(`${this.apiUrl}/vecino/listar/vecinos/comunidad/${idComunidad}`, options)
   }
+
+  buscarComunidadPorCodigo(codigo: string): Observable<Comunidad> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Comunidad>(`${this.apiUrl}/vecino/buscar/comunidad/codigo/${codigo}`, options)
+  }
+
 }

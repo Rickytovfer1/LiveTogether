@@ -35,5 +35,10 @@ ion-row {
   margin-top: 20%;
   margin-bottom: 40px;
   margin-left: 25px;
+  cursor: pointer;
 }
 
+ion-row:hover {
+  background: #7ad07a;
+  border-radius: 10px;
+}

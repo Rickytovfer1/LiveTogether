@@ -1,6 +1,8 @@
 package org.example.backendlivetogether.Controladores;
 
 import lombok.AllArgsConstructor;
+import org.example.backendlivetogether.DTOs.ComunidadDTO;
+import org.example.backendlivetogether.DTOs.InsertarCodigoDTO;
 import org.example.backendlivetogether.DTOs.VecinoDTO;
 import org.example.backendlivetogether.DTOs.VecinoUsuarioDTO;
 import org.example.backendlivetogether.Modelos.Usuario;
@@ -8,10 +10,7 @@ import org.example.backendlivetogether.Seguridad.UsuarioAdapter;
 import org.example.backendlivetogether.Servicios.UsuarioServicio;
 import org.example.backendlivetogether.Servicios.VecinoServicio;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -53,4 +52,13 @@ public class VecinoControlador {
         return vecinoServicio.listarVecinosIdComunidad(idComunidad);
     }
 
+    @PostMapping("/insertar/codigo")
+    public void insertarCodigoComunidad(@RequestBody InsertarCodigoDTO dto){
+        vecinoServicio.insertarCodigoComunidad(dto);
+    }
+
+    @GetMapping("/buscar/comunidad/codigo/{codigo}")
+    public ComunidadDTO buscarComunidadPorCodigo(@PathVariable String codigo){
+        return vecinoServicio.buscarComunidadPorCodigo(codigo);
+    }
 }

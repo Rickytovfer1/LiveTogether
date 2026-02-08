@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface IComunidadRepositorio extends JpaRepository<Comunidad, Integer> {
 
     Comunidad findByUsuario_Id(Integer idUsuario);
+    Comunidad findByCodigoComunidad(String codigoComunidad);
 }

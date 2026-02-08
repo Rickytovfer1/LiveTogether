@@ -1,0 +1,100 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral></app-nav-lateral>
+    </ion-col>
+
+    <ion-content class="login-container">
+      <div class="titulo-container">
+        <h2 class="title">Unirse a una comunidad</h2>
+      </div>
+
+      <div class="subtitulo-container">
+        <ion-text class="subtitle">Comunidades</ion-text>
+        <ion-select label="Selecciona una comunidad" label-placement="floating">
+          <ion-select-option >
+            NombreComunidad - Direccion
+          </ion-select-option>
+          <ion-select-option>
+            Todavía no hay comunidades disponibles en la aplicación
+          </ion-select-option>
+        </ion-select>
+
+      </div>
+
+      <div class="subtitulo-container">
+        <ion-text class="subtitle">Vivienda a elegir</ion-text>
+        <ion-select label="Selecciona una vivienda"  label-placement="floating">
+          <ion-select-option >
+            Vivienda
+          </ion-select-option>
+          <ion-select-option disabled>
+            Esta comunidad no tiene viviendas disponibles
+          </ion-select-option>
+        </ion-select>
+      </div>
+
+      <ion-button class="ion-button1" expand="block" >SOLICITAR UNIÓN</ion-button>
+
+      <div class="linea-blanca"></div>
+
+      <div class="frase-tres-lineas">
+        <p>También puedes unirte directamente</p>
+        <p>introduciendo el código de comunidad</p>
+        <p>proporcionado por el presidente</p>
+      </div>
+
+      <div class="subtitulo-container">
+        <ion-text class="subtitle">Código de la comunidad</ion-text>
+        <ion-input type="text" placeholder="Introduce el código de la comunidad" [(ngModel)]="insertarCodigo.codigoComunidad"></ion-input>
+      </div>
+
+      <ion-button class="ion-button2" expand="block" (click)="insertarCodigoComunidad()">UNIRSE</ion-button>
+    </ion-content>
+  </ion-row>
+</ion-grid>
+
+<app-footer></app-footer>
+
+<ion-toast
+  id="toastUnionCorrecta"
+  message="Solicitud de unión enviada correctamente"
+  duration="3000"
+  position="top"
+  color="success"
+></ion-toast>
+
+<ion-toast
+  id="toastUnionError"
+  message="Error al solicitar la unión"
+  duration="3000"
+  position="top"
+  color="danger"
+></ion-toast>
+
+<ion-toast
+  id="toastCodigoCorrecto"
+  message="Código insertado correctamente"
+  duration="3000"
+  position="top"
+  color="success"
+></ion-toast>
+
+<ion-toast
+  id="toastCodigoError"
+  message="Error al insertar el código de comunidad"
+  duration="3000"
+  position="top"
+  color="danger"
+></ion-toast>
+
+<ion-toast
+  id="toastFaltanDatos"
+  message="Faltan datos para solicitar unión"
+  duration="3000"
+  position="top"
+  color="warning"
+></ion-toast>

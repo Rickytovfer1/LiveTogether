@@ -6,14 +6,14 @@
           <ion-img src="assets/icon/footer/perfil.png"></ion-img>
         </ion-col>
         <ion-col size="4">
-          <ion-img src="assets/icon/footer/casa.png"></ion-img>
+          <ion-img src="assets/icon/footer/casa.png" (click)="navigateToComunidades()"></ion-img>
         </ion-col>
         <ion-col size="4">
           <ion-img [id]="popoverId" src="assets/icon/footer/añadir.png"></ion-img>
           <ion-popover [trigger]="popoverId" triggerAction="click" [dismissOnSelect]="true">
             <ng-template>
               <ion-list>
-                <ion-item button >Unirse a una comunidad</ion-item>
+                <ion-item (click)="navigateToUnirseComunidad()" button >Unirse a una comunidad</ion-item>
                 <ion-item button >Crear una comunidad</ion-item>
               </ion-list>
             </ng-template>

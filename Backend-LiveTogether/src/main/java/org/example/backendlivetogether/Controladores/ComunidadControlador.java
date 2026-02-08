@@ -7,10 +7,7 @@ import org.example.backendlivetogether.Seguridad.UsuarioAdapter;
 import org.example.backendlivetogether.Servicios.ComunidadServicio;
 import org.example.backendlivetogether.Servicios.UsuarioServicio;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,6 +47,11 @@ public class ComunidadControlador {
             return ((UsuarioAdapter) userDetails).getUsuario();
         }
         throw new RuntimeException("El usuario autenticado no es del tipo esperado.");
+    }
+
+    @PostMapping("/comunidad/generar/codigo/{idVivienda}/{idComunidad}")
+    public String generarCodigo(@PathVariable Integer idVivienda, @PathVariable Integer idComunidad){
+        return comunidadServicio.generarCodigo(idVivienda, idComunidad);
     }
 
 }
