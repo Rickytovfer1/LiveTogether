@@ -85,6 +85,21 @@ public class GastoServicio {
         return listaGastos;
     }
 
+    public double calcularPorcentajePagado(Integer idGasto) {
+        Gasto gasto = iGastoRepositorio.findById(idGasto)
+                .orElseThrow(() -> new RuntimeException("No existe un gasto con este ID."));
+
+        int totalVecinos = gasto.getVecinosPendientes().size() + gasto.getVecinosPagados().size();
+
+        int vecinosPendientes = gasto.getVecinosPendientes().size();
+
+        if (totalVecinos == 0) {
+            return 0.0;
+        }
+
+        return (1 - ((double) vecinosPendientes / totalVecinos)) * 100;
+    }
+
     public static GastoDTO getGastoDTO(Gasto g) {
         GastoDTO dto = new GastoDTO();
         dto.setId(g.getId());

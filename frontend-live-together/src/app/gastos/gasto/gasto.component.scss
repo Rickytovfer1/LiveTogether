@@ -1,0 +1,56 @@
+ion-content {
+  --background: #E7F4E7;
+
+  .contenedor-princial {
+    padding: 20px;
+    margin: 15px auto;   // 👈 centra horizontalmente
+    max-width: 600px;    // 👈 límite de ancho (ajústalo a tu gusto)
+    width: 100%;         // 👈 para móvil
+
+    .asunto-gasto {
+      color: white;
+      background-color: #339F28;
+      font-weight: bold;
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .info-gasto {
+      div {
+        margin-block: 15px;
+        background-color: white;
+        border: 1px solid #0E8008;
+        padding: 15px;
+        border-radius: 10px;
+
+        span {
+          color: #0E8008;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .contenedor-boton {
+      display: flex;
+      align-items: center;
+
+      button {
+        background-color: #0E8008;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 15px;
+        border-radius: 15px;
+        margin: 0 auto;
+        margin-block: 30px;
+        width: 200px;
+      }
+    }
+  }
+}
+
+
+

@@ -1,0 +1,46 @@
+<app-header></app-header>
+<app-header-vecino class="ocultarHeader"></app-header-vecino>
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+    <!-- MENÚ IZQUIERDO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-vecino></app-nav-lateral-vecino>
+    </ion-col>
+
+    <ion-content>
+      <div class="contenedor-princial">
+        <div class="asunto-gasto">
+          <span>{{gasto.concepto}}</span>
+        </div>
+        <div class="info-gasto">
+          <div>
+            <span>Coste total: {{gasto.total}}€</span>
+          </div>
+          <div>
+            <span>Coste por vecino: {{totalPorVecino}}€</span>
+          </div>
+          <div>
+            <span style="padding-bottom: 5px">Pagado: {{porcentajePagado}}% / {{gasto.total}}€</span>
+            <ion-progress-bar [value]="porcentajePagado / 100" color="success" ></ion-progress-bar>
+          </div>
+
+
+        </div>
+
+        <div class="contenedor-boton">
+          <button
+            [disabled]="estaPagado(gasto)">
+<!--            (click)="iniciarPago()"-->
+            {{ mensajeBotonPagar(gasto) }}
+          </button>
+        </div>
+      </div>
+    </ion-content>
+
+    <!-- MENÚ DERECHO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<app-footer-vecino class="ocultarFooter"></app-footer-vecino>

@@ -35,4 +35,10 @@ public class GastoControlador {
     public GastoDTO verGasto(@PathVariable Integer idGasto){
         return gastoServicio.verGasto(idGasto);
     }
+
+    @GetMapping("/calcular/porcentaje/{idGasto}")
+    public double calcularPorcentajePagado(@PathVariable Integer idGasto){
+        return gastoServicio.calcularPorcentajePagado(idGasto);
+    }
+
 }

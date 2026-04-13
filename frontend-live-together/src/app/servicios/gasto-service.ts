@@ -33,4 +33,9 @@ export class GastoService {
     const options = this.comunService.autorizarPeticion();
     return this.http.post(`${this.apiUrl}/comunidad/crear/gasto`, crearGasto, options);
   }
+
+  calcularPorcentajePagado(idGasto: number): Observable<number> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<number>(`${this.apiUrl}/calcular/porcentaje/${idGasto}`, options)
+  }
 }

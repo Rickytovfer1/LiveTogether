@@ -61,4 +61,9 @@ public class VecinoControlador {
     public ComunidadDTO buscarComunidadPorCodigo(@PathVariable String codigo){
         return vecinoServicio.buscarComunidadPorCodigo(codigo);
     }
+
+    @GetMapping("/listar/propietarios/{idComunidad}")
+    public List<VecinoUsuarioDTO> listarPropietarios(@PathVariable Integer idComunidad) {
+        return vecinoServicio.listarPropietarios(idComunidad);
+    }
 }

@@ -53,4 +53,8 @@ export const routes: Routes = [
     path: 'unirse-comunidad',
     loadComponent: () => import('./unirse-comunidad/unirse-comunidad.component').then((m) => m.UnirseComunidadComponent),
   },
+  {
+    path: 'comunidad/gastos/gasto/:id',
+    loadComponent: () => import('./gastos/gasto/gasto.component').then((m) => m.GastoComponent),
+  },
 ];
