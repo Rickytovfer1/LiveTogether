@@ -57,4 +57,12 @@ export const routes: Routes = [
     path: 'comunidad/gastos/gasto/:id',
     loadComponent: () => import('./gastos/gasto/gasto.component').then((m) => m.GastoComponent),
   },
+  {
+    path: 'comunidad/elecciones',
+    loadComponent: () => import('./elecciones/elecciones.component').then((m) => m.EleccionesComponent),
+  },
+  {
+    path: 'comunidad/elecciones/votacion/:id',
+    loadComponent: () => import('./elecciones/votacion/votacion.component').then((m) => m.VotacionComponent),
+  },
 ];

@@ -44,4 +44,8 @@ export class NavLateralVecinoComponent  implements OnInit {
     this.router.navigate(['comunidad/perfil'])
   }
 
+  navigateToElecciones() {
+    this.router.navigate(['comunidad/elecciones'])
+  }
+
 }

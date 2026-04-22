@@ -1,0 +1,41 @@
+<app-header></app-header>
+<app-header-vecino class="ocultarHeader"></app-header-vecino>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+    <!-- MENÚ IZQUIERDO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-vecino></app-nav-lateral-vecino>
+    </ion-col>
+
+    <ion-content>
+      <div class="contenedor-elecciones">
+
+        @for (eleccion of listaElecciones; track eleccion.id) {
+          <div class="eleccion" (click)="navigateToVotacion(eleccion)">
+            <p>{{ eleccion.motivo }}</p>
+            <div class="eleccion-info">
+              <span class="fecha">{{calcularFecha(eleccion.fechaHoraCreacion)}}</span>
+              <span [ngClass]="comprobarEstado(eleccion)">
+            {{ comprobarEstado(eleccion) }}
+          </span>
+            </div>
+          </div>
+        }
+
+        @if (listaElecciones.length === 0) {
+          <div class="div-sin">
+            <span>No hay votaciones en curso en tu comunidad.</span>
+          </div>
+        }
+
+      </div>
+    </ion-content>
+
+    <!-- MENÚ DERECHO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<app-footer-vecino class="ocultarFooter"></app-footer-vecino>
