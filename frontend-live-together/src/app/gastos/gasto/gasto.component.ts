@@ -19,6 +19,7 @@ import {GastoService} from "../../servicios/gasto-service";
 import {UsuarioService} from "../../servicios/usuario-service";
 import {VecinoService} from "../../servicios/vecino-service";
 import {TokenDataDTO} from "../../modelos/TokenDataDTO";
+import {loadStripe} from "@stripe/stripe-js";
 
 @Component({
   selector: 'app-gasto',
@@ -62,7 +63,7 @@ export class GastoComponent implements OnInit {
     if (comunidad) {
       this.comunidadObjeto = JSON.parse(comunidad);
     }
-  
+
     const token = sessionStorage.getItem('authToken');
     if (token) {
       try {
@@ -143,32 +144,32 @@ export class GastoComponent implements OnInit {
       })
   }
 
-  // stripeClavePublica = 'pk_test_51RIofJQu2AOfAVJhL5JoD26V1FmzcDjuqnKvY2jXakWcYFC3Xvdgy0AvwyW8vZVsHYmjoPyysEuyQDIObfo9jURb006ljK69KO';
-  //
-  // async iniciarPago() {
-  //   const stripe = await loadStripe(this.stripeClavePublica);
-  //   const idSesion = await this.crearSesionPago();
-  //
-  //   if (stripe && idSesion) {
-  //     stripe.redirectToCheckout({ sessionId: idSesion });
-  //   }
-  // }
-  //
-  // async crearSesionPago(): Promise<string> {
-  //   const respuesta = await fetch('http://localhost:8080/api/pago/crear-sesion', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       gasto: 'Pago de gasto de comunidad: '+ this.gasto.concepto,
-  //       cantidad: Math.round(this.totalPorVecino * 100)
-  //     })
-  //   });
-  //
-  //   const datos = await respuesta.json();
-  //   return datos.idSesion;
-  // }
+  stripeClavePublica = '';
+
+  async iniciarPago() {
+    const stripe = await loadStripe(this.stripeClavePublica);
+    const idSesion = await this.crearSesionPago();
+
+    if (stripe && idSesion) {
+      stripe.redirectToCheckout({ sessionId: idSesion });
+    }
+  }
+
+  async crearSesionPago(): Promise<string> {
+    const respuesta = await fetch('http://localhost:8080/api/pago/crear-sesion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        gasto: 'Pago de gasto de comunidad: '+ this.gasto.concepto,
+        cantidad: Math.round(this.totalPorVecino * 100)
+      })
+    });
+
+    const datos = await respuesta.json();
+    return datos.idSesion;
+  }
 
   estaPagado(gasto: Gasto): boolean {
     if (!gasto || !Array.isArray(gasto.pendientes) || !this.vecino.id) {

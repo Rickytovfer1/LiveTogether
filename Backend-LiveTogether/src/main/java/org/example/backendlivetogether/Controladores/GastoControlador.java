@@ -3,6 +3,7 @@ package org.example.backendlivetogether.Controladores;
 import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.CrearGastoDTO;
 import org.example.backendlivetogether.DTOs.GastoDTO;
+import org.example.backendlivetogether.DTOs.MarcarPagadoDTO;
 import org.example.backendlivetogether.Servicios.GastoServicio;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +40,11 @@ public class GastoControlador {
     @GetMapping("/calcular/porcentaje/{idGasto}")
     public double calcularPorcentajePagado(@PathVariable Integer idGasto){
         return gastoServicio.calcularPorcentajePagado(idGasto);
+    }
+
+    @PostMapping("/marcar/pagado")
+    public void marcarPagado(@RequestBody MarcarPagadoDTO dto){
+        gastoServicio.marcarPagado(dto);
     }
 
 }

@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {ComunService} from "./comun-service";
 import {environment} from "../../environments/environment";
 import {CrearGasto} from "../modelos/CrearGasto";
+import {MarcarPagado} from "../modelos/MarcarPagado";
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,10 @@ export class GastoService {
   calcularPorcentajePagado(idGasto: number): Observable<number> {
     const options = this.comunService.autorizarPeticion();
     return this.http.get<number>(`${this.apiUrl}/calcular/porcentaje/${idGasto}`, options)
+  }
+
+  marcarPagado(marcarPagado: MarcarPagado): Observable<any> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.post(`${this.apiUrl}/marcar/pagado`, marcarPagado, options);
   }
 }

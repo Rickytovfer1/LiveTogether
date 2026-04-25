@@ -29,8 +29,9 @@
 
         <div class="contenedor-boton">
           <button
-            [disabled]="estaPagado(gasto)">
-<!--            (click)="iniciarPago()"-->
+            [disabled]="estaPagado(gasto)"
+            (click)="iniciarPago()">
+
             {{ mensajeBotonPagar(gasto) }}
           </button>
         </div>
