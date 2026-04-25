@@ -1,3 +1,62 @@
-<p>
-  votacion works!
-</p>
+<app-header></app-header>
+<app-header-vecino class="ocultarHeader"></app-header-vecino>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+    <!-- MENÚ IZQUIERDO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-vecino></app-nav-lateral-vecino>
+    </ion-col>
+
+    <ion-content>
+      <div class="eleccion">
+        <p>{{eleccion.motivo}}</p>
+      </div>
+      <div class="votos">
+        <ion-grid>
+          <ion-row class="fila-voto" (click)="emitirVoto('A_FAVOR')">
+            <ion-col size="3">
+              <ion-img src="assets/icon/votacion/votoFavor.png" class="logo"></ion-img>
+            </ion-col>
+            <ion-col size="9">
+              <p>A FAVOR</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="votos">
+        <ion-grid>
+          <ion-row class="fila-voto" (click)="emitirVoto('EN_CONTRA')">
+            <ion-col size="3">
+              <ion-img src="assets/icon/votacion/votoContra.png" class="logo logo-circulo"></ion-img>
+            </ion-col>
+            <ion-col size="9">
+              <p>EN CONTRA</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="votos">
+        <ion-grid>
+          <ion-row class="fila-voto" (click)="emitirVoto('ABTENCION')">
+            <ion-col size="3">
+              <ion-img src="assets/icon/votacion/votoBlanco.png" class="logo logo-circulo"></ion-img>
+            </ion-col>
+            <ion-col size="9">
+              <p>EN BLANCO</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="textoVoto">
+        <p >Número de votos: {{totalVoto}}</p>
+      </div>
+    </ion-content>
+
+    <!-- MENÚ DERECHO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<app-footer-vecino class="ocultarFooter"></app-footer-vecino>
