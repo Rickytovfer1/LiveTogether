@@ -46,4 +46,8 @@ export class FooterVecinoComponent  implements OnInit {
   navigateToElecciones() {
     this.router.navigate(['comunidad/elecciones'])
   }
+
+  navigateToDocumentacion() {
+    this.router.navigate(['comunidad/documentacion'])
+  }
 }

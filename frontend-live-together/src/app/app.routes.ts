@@ -73,4 +73,8 @@ export const routes: Routes = [
     path: 'cancelado',
     loadComponent: () => import('./cancelado/cancelado.component').then(m => m.CanceladoComponent),
   },
+  {
+    path: 'comunidad/documentacion',
+    loadComponent: () => import('./documentacion/documentacion.component').then((m) => m.DocumentacionComponent),
+  },
 ];
