@@ -144,7 +144,7 @@ export class GastoComponent implements OnInit {
       })
   }
 
-  stripeClavePublica = '';
+  stripeClavePublica = 'pk_test_51RIofJQu2AOfAVJhL5JoD26V1FmzcDjuqnKvY2jXakWcYFC3Xvdgy0AvwyW8vZVsHYmjoPyysEuyQDIObfo9jURb006ljK69KO';
 
   async iniciarPago() {
     const stripe = await loadStripe(this.stripeClavePublica);

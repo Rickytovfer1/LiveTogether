@@ -15,7 +15,7 @@ public class PagoServicio {
 
 
     public PagoServicio() {
-        Stripe.apiKey = "";
+        Stripe.apiKey = "sk_test_51RIofJQu2AOfAVJhXEcrduViKhveomANjIT80QHzUQYeo5U46ZRzYnoxvAZvHxffemkkTAeZjqhHuH3xSDwncYGT00LlVvAEd0";
     }
 
     public Map<String, String> crearSesion(@RequestBody PagoDTO dto) {
