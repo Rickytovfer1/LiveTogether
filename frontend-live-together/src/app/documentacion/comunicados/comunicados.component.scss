@@ -61,25 +61,20 @@ ion-img {
 
 
 @media (min-width: 992px) {
+
+  ion-row {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto 25px;
+    border-top: 1px solid black !important;
+
+  }
   ion-grid {
     padding: 0 40px;
   }
-
-  @media (min-width: 992px) {
-
-    ion-row {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto 25px;
-      border-top: 1px solid black !important;
-
-    }
-
-    .cruz-roja {
-      right: 5px;
-      top: 5px;
-    }
-
+  .cruz-roja {
+    right: 5px;
+    top: 5px;
   }
 
 }

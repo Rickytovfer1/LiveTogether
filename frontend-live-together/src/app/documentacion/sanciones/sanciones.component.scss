@@ -1,0 +1,68 @@
+ion-grid {
+  padding: 0;
+
+  ion-row {
+    background-color: #7CDF68;
+    border: 1px solid black;
+    padding: 0;
+    margin-bottom: 20px;
+
+    .contenedor {
+      width: 100%;
+
+      .vecino-div {
+        background-color: #57BF48;
+        border-radius: 20px;
+        padding: 10px;
+        font-weight: bold;
+        color: white;
+        margin: 15px;
+      }
+
+      .sancion-div {
+        background-color: red;
+        border-radius: 20px;
+        padding: 10px;
+        font-weight: bold;
+        color: white;
+        margin: 15px;
+
+        span:first-child {
+          font-style: italic;
+        }
+      }
+
+      .motivo-div {
+        text-align: center;
+        font-weight: bold;
+        background-color: white;
+        padding: 10px;
+        color: black;
+        border-top: 2px solid black;
+
+        span:first-child {
+          font-style: italic;
+        }
+      }
+
+    }
+  }
+}
+
+.div-sin {
+  margin: 60px auto 0;
+  text-align: center;
+
+  span {
+    font-weight: bold
+  }
+}
+
+@media(min-width: 768px) {
+
+  ion-grid {
+    max-width: 700px;
+    margin: 0 auto;
+
+  }
+}
