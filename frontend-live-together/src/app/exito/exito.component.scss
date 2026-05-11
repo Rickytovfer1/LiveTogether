@@ -1,0 +1,50 @@
+ion-content {
+
+  .contenedor {
+    height: 90%;
+    margin: 20px;
+    background-color: #7CDF68;
+    padding-top: 100px;
+    padding-inline: 20px;
+    padding-bottom: 20px;
+
+    .div-mensaje {
+      padding: 20px;
+      border-radius: 10px;
+      background-color: white;
+      text-align: center;
+
+      span {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 0 auto;
+      }
+
+      h1 {
+        color: #0E8008;
+        font-weight: bold;
+        margin-inline: auto;
+      }
+    }
+
+    p {
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+      margin-block: 100px
+    }
+
+    div {
+      margin-top: auto;
+      display: flex;
+      justify-content: center;
+      padding-top: 40px;
+
+      ion-button {
+        font-weight: bold;
+        margin: 0 auto;
+      }
+    }
+  }
+}

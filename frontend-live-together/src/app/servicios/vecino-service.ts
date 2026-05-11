@@ -35,4 +35,9 @@ export class VecinoService {
     return this.http.get<Comunidad>(`${this.apiUrl}/vecino/buscar/comunidad/codigo/${codigo}`, options)
   }
 
+  listarPropietarios(idComunidad: number): Observable<VecinoUsuarioDTO[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<VecinoUsuarioDTO[]>(`${this.apiUrl}/vecino/listar/propietarios/${idComunidad}`, options)
+  }
+
 }

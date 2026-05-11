@@ -1,0 +1,31 @@
+<ion-content>
+  @if (listaComunicado.length === 0) {
+    <div class="div-sin">
+      <span>No hay comunicados publicados en tu comunidad.</span>
+    </div>
+  }
+  <ion-grid>
+
+    @for (comunicado of listaComunicado; track comunicado.id) {
+      <ion-row>
+        <div>
+          <span [innerHTML]="htmlSeguro(comunicado.descripcion)"></span>
+        </div>
+        <div class="footer-comunicado">
+          <span class="fecha">{{ formatearFecha(comunicado.fecha) }}</span>
+          <span class="vecino">
+                {{ comunicado.idVecino ? (vecinosMap[comunicado.idVecino]?.nombre + ' ' + vecinosMap[comunicado.idVecino]?.apellidos) : 'Comunidad' }}
+              </span>
+        </div>
+
+        @if (vecino.id === comunicado.idVecino) {
+          <ion-img class="cruz-roja" src="assets/icon/documentacion/cruz-roja.png"
+                   (click)="confirmarEliminacion(comunicado.id)"></ion-img>
+        }
+
+      </ion-row>
+    }
+  </ion-grid>
+</ion-content>
+
+<ion-img src="assets/icon/documentacion/anadir.png" (click)="navigateToCrearComunicado()"></ion-img>

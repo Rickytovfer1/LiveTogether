@@ -1,0 +1,29 @@
+<ion-grid class="grid-principal">
+
+  @for (sancion of listaSanciones; track sancion.id) {
+    <ion-row class="row-principal">
+      <div class="contenedor">
+        <div class="vecino-div">
+          <span>Vecino afectado → </span>
+          <span><u>{{ sancion?.nombreVecino }}</u></span>
+        </div>
+
+        <div class="sancion-div">
+          <span>Sanción: </span>
+          <span>{{ sancion.sancion }}</span>
+        </div>
+
+        <div class="motivo-div">
+          <span>Motivo: </span>
+          <span>{{ sancion.motivo }}</span>
+        </div>
+      </div>
+    </ion-row>
+  }
+</ion-grid>
+
+@if (listaSanciones.length === 0) {
+  <div class="div-sin">
+    <span>No hay sanciones registrados en tu comunidad.</span>
+  </div>
+}

@@ -1,0 +1,62 @@
+ion-content {
+  --background: #E7F4E7;
+  font-weight: bold;
+
+  @media (min-width: 768px) {
+    .contenedor-elecciones {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .eleccion{
+      &:hover {
+        transform: translateY(-6px);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .eleccion {
+    background-color: #57BF48;
+    border-radius: 7px;
+    padding: 15px;
+    margin: 35px;
+    margin-block: 45px;
+
+    p {
+      color: white;
+      margin: 0 auto 10px;
+      font-size: 18px;
+    }
+
+    .eleccion-info {
+      background-color: white;
+      border-radius: 10px;
+      padding: 7px;
+      display: flex;
+      justify-content: space-between;
+
+      .fecha {
+        color: black;
+      }
+
+      .Abierta {
+        color: #40A3FF;
+      }
+
+      .Cerrada {
+        color: red;
+      }
+    }
+  }
+
+  .div-sin {
+    margin: 60px auto 0;
+    text-align: center;
+
+    span {
+      font-weight: bold
+    }
+  }
+}
+
+

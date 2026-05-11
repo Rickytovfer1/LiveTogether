@@ -3,6 +3,7 @@ package org.example.backendlivetogether.Servicios;
 import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.CrearGastoDTO;
 import org.example.backendlivetogether.DTOs.GastoDTO;
+import org.example.backendlivetogether.DTOs.MarcarPagadoDTO;
 import org.example.backendlivetogether.DTOs.VecinoUsuarioDTO;
 import org.example.backendlivetogether.Modelos.Comunidad;
 import org.example.backendlivetogether.Modelos.Gasto;
@@ -83,6 +84,51 @@ public class GastoServicio {
         }
 
         return listaGastos;
+    }
+
+    public double calcularPorcentajePagado(Integer idGasto) {
+        Gasto gasto = iGastoRepositorio.findById(idGasto)
+                .orElseThrow(() -> new RuntimeException("No existe un gasto con este ID."));
+
+        int totalVecinos = gasto.getVecinosPendientes().size() + gasto.getVecinosPagados().size();
+
+        int vecinosPendientes = gasto.getVecinosPendientes().size();
+
+        if (totalVecinos == 0) {
+            return 0.0;
+        }
+
+        return (1 - ((double) vecinosPendientes / totalVecinos)) * 100;
+    }
+
+    public void marcarPagado(MarcarPagadoDTO dto){
+        Gasto gasto = iGastoRepositorio.findById(dto.getIdGasto())
+                .orElseThrow(() -> new RuntimeException("No existe un gasto con este ID."));
+
+        Vecino vecino = iVecinoRepositorio.findById(dto.getIdVecino())
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        if (!gasto.getVecinosPendientes().contains(vecino) && gasto.getVecinosPagados().contains(vecino)) {
+            throw new RuntimeException("Este vecino ya ha pagado o no le corresponde el pago.");
+        }
+
+        Integer totalVecinosDelGasto = gasto.getVecinosPendientes().size() + gasto.getVecinosPagados().size();
+        double totalPorVecino;
+
+        if (totalVecinosDelGasto > 0){
+            totalPorVecino = gasto.getTotal() / totalVecinosDelGasto;
+
+            gasto.getVecinosPendientes().remove(vecino);
+            vecino.getGastosPendientes().remove(gasto);
+
+            gasto.getVecinosPagados().add(vecino);
+            vecino.getGastosPagados().add(gasto);
+
+            gasto.setCantidadPagada(gasto.getCantidadPagada() + totalPorVecino);
+
+            iGastoRepositorio.save(gasto);
+            iVecinoRepositorio.save(vecino);
+        }
     }
 
     public static GastoDTO getGastoDTO(Gasto g) {

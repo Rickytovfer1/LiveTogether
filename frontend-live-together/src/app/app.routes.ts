@@ -49,4 +49,28 @@ export const routes: Routes = [
     path: 'unirse-comunidad',
     loadComponent: () => import('./unirse-comunidad/unirse-comunidad.component').then((m) => m.UnirseComunidadComponent),
   },
+  {
+    path: 'comunidad/gastos/gasto/:id',
+    loadComponent: () => import('./gastos/gasto/gasto.component').then((m) => m.GastoComponent),
+  },
+  {
+    path: 'comunidad/elecciones',
+    loadComponent: () => import('./elecciones/elecciones.component').then((m) => m.EleccionesComponent),
+  },
+  {
+    path: 'comunidad/elecciones/votacion/:id',
+    loadComponent: () => import('./elecciones/votacion/votacion.component').then((m) => m.VotacionComponent),
+  },
+  {
+    path: 'exito',
+    loadComponent: () => import('./exito/exito.component').then(m => m.ExitoComponent),
+  },
+  {
+    path: 'cancelado',
+    loadComponent: () => import('./cancelado/cancelado.component').then(m => m.CanceladoComponent),
+  },
+  {
+    path: 'comunidad/documentacion',
+    loadComponent: () => import('./documentacion/documentacion.component').then((m) => m.DocumentacionComponent),
+  },
 ];

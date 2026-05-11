@@ -46,6 +46,9 @@ public class UsuarioServicio implements UserDetailsService{
 
     private IVerificationTokenRepositorio iVerificationTokenRepositorio;
 
+    private EmailServicio emailServicio;
+
+
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.findTopByCorreo(correo)
@@ -101,6 +104,13 @@ public class UsuarioServicio implements UserDetailsService{
         vecino.setUsuario(nuevoUsuario);
         iVecinoRepositorio.save(vecino);
 
+        String token = UUID.randomUUID().toString();
+        LocalDateTime expiryDate = LocalDateTime.now().plusHours(24);
+        VerificationToken verificationToken = new VerificationToken(token, nuevoUsuario, expiryDate);
+        iVerificationTokenRepositorio.save(verificationToken);
+
+        emailServicio.sendVerificationEmail(nuevoUsuario.getCorreo(), token);
+
         return nuevoUsuario;
     }
 
@@ -126,6 +136,13 @@ public class UsuarioServicio implements UserDetailsService{
         comunidad.setUsuario(usuarioGuardado);
 
         iComunidadRepositorio.save(comunidad);
+
+        String token = UUID.randomUUID().toString();
+        LocalDateTime expiryDate = LocalDateTime.now().plusHours(24);
+        VerificationToken verificationToken = new VerificationToken(token, usuarioGuardado, expiryDate);
+        iVerificationTokenRepositorio.save(verificationToken);
+
+        emailServicio.sendVerificationEmail(usuarioGuardado.getCorreo(), token);
 
         return usuarioGuardado;
     }

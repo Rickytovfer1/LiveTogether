@@ -23,7 +23,7 @@
       <ion-text>Mi vivienda</ion-text>
     </ion-col>
   </ion-row>
-  <ion-row>
+  <ion-row (click)="navigateToElecciones()">
     <ion-col size="3">
       <ion-img [src]="eleccionesImgSrc"></ion-img>
     </ion-col>
@@ -31,7 +31,7 @@
       <ion-text>Elecciones</ion-text>
     </ion-col>
   </ion-row>
-  <ion-row>
+  <ion-row (click)="navigateToDocumentacion()">
     <ion-col size="3">
       <ion-img [src]="documentacionImgSrc"></ion-img>
     </ion-col>
