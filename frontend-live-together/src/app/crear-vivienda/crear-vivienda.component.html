@@ -1,0 +1,48 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <!-- MENÚ IZQUIERDO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <ion-img
+      class="flecha-retorno"
+      src="assets/icon/FlechaRetorno.png"
+      (click)="volverAtras()">
+    </ion-img>
+    <ion-content>
+      <div class="input-container" id="primerDiv">
+        <ion-text>Dirección de la vivienda</ion-text>
+        <ion-input type="text" [(ngModel)]="crearVvienda.direccionPersonal" placeholder="¿Cuál es la dirección de la vivienda?"></ion-input>
+        <ion-button expand="block" class="guardar-boton" (click)="crearViviendaMetodo()" >Crear</ion-button>
+
+      </div>
+    </ion-content>
+
+    <!-- MENÚ DERECHO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <!--      <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>-->
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>
+
+<ion-toast
+  id="campoVacioVivienda"
+  message="Por favor, completa todos los campos"
+  duration="3000"
+  position="top"
+  color="warning"
+></ion-toast>
+<ion-toast
+  id="exitoCreacionVivienda"
+  message="Vivienda creada con éxito"
+  duration="3000"
+  position="top"
+  color="success"
+></ion-toast>

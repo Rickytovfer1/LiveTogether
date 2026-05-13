@@ -1,48 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import {FooterVecinoComponent} from "../footer-vecino/footer-vecino.component";
-import {HeaderComponent} from "../header/header.component";
-import {HeaderVecinoComponent} from "../header-vecino/header-vecino.component";
-import {IonicModule} from "@ionic/angular";
-import {NavLateralDerechoVecinoComponent} from "../nav-lateral-derecho-vecino/nav-lateral-derecho-vecino.component";
-import {NavLateralVecinoComponent} from "../nav-lateral-vecino/nav-lateral-vecino.component";
-import {NgOptimizedImage} from "@angular/common";
-import {NavLateralComunidadComponent} from "../nav-lateral-comunidad/nav-lateral-comunidad.component";
+import {AnadirGastoComponent} from "../gastos-comunidad/anadir-gasto/anadir-gasto.component";
+import {DeudoresComponent} from "../gastos-comunidad/deudores/deudores.component";
 import {FooterComunidadComponent} from "../footer-comunidad/footer-comunidad.component";
+import {GastosComponent} from "../gastos-comunidad/gastos/gastos.component";
+import {HeaderComponent} from "../header/header.component";
+import {IonicModule} from "@ionic/angular";
+import {NavLateralComunidadComponent} from "../nav-lateral-comunidad/nav-lateral-comunidad.component";
+import {NgIf} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 import {Usuario} from "../modelos/Usuario";
 import {Comunidad} from "../modelos/Comunidad";
+import {CrearVivienda} from "../modelos/CrearVivienda";
 import {Router} from "@angular/router";
 import {UsuarioService} from "../servicios/usuario-service";
+import {ViviendaService} from "../servicios/vivienda-service";
 import {ComunidadService} from "../servicios/comunidad-service";
 import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../modelos/TokenDataDTO";
-import {Vivienda} from "../modelos/Vivienda";
-import {ViviendaService} from "../servicios/vivienda-service";
 
 @Component({
-  selector: 'app-lista-viviendas',
-  templateUrl: './lista-viviendas.component.html',
-  styleUrls: ['./lista-viviendas.component.scss'],
+  selector: 'app-crear-vivienda',
+  templateUrl: './crear-vivienda.component.html',
+  styleUrls: ['./crear-vivienda.component.scss'],
   standalone: true,
   imports: [
-    FooterVecinoComponent,
+    AnadirGastoComponent,
+    DeudoresComponent,
+    FooterComunidadComponent,
+    GastosComponent,
     HeaderComponent,
-    HeaderVecinoComponent,
     IonicModule,
-    NavLateralDerechoVecinoComponent,
-    NavLateralVecinoComponent,
-    NgOptimizedImage,
     NavLateralComunidadComponent,
-    FooterComunidadComponent
+    NgIf,
+    FormsModule
   ]
 })
-export class ListaViviendasComponent  implements OnInit {
+export class CrearViviendaComponent  implements OnInit {
 
-  notificacionesPendientes = 0
   private usuario!: Usuario
   private comunidad!: Comunidad
-  listaViviendas: Vivienda[] = []
   correo!: string
-  todasViviendas: Vivienda[] = []
+
+
+  crearVvienda: CrearVivienda = {
+    direccionPersonal: "",
+    idComunidad: undefined
+  }
 
   constructor(private router: Router,
               private usuarioService: UsuarioService,
@@ -50,14 +53,6 @@ export class ListaViviendasComponent  implements OnInit {
               private comunidadService: ComunidadService) { }
 
   ngOnInit() {
-    this.inicio()
-  }
-
-  ionViewWillEnter() {
-    this.inicio()
-  }
-
-  inicio() {
     const token = sessionStorage.getItem('authToken');
     if (token) {
       try {
@@ -72,8 +67,7 @@ export class ListaViviendasComponent  implements OnInit {
       }
     } else {
       this.router.navigate(['/']);
-    }
-  }
+    }}
 
   cargarUsuario(correo: string): void {
     this.usuarioService.cargarUsuarioComunidad(correo).subscribe({
@@ -94,32 +88,32 @@ export class ListaViviendasComponent  implements OnInit {
       this.comunidadService.cargarComunidadPorIdUsuario(this.usuario.id).subscribe({
         next: data => {
           this.comunidad = data
-          this.listarViviendas()
+          this.crearVvienda.idComunidad = this.comunidad.id
         }
       })
     }
   }
 
-  listarViviendas() {
-    if (this.comunidad.id) {
-      this.viviendaService.listarViviendasComunidad(this.comunidad.id).subscribe({
-        next: data => {
-          this.listaViviendas = data
-          this.todasViviendas = data;
-        }
-      });
+  volverAtras(): void {
+    this.router.navigate(['/lista-viviendas']);
+  }
+
+  crearViviendaMetodo() {
+    if (!this.crearVvienda.direccionPersonal || !this.crearVvienda.idComunidad) {
+      const toast = document.getElementById("campoVacioVivienda") as any;
+      toast.present();
+      return;
     }
-  }
-
-  filtrarViviendas(event: any): void {
-    const texto = event.target?.value?.toLowerCase() || '';
-    this.listaViviendas = this.todasViviendas.filter(vivienda =>
-      vivienda.direccionPersonal.toLowerCase().includes(texto)
-    )
-  }
-
-  crearVivienda() {
-    this.router.navigate(["/crear-vivienda"])
+    this.viviendaService.crearVivienda(this.crearVvienda).subscribe({
+      next: () => {
+        const toast = document.getElementById("exitoCreacionVivienda") as any;
+        toast.present();
+        this.router.navigate(['/lista-viviendas']);
+      },
+      error: () => {
+        console.log('Error al insertar codigo.');
+      }
+    });
   }
 
 }
