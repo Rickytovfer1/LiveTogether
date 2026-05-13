@@ -1,0 +1,66 @@
+  .gastos {
+    padding-inline: 50px;
+    margin: 0 auto;
+
+    .gasto {
+      margin-block: 40px;
+      padding: 15px 15px 20px;
+      background-color: white;
+      border: 5px solid #57BF48;
+      color: black;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 10px;
+
+      .estado {
+        border-radius: 15px;
+        padding: 10px;
+        margin: 15px auto 0;
+        float: right;
+        border: 1px solid black;
+      }
+
+      .Pagado {
+        color: black;
+        background-color: white;
+      }
+
+      .Pendiente {
+        color: white;
+        background-color: red;
+      }
+    }
+  }
+
+  .div-sin {
+    margin: 60px auto 0;
+    text-align: center;
+
+    span {
+      font-weight: bold
+    }
+  }
+
+@media (min-width: 768px) {
+
+  .gastos {
+    width: 100%;
+    max-width: 700px;
+    padding-inline: 0;
+  }
+
+  .gasto {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 20px;
+    &:hover {
+      transform: translateY(-6px);
+    }
+  }
+
+  .gasto .estado {
+    margin: 0;
+    float: none;
+  }
+}

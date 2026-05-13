@@ -1,0 +1,16 @@
+@for (gasto of listaGastos; track gasto.id) {
+  <div class="gastos" >
+    <div class="gasto" (click)="navigateToGasto(gasto.id)">
+      <span>{{ gasto.concepto }}</span>
+      <div class="estado" [ngClass]="comprobarEstado(gasto)">
+        <span>{{ comprobarEstado(gasto) }}</span>
+      </div>
+    </div>
+  </div>
+}
+
+@if (listaGastos.length === 0) {
+  <div class="div-sin">
+    <span>No hay gastos registrados en tu comunidad.</span>
+  </div>
+}

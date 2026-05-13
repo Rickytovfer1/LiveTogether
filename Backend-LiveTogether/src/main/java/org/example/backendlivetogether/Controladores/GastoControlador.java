@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.CrearGastoDTO;
 import org.example.backendlivetogether.DTOs.GastoDTO;
 import org.example.backendlivetogether.DTOs.MarcarPagadoDTO;
+import org.example.backendlivetogether.DTOs.VecinoGastosDTO;
 import org.example.backendlivetogether.Servicios.GastoServicio;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,11 @@ public class GastoControlador {
     @PostMapping("/marcar/pagado")
     public void marcarPagado(@RequestBody MarcarPagadoDTO dto){
         gastoServicio.marcarPagado(dto);
+    }
+
+    @GetMapping("/comunidad/listar/deudores/comunidad/{idComunidad}")
+    public List<VecinoGastosDTO> listarDeudoresIdComunidad(@PathVariable Integer idComunidad){
+        return gastoServicio.listarDeudoresIdComunidad(idComunidad);
     }
 
 }

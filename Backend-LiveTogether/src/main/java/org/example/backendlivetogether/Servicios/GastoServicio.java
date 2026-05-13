@@ -1,10 +1,7 @@
 package org.example.backendlivetogether.Servicios;
 
 import lombok.AllArgsConstructor;
-import org.example.backendlivetogether.DTOs.CrearGastoDTO;
-import org.example.backendlivetogether.DTOs.GastoDTO;
-import org.example.backendlivetogether.DTOs.MarcarPagadoDTO;
-import org.example.backendlivetogether.DTOs.VecinoUsuarioDTO;
+import org.example.backendlivetogether.DTOs.*;
 import org.example.backendlivetogether.Modelos.Comunidad;
 import org.example.backendlivetogether.Modelos.Gasto;
 import org.example.backendlivetogether.Modelos.Vecino;
@@ -129,6 +126,46 @@ public class GastoServicio {
             iGastoRepositorio.save(gasto);
             iVecinoRepositorio.save(vecino);
         }
+    }
+
+    public List<VecinoGastosDTO> listarDeudoresIdComunidad(Integer idComunidad) {
+        List<VecinoGastosDTO> listaDeudores = new ArrayList<>();
+
+        List<VecinoUsuarioDTO> vecinos = vecinoServicio.listarVecinosIdComunidad(idComunidad);
+
+        for (VecinoUsuarioDTO v : vecinos) {
+
+            Vecino vecino = iVecinoRepositorio.findById(v.getId())
+                    .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+            if (!vecino.getGastosPendientes().isEmpty()) {
+
+                Set<GastoDTO> gastosPagados = new HashSet<>(0);
+                for (Gasto g : vecino.getGastosPagados()) {
+                    gastosPagados.add(getGastoDTO(g));
+                }
+
+                Set<GastoDTO> gastosPendientes = new HashSet<>(0);
+                for (Gasto g : vecino.getGastosPendientes()) {
+                    gastosPendientes.add(getGastoDTO(g));
+                }
+
+                VecinoGastosDTO dto = new VecinoGastosDTO();
+                dto.setId(vecino.getId());
+                dto.setNombre(vecino.getNombre());
+                dto.setApellidos(vecino.getApellidos());
+                dto.setTelefono(vecino.getTelefono());
+                dto.setFechaNacimiento(vecino.getFechaNacimiento());
+                dto.setDni(vecino.getDni());
+                dto.setFotoPerfil(vecino.getFotoPerfil());
+                dto.setGastosPagados(gastosPagados);
+                dto.setGastosPendientes(gastosPendientes);
+
+                listaDeudores.add(dto);
+            }
+        }
+
+        return listaDeudores;
     }
 
     public static GastoDTO getGastoDTO(Gasto g) {

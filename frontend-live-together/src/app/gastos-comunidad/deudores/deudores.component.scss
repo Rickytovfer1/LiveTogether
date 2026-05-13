@@ -1,0 +1,147 @@
+.gastos {
+  padding-inline: 50px;
+  margin: 0 auto;
+
+  .gasto {
+    margin-block: 40px;
+    padding: 15px 15px 20px;
+    background-color: white;
+    border: 5px solid #57BF48;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 10px;
+
+    .estado {
+      border-radius: 15px;
+      padding: 10px;
+      margin: 15px auto 0;
+      float: right;
+      border: 1px solid black;
+    }
+
+    .Pagado {
+      color: black;
+      background-color: white;
+    }
+
+    .Pendiente {
+      color: white;
+      background-color: red;
+    }
+  }
+}
+
+.div-sin {
+  margin: 60px auto 0;
+  text-align: center;
+
+  span {
+    font-weight: bold
+  }
+}
+
+@media (min-width: 768px) {
+
+  .gastos {
+    width: 100%;
+    max-width: 700px;
+    padding-inline: 0;
+  }
+
+  .gasto {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    &:hover {
+      transform: translateY(-6px);
+    }
+  }
+
+  .gasto .estado {
+    margin: 0;
+    float: none;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-contenido {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: aparecer 0.3s ease-out;
+}
+
+.lista-gastos {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.texto-gasto {
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.botones-modal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.div-sin {
+  margin: 60px auto 0;
+  text-align: center;
+
+  span {
+    font-weight: bold
+  }
+}

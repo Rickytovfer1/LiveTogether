@@ -24,5 +24,10 @@ export class ComunidadService {
     return this.http.post(`${this.apiUrl}/vecino/insertar/codigo`, insertarCodigo, options);
   }
 
+  cargarComunidadPorIdUsuario(idUsuario: number): Observable<Comunidad> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Comunidad>(`${this.apiUrl}/comunidad/ver/comunidad/usuario/${idUsuario}`, options)
+  }
+
 
 }

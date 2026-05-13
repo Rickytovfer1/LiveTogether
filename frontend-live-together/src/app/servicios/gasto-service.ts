@@ -6,6 +6,7 @@ import {ComunService} from "./comun-service";
 import {environment} from "../../environments/environment";
 import {CrearGasto} from "../modelos/CrearGasto";
 import {MarcarPagado} from "../modelos/MarcarPagado";
+import {VecinoGastos} from "../modelos/VecinoGastos";
 
 @Injectable({
   providedIn: 'root',
@@ -43,5 +44,10 @@ export class GastoService {
   marcarPagado(marcarPagado: MarcarPagado): Observable<any> {
     const options = this.comunService.autorizarPeticion();
     return this.http.post(`${this.apiUrl}/marcar/pagado`, marcarPagado, options);
+  }
+
+  listarDeudoresIdComunidad(idComunidad: number): Observable<VecinoGastos[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<VecinoGastos[]>(`${this.apiUrl}/comunidad/listar/deudores/comunidad/${idComunidad}`, options)
   }
 }

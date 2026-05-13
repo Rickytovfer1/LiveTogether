@@ -1,0 +1,24 @@
+<div class="input-container" id="primerDiv">
+  <ion-text>Concepto</ion-text>
+  <ion-input type="text" [(ngModel)]="crearGasto.concepto" placeholder="¿Cuál es el concepto del gasto?"></ion-input>
+
+  <ion-text>Total</ion-text>
+  <ion-input type="text" [(ngModel)]="crearGasto.total" placeholder="Cantidad total del gasto (€)"></ion-input>
+
+</div>
+<ion-button expand="block" class="guardar-boton" (click)="crearGastoMetodo()" >Crear</ion-button>
+
+<ion-toast
+  id="campoVacioGasto"
+  message="Por favor, completa todos los campos"
+  duration="3000"
+  position="top"
+  color="warning"
+></ion-toast>
+<ion-toast
+  id="exitoCreacionGasto"
+  message="Gasto publicado con éxito"
+  duration="3000"
+  position="top"
+  color="success"
+></ion-toast>

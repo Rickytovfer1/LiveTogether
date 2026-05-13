@@ -54,4 +54,8 @@ public class ComunidadControlador {
         return comunidadServicio.generarCodigo(idVivienda, idComunidad);
     }
 
+    @GetMapping("/comunidad/ver/comunidad/usuario/{idUsuario}")
+    public ComunidadDTO verComunidadUsuarioIDComunidad(@PathVariable Integer idUsuario){
+        return comunidadServicio.verComunidadUsuarioID(idUsuario);
+    }
 }
