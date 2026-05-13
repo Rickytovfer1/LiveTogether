@@ -1,17 +1,47 @@
 <app-header></app-header>
-<app-header-vecino class="ocultarHeader"></app-header-vecino>
 
 <ion-grid class="grid_menus">
   <ion-row class="fila_menus">
 
     <!-- MENÚ IZQUIERDO -->
     <ion-col size="12" size-md="2.5" class="menu-lateral">
-      <app-nav-lateral-vecino></app-nav-lateral-vecino>
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
     </ion-col>
 
     <!-- CONTENIDO -->
     <ion-content>
-      <ion-text>Lista viviendas</ion-text>
+      <ion-grid>
+        <ion-row class="cabecera">
+          <ion-col size="2">
+            <div class="notif-wrapper">
+              <ion-img
+                class="btn-notif"
+                src="assets/icon/lista-viviendas/notificacion.png">
+              </ion-img>
+              <div class="notif-badge">
+                5
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="8">
+            <div class="buscador">
+              <ion-searchbar
+                class="searchbar-blanco"
+                placeholder="Buscar viviendas"
+                showCancelButton="focus"
+              ></ion-searchbar>
+            </div>
+          </ion-col>
+          <ion-col size="2">
+            <ion-img src="assets/icon/lista-viviendas/anadir.png"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <div class="tarjeta">
+        <p class="tarjeta-titulo">Direccion</p>
+      </div>
     </ion-content>
 
     <!-- MENÚ DERECHO -->
@@ -22,4 +52,4 @@
   </ion-row>
 </ion-grid>
 
-<app-footer-vecino class="ocultarFooter"></app-footer-vecino>
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>

@@ -3,15 +3,16 @@ import {IonicModule} from "@ionic/angular";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-nav-lateral-comunidad',
-  templateUrl: './nav-lateral-comunidad.component.html',
-  styleUrls: ['./nav-lateral-comunidad.component.scss'],
-  standalone: true,
-  imports: [
-    IonicModule,
-  ]
+    selector: 'app-footer-comunidad',
+    templateUrl: './footer-comunidad.component.html',
+    styleUrls: ['./footer-comunidad.component.scss'],
+    standalone: true,
+    imports: [
+        IonicModule
+    ]
 })
-export class NavLateralComunidadComponent  implements OnInit {
+export class FooterComunidadComponent  implements OnInit {
+
   gastosImgSrc: string = 'assets/icon/nav-footer-vecino/gastos.png'
   viviendasImgSrc: string = 'assets/icon/nav-footer-vecino/propiedades.png'
   eleccionesImgSrc: string = 'assets/icon/nav-footer-vecino/elecciones.png'
@@ -32,12 +33,11 @@ export class NavLateralComunidadComponent  implements OnInit {
     }
   }
 
-
   navigateToGastos() {
     this.router.navigate(['gastos/comunidad'])
   }
 
-  navigateToVivienda() {
+  navigateToViviendas() {
     this.router.navigate(['lista-viviendas'])
   }
 

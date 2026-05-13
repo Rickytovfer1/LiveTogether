@@ -6,6 +6,8 @@ import {IonicModule} from "@ionic/angular";
 import {NavLateralDerechoVecinoComponent} from "../nav-lateral-derecho-vecino/nav-lateral-derecho-vecino.component";
 import {NavLateralVecinoComponent} from "../nav-lateral-vecino/nav-lateral-vecino.component";
 import {NgOptimizedImage} from "@angular/common";
+import {NavLateralComunidadComponent} from "../nav-lateral-comunidad/nav-lateral-comunidad.component";
+import {FooterComunidadComponent} from "../footer-comunidad/footer-comunidad.component";
 
 @Component({
   selector: 'app-lista-viviendas',
@@ -19,7 +21,9 @@ import {NgOptimizedImage} from "@angular/common";
     IonicModule,
     NavLateralDerechoVecinoComponent,
     NavLateralVecinoComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NavLateralComunidadComponent,
+    FooterComunidadComponent
   ]
 })
 export class ListaViviendasComponent  implements OnInit {
