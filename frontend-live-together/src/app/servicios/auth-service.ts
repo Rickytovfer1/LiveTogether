@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {RegistrarVecino} from "../modelos/RegistrarVecino";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {RegistrarComunidad} from "../modelos/RegistrarComunidad";
 
 @Injectable({
   providedIn: 'root',
@@ -40,4 +41,9 @@ export class AuthService {
   registroVecino(registroVecino: RegistrarVecino): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/autorizacion/registro/vecino`, registroVecino);
   }
+
+  registroComunidad(registroComunidad: RegistrarComunidad): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/autorizacion/registro/comunidad`, registroComunidad);
+  }
+
 }

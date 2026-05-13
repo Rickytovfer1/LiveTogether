@@ -77,4 +77,12 @@ export const routes: Routes = [
     path: 'comunidad/documentacion',
     loadComponent: () => import('./documentacion/documentacion.component').then((m) => m.DocumentacionComponent),
   },
+  {
+    path: 'crear-comunidad',
+      loadComponent: () => import('./registroComunidad/crear-comunidad/crear-comunidad.component').then((m) => m.CrearComunidadComponent),
+  },
+  {
+    path: 'lista-viviendas',
+    loadComponent: () => import('./lista-viviendas/lista-viviendas.component').then((m) => m.ListaViviendasComponent),
+  },
 ];
