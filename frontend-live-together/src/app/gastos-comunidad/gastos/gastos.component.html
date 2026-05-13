@@ -1,6 +1,6 @@
 @for (gasto of listaGastos; track gasto.id) {
   <div class="gastos" >
-    <div class="gasto" (click)="navigateToGasto(gasto.id)">
+    <div class="gasto">
       <span>{{ gasto.concepto }}</span>
       <div class="estado" [ngClass]="comprobarEstado(gasto)">
         <span>{{ comprobarEstado(gasto) }}</span>
