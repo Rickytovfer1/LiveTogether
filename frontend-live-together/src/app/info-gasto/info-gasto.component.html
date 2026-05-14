@@ -1,0 +1,82 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <!-- MENÚ IZQUIERDO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <!-- CONTENIDO -->
+    <ion-content>
+      <div class="contenedor-princial">
+        <div class="asunto-gasto">
+          <span>{{gasto.concepto}}</span>
+        </div>
+        <div class="info-gasto">
+          <div>
+            <span>Coste total: {{gasto.total}}€</span>
+          </div>
+          <div>
+            <span>Coste por vecino: {{totalPorVecino}}€</span>
+          </div>
+          <div>
+            <span>Pagado: {{porcentajePagado}}% / {{gasto.total}}€</span>
+          </div>
+        </div>
+        <div class="contenedor-boton">
+          <button (click)="abrirModal(gasto)">
+            {{ porcentajePagado === 100 ? 'Pagado' : 'Ver más' }}
+          </button>
+        </div>
+      </div>
+    </ion-content>
+
+    <!-- MENÚ DERECHO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <!--      <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>-->
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+@if (modalAbierto) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-contenido" (click)="$event.stopPropagation()">
+      <h1>Enviar recordatorio</h1>
+      <div class="lista-gastos">
+
+        @for (vecino of vecinoDeudas; track vecino.id) {
+          <label>
+            <input type="checkbox" [value]="vecino.id" (change)="actualizarSeleccion($event)">
+            <span class="texto-gasto">{{ vecino.nombre }} {{ vecino.apellidos }}</span>
+          </label>
+        }
+      </div>
+
+      <div class="botones-modal">
+        <button (click)="aceptar()">Aceptar</button>
+        <button (click)="cerrarModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+}
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>
+
+
+<ion-toast
+  id="exitoEnviado"
+  message="Notificación enviada"
+  duration="3000"
+  position="top"
+  color="success"
+></ion-toast>
+
+<ion-toast
+  id="seleccionaUno"
+  message="Por favor, completa todos los campos"
+  duration="3000"
+  position="top"
+  color="warning"
+></ion-toast>

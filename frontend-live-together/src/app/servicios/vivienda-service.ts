@@ -36,4 +36,9 @@ export class ViviendaService {
     return this.http.get<Vivienda>(`${this.apiUrl}/comunidad/ver/info/vivienda/${idVivienda}`, options)
   }
 
+  numeroPropietarios(idComunidad: number): Observable<number> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<number>(`${this.apiUrl}/numero/propietarios/${idComunidad}`, options)
+  }
+
 }

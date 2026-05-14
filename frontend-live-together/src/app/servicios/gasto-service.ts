@@ -7,6 +7,7 @@ import {environment} from "../../environments/environment";
 import {CrearGasto} from "../modelos/CrearGasto";
 import {MarcarPagado} from "../modelos/MarcarPagado";
 import {VecinoGastos} from "../modelos/VecinoGastos";
+import {Vecino} from "../modelos/Vecino";
 
 @Injectable({
   providedIn: 'root',
@@ -49,5 +50,15 @@ export class GastoService {
   listarDeudoresIdComunidad(idComunidad: number): Observable<VecinoGastos[]> {
     const options = this.comunService.autorizarPeticion();
     return this.http.get<VecinoGastos[]>(`${this.apiUrl}/comunidad/listar/deudores/comunidad/${idComunidad}`, options)
+  }
+
+  verGastoComunidad(idGasto: number): Observable<Gasto> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Gasto>(`${this.apiUrl}/comunidad/ver/gasto/${idGasto}`, options)
+  }
+
+  listarDeudoresIdGasto(idGasto: number): Observable<Vecino[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Vecino[]>(`${this.apiUrl}/comunidad/listar/deudores/${idGasto}`, options)
   }
 }

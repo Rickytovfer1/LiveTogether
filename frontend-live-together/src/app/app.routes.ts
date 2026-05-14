@@ -105,4 +105,8 @@ export const routes: Routes = [
     path: 'notificaciones-comunidad',
     loadComponent: () => import('./notificaciones-comunidad/notificaciones-comunidad.component').then((m) => m.NotificacionesComunidadComponent),
   },
+  {
+    path: 'info-gasto/:id',
+    loadComponent: () => import('./info-gasto/info-gasto.component').then((m) => m.InfoGastoComponent),
+  },
 ];

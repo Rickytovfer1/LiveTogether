@@ -33,4 +33,9 @@ public class ViviendaControlador {
     public ViviendaDTO verInfoVivienda(@PathVariable Integer idVivienda){
         return viviendaServicio.verViviendaID(idVivienda);
     }
+
+    @GetMapping("/numero/propietarios/{idComunidad}")
+    public Integer numeroPropietarios(@PathVariable Integer idComunidad){
+        return viviendaServicio.numeroPropietarios(idComunidad);
+    }
 }

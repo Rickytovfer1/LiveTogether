@@ -168,6 +168,19 @@ public class GastoServicio {
         return listaDeudores;
     }
 
+    public List<VecinoDTO> listarDeudores(Integer idGasto) {
+        Gasto gasto = iGastoRepositorio.findById(idGasto)
+                .orElseThrow(() -> new RuntimeException("No existe un gasto con este ID."));
+
+        List<VecinoDTO> deudoresDTO = new ArrayList<>();
+
+        for (Vecino vecino : gasto.getVecinosPendientes()) {
+            deudoresDTO.add(VecinoServicio.getVecinoDTO(vecino));
+        }
+
+        return deudoresDTO;
+    }
+
     public static GastoDTO getGastoDTO(Gasto g) {
         GastoDTO dto = new GastoDTO();
         dto.setId(g.getId());

@@ -55,6 +55,19 @@ public class ViviendaServicio {
 
     }
 
+    public Integer numeroPropietarios(Integer idComunidad){
+        List<Vivienda> viviendas = iViviendaRepositorio.findByComunidad_Id(idComunidad);
+        int propietarios = 0;
+
+        for (Vivienda vivienda : viviendas){
+            if (vivienda.getPropietario() != null) {
+                propietarios++;
+            }
+        }
+
+        return propietarios;
+    }
+
     public static ViviendaDTO getViviendaDTO(Vivienda v) {
         ViviendaDTO dto = new ViviendaDTO();
         dto.setId(v.getId());
