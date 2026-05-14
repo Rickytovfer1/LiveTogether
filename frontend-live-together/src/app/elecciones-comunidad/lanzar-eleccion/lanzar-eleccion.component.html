@@ -1,0 +1,54 @@
+<div class="trespuntitos" >
+  <ion-img (click)="abrirModalOpciones()" class="foto3" src="assets/icon/trespuntos.png"></ion-img>
+</div>
+
+
+
+<div class="input-container" id="primerDiv">
+  <ion-text>¿Qué votación quieres lanzar?</ion-text>
+  <ion-input type="text" [(ngModel)]="crearEleccion.motivo" placeholder="Escribe un enunciado para la votación"></ion-input>
+
+  @if (modoCambioPresidente) {
+    <div>
+      <ion-text>Selecciona el nuevo presidente:</ion-text>
+      <ion-select [(ngModel)]="idNuevoPresidente" placeholder="Elige un propietario">
+
+        @for (vecino of listaPropietarios; track vecino.id) {
+          <ion-select-option [value]="vecino.id">
+            {{ vecino.nombre }} {{ vecino.apellidos }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </div>
+  }
+
+  <ion-text>Día de finalización</ion-text>
+  <ion-input type="date" [(ngModel)]="fecha" (ionChange)="actualizarFechaHora()"></ion-input>
+
+  <ion-text>Hora de finalización</ion-text>
+  <ion-datetime locale="es" [(ngModel)]="hora" (ionChange)="actualizarFechaHora()" presentation="time" displayFormat="HH:mm" pickerFormat="HH:mm"  name="horaFinalizacion"></ion-datetime>
+
+</div>
+<ion-button expand="block" class="guardar-boton" (click)="crearEleccionMetodo()" >Lanzar</ion-button>
+
+<ion-toast
+  id="diaIncorrecto"
+  message="La fecha no puede ser anterior de la actual."
+  duration="3000"
+  position="top"
+  color="danger"
+></ion-toast>
+<ion-toast
+  id="campoVacio"
+  message="Por favor, completa todos los campos"
+  duration="3000"
+  position="top"
+  color="warning"
+></ion-toast>
+<ion-toast
+  id="exitoCreacion"
+  message="Elección creada con éxito"
+  duration="3000"
+  position="top"
+  color="success"
+></ion-toast>

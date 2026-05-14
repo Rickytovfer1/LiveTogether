@@ -5,6 +5,8 @@ import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {Comunidad} from "../modelos/Comunidad";
 import {InsertarCodigo} from "../modelos/InsertarCodigo";
+import {Vecino} from "../modelos/Vecino";
+import {VecinoUsuarioDTO} from "../modelos/VecinoUsuarioDTO";
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +31,13 @@ export class ComunidadService {
     return this.http.get<Comunidad>(`${this.apiUrl}/comunidad/ver/comunidad/usuario/${idUsuario}`, options)
   }
 
+  cargarVecinoPorIdVecinoComunidad(idVecino: number): Observable<Vecino> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Vecino>(`${this.apiUrl}/comunidad/ver/vecino/${idVecino}`, options)
+  }
 
+  listarPropietariosComunidad(idComunidad: number): Observable<VecinoUsuarioDTO[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<VecinoUsuarioDTO[]>(`${this.apiUrl}/comunidad/listar/propietarios/${idComunidad}`, options)
+  }
 }

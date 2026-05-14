@@ -2,10 +2,13 @@ package org.example.backendlivetogether.Controladores;
 
 import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.ComunidadDTO;
+import org.example.backendlivetogether.DTOs.VecinoDTO;
+import org.example.backendlivetogether.DTOs.VecinoUsuarioDTO;
 import org.example.backendlivetogether.Modelos.Usuario;
 import org.example.backendlivetogether.Seguridad.UsuarioAdapter;
 import org.example.backendlivetogether.Servicios.ComunidadServicio;
 import org.example.backendlivetogether.Servicios.UsuarioServicio;
+import org.example.backendlivetogether.Servicios.VecinoServicio;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +22,8 @@ public class ComunidadControlador {
     private ComunidadServicio comunidadServicio;
 
     private UsuarioServicio usuarioServicio;
+
+    private VecinoServicio vecinoServicio;
 
     @GetMapping("/vecino/ver/comunidad/{idComunidad}")
     public ComunidadDTO verComunidadID(@PathVariable Integer idComunidad){
@@ -57,5 +62,15 @@ public class ComunidadControlador {
     @GetMapping("/comunidad/ver/comunidad/usuario/{idUsuario}")
     public ComunidadDTO verComunidadUsuarioIDComunidad(@PathVariable Integer idUsuario){
         return comunidadServicio.verComunidadUsuarioID(idUsuario);
+    }
+
+    @GetMapping("/comunidad/ver/vecino/{idVecino}")
+    public VecinoDTO verVecinoID(@PathVariable Integer idVecino){
+        return vecinoServicio.verVecinoID(idVecino);
+    }
+
+    @GetMapping("comunidad/listar/propietarios/{idComunidad}")
+    public List<VecinoUsuarioDTO> listarPropietarios(@PathVariable Integer idComunidad) {
+        return vecinoServicio.listarPropietarios(idComunidad);
     }
 }

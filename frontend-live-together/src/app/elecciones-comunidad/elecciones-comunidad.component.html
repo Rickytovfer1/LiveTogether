@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <!-- MENÚ IZQUIERDO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <!-- CONTENIDO -->
+    <ion-content>
+      <ion-segment [(ngModel)]="seccion" mode="ios">
+        <ion-segment-button value="lanzar-eleccion">
+          <ion-label>Nueva elección</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="listar-elecciones">
+          <ion-label>Mis elecciones</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      @if (seccion === 'lanzar-eleccion') {
+        <app-lanzar-eleccion></app-lanzar-eleccion>
+      }
+
+      @if (seccion === 'listar-elecciones') {
+        <app-listar-elecciones></app-listar-elecciones>
+      }
+
+    </ion-content>
+
+    <!-- MENÚ DERECHO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <!--      <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>-->
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>
