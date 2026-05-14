@@ -13,7 +13,6 @@ import {Router} from "@angular/router";
 })
 export class NavLateralVecinoComponent  implements OnInit {
 
-  propiedadesImgSrc: string = 'assets/icon/nav-footer-vecino/propiedades.png'
   gastosImgSrc: string = 'assets/icon/nav-footer-vecino/gastos.png'
   perfilImgSrc: string = 'assets/icon/nav-footer-vecino/perfil.png'
   eleccionesImgSrc: string = 'assets/icon/nav-footer-vecino/elecciones.png'
@@ -22,9 +21,7 @@ export class NavLateralVecinoComponent  implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    if (this.router.url.includes('/propiedades')) {
-      this.propiedadesImgSrc = 'assets/icon/nav-footer-vecino/propiedadesActive.png'
-    } else if (this.router.url.includes('/gastos')) {
+    if (this.router.url.includes('/gastos')) {
       this.gastosImgSrc = 'assets/icon/nav-footer-vecino/gastosActive.png'
     } else if (this.router.url.includes('/perfil')) {
       this.perfilImgSrc = 'assets/icon/nav-footer-vecino/perfilActive.png'
