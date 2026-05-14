@@ -1,0 +1,39 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <!-- MENÚ IZQUIERDO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <!-- CONTENIDO -->
+    <ion-content>
+      <ion-segment [(ngModel)]="seccion" mode="ios">
+        <ion-segment-button value="comunicados">
+          <ion-label>Comunicados</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="sanciones">
+          <ion-label>Sanciones</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      @if (seccion === 'comunicados') {
+        <app-comunicados></app-comunicados>
+      }
+
+      @if (seccion === 'sanciones') {
+        <app-sanciones></app-sanciones>
+      }
+    </ion-content>
+
+    <!-- MENÚ DERECHO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <!--      <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>-->
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>

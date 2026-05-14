@@ -19,4 +19,13 @@ export class SancionService {
     return this.http.get<Sancion[]>(`${this.apiUrl}/vecino/listar/sanciones/${idComunidad}`, options)
   }
 
+  listarSancionesComunidad(idComunidad: number): Observable<Sancion[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Sancion[]>(`${this.apiUrl}/comunidad/listar/sanciones/${idComunidad}`, options)
+  }
+
+  eliminarSancionComunidad(idSancion: number): Observable<void> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.post<void>(`${this.apiUrl}/comunidad/eliminar/sancion/${idSancion}`, {}, options);
+  }
 }

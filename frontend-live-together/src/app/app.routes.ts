@@ -109,4 +109,8 @@ export const routes: Routes = [
     path: 'info-gasto/:id',
     loadComponent: () => import('./info-gasto/info-gasto.component').then((m) => m.InfoGastoComponent),
   },
+  {
+    path: 'documentacion/comunidad',
+    loadComponent: () => import('./documentacion-comunidad/documentacion-comunidad.component').then((m) => m.DocumentacionComunidadComponent),
+  },
 ];

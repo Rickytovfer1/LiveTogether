@@ -30,4 +30,14 @@ export class ComunicadoService {
     return this.http.post<void>(`${this.apiUrl}/vecino/eliminar/comunicado/${idComunicado}`, {}, options);
   }
 
+  listarComunicadosComunidad(idComunidad: number): Observable<Comunicado[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Comunicado[]>(`${this.apiUrl}/comunidad/listar/comunicados/${idComunidad}`, options)
+  }
+
+
+  eliminarComunicadoComunidad(idComunicado: number): Observable<void> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.post<void>(`${this.apiUrl}/comunidad/eliminar/comunicado/${idComunicado}`, {}, options);
+  }
 }

@@ -1,0 +1,79 @@
+ion-content {
+  height: 65%;
+  --background: #E7F4E7;
+}
+
+ion-grid {
+  padding: 0;
+
+  ion-row {
+    position: relative;
+    background-color: #7CDF68;
+    padding: 15px;
+    border: 1px solid black;
+    border-top: none;
+
+    div {
+      width: 100%;
+    }
+
+    .footer-comunicado {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .fecha,
+    .vecino {
+      font-size: 15px;
+      font-weight: bold;
+      color: white;
+    }
+
+    &:first-child {
+      border-top: 1px solid black;
+    }
+
+    .cruz-roja {
+      position: absolute;
+      right: 5px;
+      top: -15px;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+  }
+}
+
+ion-img {
+  margin: 20px auto 10px auto;
+  width: 60px;
+}
+
+.div-sin {
+  margin: 60px auto 0;
+  text-align: center;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+@media (min-width: 992px) {
+
+  ion-row {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto 25px;
+    border-top: 1px solid black !important;
+
+  }
+  ion-grid {
+    padding: 0 40px;
+  }
+  .cruz-roja {
+    right: 5px;
+    top: 5px;
+  }
+
+}
