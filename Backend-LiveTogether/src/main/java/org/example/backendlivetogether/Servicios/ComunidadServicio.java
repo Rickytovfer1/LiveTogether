@@ -2,15 +2,13 @@ package org.example.backendlivetogether.Servicios;
 
 import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.ComunidadDTO;
-import org.example.backendlivetogether.Modelos.Comunidad;
-import org.example.backendlivetogether.Modelos.Vecino;
-import org.example.backendlivetogether.Modelos.Vivienda;
-import org.example.backendlivetogether.Repositorios.IComunidadRepositorio;
-import org.example.backendlivetogether.Repositorios.IVecinoRepositorio;
-import org.example.backendlivetogether.Repositorios.IViviendaRepositorio;
+import org.example.backendlivetogether.Enumerados.TipoNotificacion;
+import org.example.backendlivetogether.Modelos.*;
+import org.example.backendlivetogether.Repositorios.*;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -22,6 +20,10 @@ public class ComunidadServicio {
     private IVecinoRepositorio iVecinoRepositorio;
 
     private IViviendaRepositorio iViviendaRepositorio;
+
+    private ISolicitudRepositorio iSolicitudRepositorio;
+
+    private INotificacionRepositorio iNotificacionRepositorio;
 
     public ComunidadDTO verComunnidadID(Integer idComunidad){
         Comunidad comunidad = iComunidadRepositorio.findById(idComunidad)
@@ -94,6 +96,61 @@ public class ComunidadServicio {
 
         return codigoFinal;
     }
+
+    public List<Solicitud> listarSolicitudes(Integer idComunidad) {
+        List<Solicitud> solicitudes = iSolicitudRepositorio.findAll();
+        List<Solicitud> solicitudesComunidad = new ArrayList<>();
+        for (Solicitud solicitud : solicitudes) {
+            if (solicitud.getIdComunidad().equals(idComunidad)) {
+                solicitudesComunidad.add(solicitud);
+            }
+        }
+        return solicitudesComunidad;
+    }
+
+    public void aceptarSolicitudEntrada(Solicitud solicitud) {
+        Vivienda vivienda = iViviendaRepositorio.findById(solicitud.getIdVivienda())
+                .orElseThrow(() -> new RuntimeException("No existe una vivienda con este ID."));
+        Comunidad comunidad = iComunidadRepositorio.findById(solicitud.getIdComunidad())
+                .orElseThrow(() -> new RuntimeException("No existe una comunidad con este ID."));
+        Vecino vecino = iVecinoRepositorio.findById(solicitud.getIdVecino())
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        if (comunidad.getViviendas().contains(vivienda)) {
+            vivienda.getVecinos().add(vecino);
+            iViviendaRepositorio.save(vivienda);
+            vecino.getViviendas().add(vivienda);
+            iVecinoRepositorio.save(vecino);
+            iSolicitudRepositorio.delete(solicitud);
+        } else if (!comunidad.getViviendas().contains(vivienda)) {
+            throw new RuntimeException("La vivienda seleccionada no pertenece o no existe en la comunidad.");
+        } else if (vecino.getViviendas().contains(vivienda) || vivienda.getVecinos().contains(vecino)) {
+            throw new RuntimeException("El vecino ya tiene esta vivienda correspondida.");
+        }
+    }
+
+    public void rechazarSolicitud(Solicitud solicitud) {
+        iSolicitudRepositorio.delete(solicitud);
+    }
+
+    public void enviarNotificacion(Integer[] idsVecinos, Integer idComunidad, TipoNotificacion tipo) {
+        Comunidad comunidad = iComunidadRepositorio.findById(idComunidad)
+                .orElseThrow(() -> new RuntimeException("No existe una comunidad con este ID."));
+
+        Set<Vecino> vecinos = new HashSet<>(0);
+        for (Integer id : idsVecinos) {
+            vecinos.add(iVecinoRepositorio.findById(id).orElseThrow(() -> new RuntimeException("No existe un vecino con este ID.")));
+        }
+
+        Notificacion n = new Notificacion();
+        n.setVecinos(vecinos);
+        n.setComunidad(comunidad);
+        n.setTipo(tipo);
+        n.setFecha(LocalDateTime.now());
+
+        iNotificacionRepositorio.save(n);
+    }
+
 
     public static ComunidadDTO getComunidadDTO(Comunidad c) {
         ComunidadDTO dto = new ComunidadDTO();

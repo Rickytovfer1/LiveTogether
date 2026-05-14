@@ -26,4 +26,14 @@ export class ViviendaService {
     return this.http.post(`${this.apiUrl}/comunidad/crear/vivienda`, crearVivienda, options);
   }
 
+  listarViviendas(idComunidad: number | undefined): Observable<Vivienda[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Vivienda[]>(`${this.apiUrl}/vecino/listar/viviendas/${idComunidad}`, options)
+  }
+
+  verInfoVivienda(idVivienda: number): Observable<Vivienda> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Vivienda>(`${this.apiUrl}/comunidad/ver/info/vivienda/${idVivienda}`, options)
+  }
+
 }

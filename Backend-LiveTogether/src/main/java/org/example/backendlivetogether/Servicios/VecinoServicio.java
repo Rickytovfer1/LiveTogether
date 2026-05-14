@@ -2,12 +2,8 @@ package org.example.backendlivetogether.Servicios;
 
 import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.*;
-import org.example.backendlivetogether.Modelos.Comunidad;
-import org.example.backendlivetogether.Modelos.Vecino;
-import org.example.backendlivetogether.Modelos.Vivienda;
-import org.example.backendlivetogether.Repositorios.IComunidadRepositorio;
-import org.example.backendlivetogether.Repositorios.IVecinoRepositorio;
-import org.example.backendlivetogether.Repositorios.IViviendaRepositorio;
+import org.example.backendlivetogether.Modelos.*;
+import org.example.backendlivetogether.Repositorios.*;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -24,6 +20,10 @@ public class VecinoServicio {
     private ViviendaServicio viviendaServicio;
 
     private IComunidadRepositorio iComunidadRepositorio;
+
+    private ISolicitudRepositorio iSolicitudRepositorio;
+
+    private INotificacionRepositorio iNotificacionRepositorio;
 
     public VecinoDTO verVecinoID(Integer idVecino){
         Vecino vecino = iVecinoRepositorio.findById(idVecino)
@@ -124,6 +124,48 @@ public class VecinoServicio {
         return ComunidadServicio.getComunidadDTO(iComunidadRepositorio.findByCodigoComunidad(codigo));
     }
 
+    public void solicitarIngresoComunidad(Integer idVivienda, Integer idComunidad, Integer idVecino) {
+
+        Solicitud solicitud = new Solicitud();
+        solicitud.setIdComunidad(idComunidad);
+        solicitud.setIdVecino(idVecino);
+        solicitud.setIdVivienda(idVivienda);
+        iSolicitudRepositorio.save(solicitud);
+
+    }
+
+    public List<NotificacionDTO> verNotificaciones(Integer idVecino, Integer idComunidad) {
+        Vecino vecino = iVecinoRepositorio.findById(idVecino)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        List<Notificacion> notificaciones = iNotificacionRepositorio.findByComunidad(iComunidadRepositorio.findById(idComunidad)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID.")));
+
+        List<NotificacionDTO> notis = new ArrayList<>(0);
+        for (Notificacion n : notificaciones) {
+            if (n.getVecinos().contains(vecino)) {
+                notis.add(getNotificacionDTO(n));
+            }
+        }
+
+        return notis;
+    }
+
+    public void eliminarNotificacion(Integer idNotificacion, Integer idVecino) {
+        Notificacion notificacion = iNotificacionRepositorio.findById(idNotificacion)
+                .orElseThrow(() -> new RuntimeException("No existe una notificación con este id"));
+
+        Vecino vecino = iVecinoRepositorio.findById(idVecino)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        if (notificacion.getVecinos().size() == 1) {
+            iNotificacionRepositorio.delete(notificacion);
+        } else {
+            notificacion.getVecinos().remove(vecino);
+            iNotificacionRepositorio.save(notificacion);
+        }
+    }
+
     public VecinoUsuarioDTO getVecinoUsuarioDTO(Vecino vecino){
         VecinoUsuarioDTO dtoNuevo  = new VecinoUsuarioDTO();
 
@@ -152,6 +194,23 @@ public class VecinoServicio {
         if (vecino.getFotoPerfil() != null){
             dtoNuevo.setFotoPerfil(vecino.getFotoPerfil());
         }
+        return dtoNuevo;
+    }
+
+    public static NotificacionDTO getNotificacionDTO(Notificacion n){
+        NotificacionDTO dtoNuevo  = new NotificacionDTO();
+
+        dtoNuevo.setId(n.getId());
+        dtoNuevo.setFecha(n.getFecha());
+        dtoNuevo.setTipo(n.getTipo());
+
+        List<Integer> idsVecinos = new ArrayList<>(0);
+        for (Vecino v : n.getVecinos()) {
+            idsVecinos.add(v.getId());
+        }
+        dtoNuevo.setIdsVecinos(idsVecinos);
+        dtoNuevo.setIdComunidad(n.getComunidad().getId());
+
         return dtoNuevo;
     }
 

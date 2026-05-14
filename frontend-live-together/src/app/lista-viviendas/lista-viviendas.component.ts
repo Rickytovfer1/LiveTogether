@@ -106,6 +106,8 @@ export class ListaViviendasComponent  implements OnInit {
         next: data => {
           this.listaViviendas = data
           this.todasViviendas = data;
+          this.listarSolicitudes()
+
         }
       });
     }
@@ -118,8 +120,19 @@ export class ListaViviendasComponent  implements OnInit {
     )
   }
 
+  listarSolicitudes() {
+    this.comunidadService.listarSolicitudes(this.comunidad.id).subscribe({
+      next: data => this.notificacionesPendientes = data.length
+    })
+  }
+
+
   crearVivienda() {
     this.router.navigate(["/crear-vivienda"])
+  }
+
+  navigateToNotificaciones() {
+    this.router.navigate(["/notificaciones-comunidad"])
   }
 
 }

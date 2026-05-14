@@ -14,30 +14,43 @@
 
       <div class="subtitulo-container">
         <ion-text class="subtitle">Comunidades</ion-text>
-        <ion-select label="Selecciona una comunidad" label-placement="floating">
-          <ion-select-option >
-            NombreComunidad - Direccion
-          </ion-select-option>
-          <ion-select-option>
-            Todavía no hay comunidades disponibles en la aplicación
-          </ion-select-option>
+        <ion-select label="Selecciona una comunidad" [(ngModel)]="idComunidad" (ionChange)="cargarVivienda(idComunidad)" label-placement="floating">
+
+          @for (comunidad of comunidades; track comunidad.id) {
+            <ion-select-option [value]="comunidad.id">
+              {{ comunidad.nombre }} - {{ comunidad.direccion }}
+            </ion-select-option>
+          }
+          @if (comunidades.length === 0) {
+            <ion-select-option>
+              Todavía no hay comunidades disponibles en la aplicación
+            </ion-select-option>
+          }
         </ion-select>
 
       </div>
 
       <div class="subtitulo-container">
         <ion-text class="subtitle">Vivienda a elegir</ion-text>
-        <ion-select label="Selecciona una vivienda"  label-placement="floating">
-          <ion-select-option >
-            Vivienda
-          </ion-select-option>
-          <ion-select-option disabled>
-            Esta comunidad no tiene viviendas disponibles
-          </ion-select-option>
+        <ion-select label="Selecciona una vivienda" [(ngModel)]="idVivienda" label-placement="floating">
+
+          @for (vivienda of viviendas; track vivienda.id) {
+            <ion-select-option [value]="vivienda.id">
+              {{ vivienda.direccionPersonal }}
+            </ion-select-option>
+          }
+
+          @if (viviendas.length === 0) {
+            <ion-select-option disabled>
+              Esta comunidad no tiene viviendas disponibles
+            </ion-select-option>
+          }
+
         </ion-select>
       </div>
 
-      <ion-button class="ion-button1" expand="block" >SOLICITAR UNIÓN</ion-button>
+
+      <ion-button class="ion-button1" expand="block" (click)="solicitarUnion()">SOLICITAR UNIÓN</ion-button>
 
       <div class="linea-blanca"></div>
 
@@ -94,6 +107,14 @@
 <ion-toast
   id="toastFaltanDatos"
   message="Faltan datos para solicitar unión"
+  duration="3000"
+  position="top"
+  color="warning"
+></ion-toast>
+
+<ion-toast
+  id="toastVacio"
+  message="Por favor inserte un codigo"
   duration="3000"
   position="top"
   color="warning"

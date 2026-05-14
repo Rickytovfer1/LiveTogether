@@ -19,6 +19,7 @@ import {
 import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../../modelos/TokenDataDTO";
 import {FormsModule} from "@angular/forms";
+import {TipoNotificacion} from "../../modelos/Notificacion";
 
 @Component({
   selector: 'app-lanzar-eleccion',
@@ -156,6 +157,13 @@ export class LanzarEleccionComponent  implements OnInit {
         this.fecha = '';
         this.hora = '';
         this.modoCambioPresidente = false;
+
+        this.comunidadService.listarPropietariosComunidad(this.comunidad.id).subscribe({
+          next: data =>
+            this.comunidadService.enviarNotificacion(data.map(vecino => vecino.id), this.comunidad.id, TipoNotificacion.ELECCION)
+              .subscribe({})
+        })
+
       },
       error: () => {
         console.log('Error al lanzar la elección.');

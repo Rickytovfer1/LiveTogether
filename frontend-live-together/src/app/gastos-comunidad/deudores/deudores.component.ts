@@ -8,12 +8,17 @@ import {GastoService} from "../../servicios/gasto-service";
 import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../../modelos/TokenDataDTO";
 import {VecinoGastos} from "../../modelos/VecinoGastos";
+import {TipoNotificacion} from "../../modelos/Notificacion";
+import {IonicModule} from "@ionic/angular";
 
 @Component({
   selector: 'app-deudores',
   templateUrl: './deudores.component.html',
   styleUrls: ['./deudores.component.scss'],
   standalone: true,
+  imports: [
+    IonicModule
+  ]
 })
 export class DeudoresComponent  implements OnInit {
 
@@ -94,6 +99,12 @@ export class DeudoresComponent  implements OnInit {
   aceptar(vecinoId: number): void {
     const ids: number[] = [vecinoId];
     console.log(ids);
-    this.cerrarModal();
+    this.comunidadService.enviarNotificacion(ids, this.comunidad.id, TipoNotificacion.DEUDA).subscribe({
+      next: () => {
+        const toast = document.getElementById("exitoEnviado") as any;
+        toast.present();
+        this.cerrarModal()
+      }
+    })
   }
 }

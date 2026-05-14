@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {Vecino} from "../modelos/Vecino";
 import {VecinoUsuarioDTO} from "../modelos/VecinoUsuarioDTO";
 import {Comunidad} from "../modelos/Comunidad";
+import {Notificacion} from "../modelos/Notificacion";
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,17 @@ export class VecinoService {
   listarPropietarios(idComunidad: number): Observable<VecinoUsuarioDTO[]> {
     const options = this.comunService.autorizarPeticion();
     return this.http.get<VecinoUsuarioDTO[]>(`${this.apiUrl}/vecino/listar/propietarios/${idComunidad}`, options)
+  }
+
+  verNotificaciones(idVecino: number, idComunidad: number): Observable<Notificacion[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<Notificacion[]>(`${this.apiUrl}/vecino/ver/notificaciones/${idVecino}/${idComunidad}`, options)
+  }
+
+
+  eliminarNotificacion(idVecino: number, idNotificacion: number) {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.post(`${this.apiUrl}/vecino/eliminar/notificacion/${idNotificacion}/${idVecino}`, {}, options)
   }
 
 }

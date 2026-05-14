@@ -14,6 +14,9 @@ import {VecinoService} from "../servicios/vecino-service";
 import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../modelos/TokenDataDTO";
 import {FormsModule} from "@angular/forms";
+import {Vivienda} from "../modelos/Vivienda";
+import {ViviendaService} from "../servicios/vivienda-service";
+import {TipoNotificacion} from "../modelos/Notificacion";
 
 @Component({
   selector: 'app-unirse-comunidad',
@@ -34,7 +37,11 @@ export class UnirseComunidadComponent  implements OnInit {
   private vecino!: Vecino;
 
   comunidades: Comunidad[] = [];
+  viviendas: Vivienda[] = [];
 
+  idVivienda?: number;
+  idComunidad?: number;
+  idVecino?: number;
 
   insertarCodigo: InsertarCodigo = {
     codigoComunidad: "",
@@ -46,6 +53,7 @@ export class UnirseComunidadComponent  implements OnInit {
     private router: Router,
     private usuarioService: UsuarioService,
     private vecinoService: VecinoService,
+    private viviendaService: ViviendaService
   ) {}
 
   ngOnInit() {
@@ -66,32 +74,41 @@ export class UnirseComunidadComponent  implements OnInit {
     }
   }
 
+  async presentToast(id: string) {
+    const toast = document.getElementById(id) as any;
+    if (toast) {
+      await toast.present();
+    }
+  }
+
   insertarCodigoComunidad() {
+    const ids: number[] = [this.insertarCodigo.idVecino!]
     if (!this.insertarCodigo.idVecino) {
       console.error("Vecino aún no cargado");
       return;
     }
 
     if (!this.insertarCodigo.codigoComunidad) {
-      console.error("Código vacío");
+      this.presentToast("toastVacio");
       return;
     }
-
     this.vecinoService.buscarComunidadPorCodigo(this.insertarCodigo.codigoComunidad).subscribe({
-      next: () => {
-        this.comunidadService.insertarCodigo(this.insertarCodigo).subscribe({
+      next: data => {
+        this.comunidadService.enviarNotificacionVecino(ids, data.id, TipoNotificacion.BIENVENIDA).subscribe({
           next: () => {
-            this.router.navigate(['/comunidades'])
-          },
-          error: (err) => {
-            console.error("Error al insertar código:", err);
+            this.comunidadService.insertarCodigo(this.insertarCodigo).subscribe({
+              next: () => {
+                this.presentToast("toastCodigoCorrecto");
+                this.router.navigate(['/comunidades'])
+              },
+              error: () => {
+                this.presentToast("toastCodigoError");
+              }
+            });
           }
-        });
-      },
-      error: (err) => {
-        console.error("Código inválido:", err);
+        })
       }
-    });
+    })
   }
 
   cargarUsuario(correo: string): void {
@@ -115,10 +132,50 @@ export class UnirseComunidadComponent  implements OnInit {
         next: data => {
           this.vecino = data;
           this.insertarCodigo.idVecino = this.vecino.id;
+          this.cargarComunidades();
         }
       });
     }
   }
 
+  solicitarUnion() {
+    if (this.idVivienda && this.idComunidad && this.vecino.id) {
+      this.comunidadService.solicitarUnion(this.idVivienda, this.idComunidad, this.vecino.id).subscribe({
+        next: () => {
+          this.presentToast("toastUnionCorrecta");
+          this.router.navigate(['/comunidades']);
+        },
+        error: () => {
+          console.log('Error al solicitar unión.');
+          this.presentToast("toastUnionError");
+        }
+      });
+    } else {
+      console.warn('Faltan datos para solicitar unión.');
+      this.presentToast("toastFaltanDatos");
+    }
+  }
+
+  cargarComunidades() {
+    this.comunidadService.listarTodasComunidades().subscribe({
+      next: (data: Comunidad[]) => {
+        this.comunidades = data;
+      },
+      error: () => {
+        console.log("Error al cargar comunidades");
+      }
+    });
+  }
+
+  cargarVivienda(idComunidad: number | undefined) {
+    this.viviendaService.listarViviendas(idComunidad).subscribe({
+      next: (data: Vivienda[]) => {
+        this.viviendas = data;
+      },
+      error: () => {
+        console.log("Error al cargar comunidades");
+      }
+    });
+  }
 
 }

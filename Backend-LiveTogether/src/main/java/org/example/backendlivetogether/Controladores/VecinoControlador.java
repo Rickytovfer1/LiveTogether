@@ -1,10 +1,7 @@
 package org.example.backendlivetogether.Controladores;
 
 import lombok.AllArgsConstructor;
-import org.example.backendlivetogether.DTOs.ComunidadDTO;
-import org.example.backendlivetogether.DTOs.InsertarCodigoDTO;
-import org.example.backendlivetogether.DTOs.VecinoDTO;
-import org.example.backendlivetogether.DTOs.VecinoUsuarioDTO;
+import org.example.backendlivetogether.DTOs.*;
 import org.example.backendlivetogether.Modelos.Usuario;
 import org.example.backendlivetogether.Seguridad.UsuarioAdapter;
 import org.example.backendlivetogether.Servicios.UsuarioServicio;
@@ -66,4 +63,21 @@ public class VecinoControlador {
     public List<VecinoUsuarioDTO> listarPropietarios(@PathVariable Integer idComunidad) {
         return vecinoServicio.listarPropietarios(idComunidad);
     }
+
+    @PostMapping("/solicitar/{idVivienda}/{idComunidad}/{idVecino}")
+    public void solicitarIngresoComunidad(@PathVariable Integer idVivienda, @PathVariable Integer idComunidad,
+                                          @PathVariable Integer idVecino){
+        vecinoServicio.solicitarIngresoComunidad(idVivienda, idComunidad, idVecino);
+    }
+
+    @GetMapping("/ver/notificaciones/{idVecino}/{idComunidad}")
+    public List<NotificacionDTO> verNotificaciones(@PathVariable Integer idVecino, @PathVariable Integer idComunidad){
+        return vecinoServicio.verNotificaciones(idVecino, idComunidad);
+    }
+
+    @PostMapping("eliminar/notificacion/{idNotificacion}/{idVecino}")
+    public void eliminarNotificacion(@PathVariable Integer idNotificacion, @PathVariable Integer idVecino){
+        vecinoServicio.eliminarNotificacion(idNotificacion, idVecino);
+    }
+
 }

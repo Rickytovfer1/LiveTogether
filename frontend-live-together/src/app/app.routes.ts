@@ -101,4 +101,8 @@ export const routes: Routes = [
     path: 'ver-votos/:id',
     loadComponent: () => import('./ver-votos/ver-votos.component').then((m) => m.VerVotosComponent),
   },
+  {
+    path: 'notificaciones-comunidad',
+    loadComponent: () => import('./notificaciones-comunidad/notificaciones-comunidad.component').then((m) => m.NotificacionesComunidadComponent),
+  },
 ];
