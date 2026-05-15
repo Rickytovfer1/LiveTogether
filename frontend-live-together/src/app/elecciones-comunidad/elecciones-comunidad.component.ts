@@ -17,14 +17,10 @@ import {ListarEleccionesComponent} from "./listar-elecciones/listar-elecciones.c
     styleUrls: ['./elecciones-comunidad.component.scss'],
     standalone: true,
   imports: [
-    AnadirGastoComponent,
-    DeudoresComponent,
     FooterComunidadComponent,
-    GastosComponent,
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
-    NgIf,
     FormsModule,
     LanzarEleccionComponent,
     ListarEleccionesComponent

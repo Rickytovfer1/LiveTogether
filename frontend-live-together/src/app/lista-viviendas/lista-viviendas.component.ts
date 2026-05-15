@@ -24,13 +24,8 @@ import {ViviendaService} from "../servicios/vivienda-service";
   styleUrls: ['./lista-viviendas.component.scss'],
   standalone: true,
   imports: [
-    FooterVecinoComponent,
     HeaderComponent,
-    HeaderVecinoComponent,
     IonicModule,
-    NavLateralDerechoVecinoComponent,
-    NavLateralVecinoComponent,
-    NgOptimizedImage,
     NavLateralComunidadComponent,
     FooterComunidadComponent
   ]

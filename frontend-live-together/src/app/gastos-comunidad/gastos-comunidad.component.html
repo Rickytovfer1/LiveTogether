@@ -21,9 +21,18 @@
           <ion-label>Deudores</ion-label>
         </ion-segment-button>
       </ion-segment>
-      <app-anadir-gasto *ngIf="seccion === 'anadir-gasto'"></app-anadir-gasto>
-      <app-gastos *ngIf="seccion === 'gastos'"></app-gastos>
-      <app-deudores *ngIf="seccion === 'deudores'"></app-deudores>
+
+      @if (seccion === 'anadir-gasto') {
+        <app-anadir-gasto></app-anadir-gasto>
+      }
+
+      @if (seccion === 'gastos') {
+        <app-gastos></app-gastos>
+      }
+
+      @if (seccion === 'deudores') {
+        <app-deudores></app-deudores>
+      }
     </ion-content>
 
     <!-- MENÚ DERECHO -->

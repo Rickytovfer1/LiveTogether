@@ -24,14 +24,10 @@ import {TokenDataDTO} from "../modelos/TokenDataDTO";
   styleUrls: ['./crear-vivienda.component.scss'],
   standalone: true,
   imports: [
-    AnadirGastoComponent,
-    DeudoresComponent,
     FooterComunidadComponent,
-    GastosComponent,
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
-    NgIf,
     FormsModule
   ]
 })

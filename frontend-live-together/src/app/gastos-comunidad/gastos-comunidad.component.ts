@@ -20,12 +20,10 @@ import {NgIf} from "@angular/common";
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
-    NavLateralDerechoVecinoComponent,
     FormsModule,
     AnadirGastoComponent,
     GastosComponent,
     DeudoresComponent,
-    NgIf
   ]
 })
 export class GastosComunidadComponent  implements OnInit {

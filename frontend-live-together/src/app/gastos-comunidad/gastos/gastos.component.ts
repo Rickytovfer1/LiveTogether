@@ -16,7 +16,6 @@ import {TokenDataDTO} from "../../modelos/TokenDataDTO";
   styleUrls: ['./gastos.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     NgClass
   ]
 })

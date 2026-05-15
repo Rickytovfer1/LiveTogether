@@ -17,7 +17,6 @@ import {NotificacionesComponent} from "../notificaciones/notificaciones.componen
     HeaderVecinoComponent,
     ChatComponent,
     ListaVecinosComponent,
-    NgIf,
     NotificacionesComponent
   ]
 })

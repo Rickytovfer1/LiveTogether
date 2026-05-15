@@ -17,14 +17,10 @@ import {FormsModule} from "@angular/forms";
     styleUrls: ['./documentacion-comunidad.component.scss'],
     standalone: true,
   imports: [
-    AnadirGastoComponent,
-    DeudoresComponent,
     FooterComunidadComponent,
-    GastosComponent,
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
-    NgIf,
     ComunicadosComponent,
     SancionesComponent,
     FormsModule

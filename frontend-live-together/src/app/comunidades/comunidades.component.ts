@@ -13,7 +13,6 @@ import {ComunidadService} from "../servicios/comunidad-service";
 import {UsuarioService} from "../servicios/usuario-service";
 import {Vecino} from "../modelos/Vecino";
 import {Usuario} from "../modelos/Usuario";
-import {FooterVecinoComponent} from "../footer-vecino/footer-vecino.component";
 
 @Component({
   selector: 'app-comunidades',
@@ -24,11 +23,7 @@ import {FooterVecinoComponent} from "../footer-vecino/footer-vecino.component";
     IonicModule,
     HeaderComponent,
     FooterComponent,
-    NgForOf,
-    NgOptimizedImage,
     NavLateralComponent,
-    NgIf,
-    FooterVecinoComponent
   ]
 })
 export class ComunidadesComponent  implements OnInit {

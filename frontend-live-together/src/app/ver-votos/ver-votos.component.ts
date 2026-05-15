@@ -24,8 +24,6 @@ import {TokenDataDTO} from "../modelos/TokenDataDTO";
     FooterComunidadComponent,
     HeaderComponent,
     IonicModule,
-    LanzarEleccionComponent,
-    ListarEleccionesComponent,
     NavLateralComunidadComponent
   ]
 })

@@ -29,7 +29,6 @@ import {FormsModule} from "@angular/forms";
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
-    QuillEditorComponent,
     FormsModule
   ]
 })
