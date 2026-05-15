@@ -113,4 +113,12 @@ export const routes: Routes = [
     path: 'documentacion/comunidad',
     loadComponent: () => import('./documentacion-comunidad/documentacion-comunidad.component').then((m) => m.DocumentacionComunidadComponent),
   },
+  {
+    path: 'crear-comunicado-comunidad',
+    loadComponent: () => import('./crear-comunicado-comunidad/crear-comunicado-comunidad.component').then((m) => m.CrearComunicadoComunidadComponent),
+  },
+  {
+    path: 'crear-sancion-comunidad',
+    loadComponent: () => import('./crear-sancion-comunidad/crear-sancion-comunidad.component').then((m) => m.CrearSancionComunidadComponent),
+  },
 ];

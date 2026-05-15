@@ -101,5 +101,9 @@ public class ComunidadControlador {
         comunidadServicio.enviarNotificacion(idsVecinos, idComunidad, tipoNotificacion);
     }
 
+    @GetMapping("comunidad/listar/vecinos/comunidad/{idComunidad}")
+    public List<VecinoUsuarioDTO> listarVecinoComunidad(@PathVariable Integer idComunidad){
+        return vecinoServicio.listarVecinosIdComunidad(idComunidad);
+    }
 
 }

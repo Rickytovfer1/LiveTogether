@@ -31,6 +31,8 @@
     "@stripe/stripe-js": "^7.2.0",
     "ionicons": "^7.0.0",
     "jwt-decode": "^4.0.0",
+    "ngx-quill": "^28.0.1",
+    "quill": "^2.0.3",
     "rxjs": "~7.8.0",
     "sockjs-client": "^1.6.1",
     "tslib": "^2.3.0",

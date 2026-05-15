@@ -5,6 +5,8 @@ import {ComunService} from "./comun-service";
 import {Observable} from "rxjs";
 import {Comunicado} from "../modelos/Comunicado";
 import {CrearComunicado} from "../modelos/CrearComunicado";
+import {CrearComunicadoComunidad} from "../modelos/CrearComunicadoComunidad";
+import {VecinoUsuarioDTO} from "../modelos/VecinoUsuarioDTO";
 
 @Injectable({
   providedIn: 'root',
@@ -40,4 +42,10 @@ export class ComunicadoService {
     const options = this.comunService.autorizarPeticion();
     return this.http.post<void>(`${this.apiUrl}/comunidad/eliminar/comunicado/${idComunicado}`, {}, options);
   }
+
+  crearComunicadoComunidad(comunicado: CrearComunicadoComunidad): Observable<any> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.post(`${this.apiUrl}/comunidad/crear/comunicado`, comunicado, options);
+  }
+
 }
