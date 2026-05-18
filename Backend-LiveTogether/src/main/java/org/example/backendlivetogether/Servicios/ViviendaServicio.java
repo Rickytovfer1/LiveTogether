@@ -1,19 +1,21 @@
 package org.example.backendlivetogether.Servicios;
 
 import lombok.AllArgsConstructor;
-import org.example.backendlivetogether.DTOs.ComunidadDTO;
-import org.example.backendlivetogether.DTOs.RegistrarViviendaDTO;
-import org.example.backendlivetogether.DTOs.ViviendaDTO;
+import org.example.backendlivetogether.DTOs.*;
 import org.example.backendlivetogether.Modelos.Comunidad;
+import org.example.backendlivetogether.Modelos.Sancion;
 import org.example.backendlivetogether.Modelos.Vecino;
 import org.example.backendlivetogether.Modelos.Vivienda;
 import org.example.backendlivetogether.Repositorios.IComunidadRepositorio;
+import org.example.backendlivetogether.Repositorios.ISancionRepositorio;
 import org.example.backendlivetogether.Repositorios.IVecinoRepositorio;
 import org.example.backendlivetogether.Repositorios.IViviendaRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +24,10 @@ public class ViviendaServicio {
     private IViviendaRepositorio iViviendaRepositorio;
 
     private IComunidadRepositorio iComunidadRepositorio;
+
+    private IVecinoRepositorio iVecinoRepositorio;
+
+    private ISancionRepositorio iSancionRepositorio;
 
     public ViviendaDTO verViviendaID(Integer idVivienda){
         Vivienda vivienda = iViviendaRepositorio.findById(idVivienda)
@@ -66,6 +72,76 @@ public class ViviendaServicio {
         }
 
         return propietarios;
+    }
+
+    public Set<VecinoDTO> listarResidentes(Integer idVivienda){
+        Vivienda vivienda = iViviendaRepositorio.findById(idVivienda)
+                .orElseThrow(() -> new RuntimeException("No existe una vivienda con este ID."));
+
+        Set<Vecino> residentes = vivienda.getVecinos();
+        Set<VecinoDTO> vecinoDTOS = new HashSet<>();
+
+
+        for (Vecino vecino: residentes){
+            vecinoDTOS.add(VecinoServicio.getVecinoDTO(vecino));
+        }
+
+        return vecinoDTOS;
+
+    }
+
+    public void asignarPropietarioVivienda(Integer idVivienda, Integer idPropietario) {
+        Vivienda vivienda = iViviendaRepositorio.findById(idVivienda)
+                .orElseThrow(() -> new RuntimeException("No existe una vivienda con este ID."));
+        Vecino propietario = iVecinoRepositorio.findById(idPropietario)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        vivienda.setPropietario(propietario);
+        iViviendaRepositorio.save(vivienda);
+    }
+
+    public void editarNombreVivienda(EditarViviendaDTO editarViviendaDTO, Integer idVivienda){
+        Vivienda vivienda = iViviendaRepositorio.findById(idVivienda)
+                .orElseThrow(() -> new RuntimeException("No existe una vivienda con este ID."));
+        vivienda.setDireccionPersonal(editarViviendaDTO.getDireccionPersonal());
+        iViviendaRepositorio.save(vivienda);
+    }
+
+    public void eliminarResidente(Integer idVivienda, Integer idResidente) {
+        Vivienda vivienda = iViviendaRepositorio.findById(idVivienda)
+                .orElseThrow(() -> new RuntimeException("Vivienda no encontrada"));
+
+        Vecino residente = iVecinoRepositorio.findById(idResidente)
+                .orElseThrow(() -> new RuntimeException("Residente no encontrado"));
+
+        Comunidad comunidad = iComunidadRepositorio.findById(vivienda.getComunidad().getId())
+                .orElseThrow(() -> new RuntimeException("Comunidad no encontrada"));
+
+        List<Sancion> sancions = iSancionRepositorio.findByComunidad_Id(comunidad.getId());
+
+        if (!vivienda.getVecinos().contains(residente)) {
+            throw new RuntimeException("El residente no pertenece a esta vivienda.");
+        }
+
+        if (vivienda.getPropietario() != null && vivienda.getPropietario().getId().equals(residente.getId())) {
+            vivienda.setPropietario(null);
+        }
+
+        vivienda.getVecinos().remove(residente);
+        residente.getViviendas().remove(vivienda);
+        for (Sancion sancion: sancions){
+            if (sancion.getVecinoAfectado() == residente){
+                iSancionRepositorio.delete(sancion);
+            }
+        }
+
+        if (comunidad.getPresidente() != null && residente.getId().equals(comunidad.getPresidente().getId())) {
+            comunidad.setPresidente(null);
+        }
+
+        iViviendaRepositorio.save(vivienda);
+        iVecinoRepositorio.save(residente);
+        iComunidadRepositorio.save(comunidad);
     }
 
     public static ViviendaDTO getViviendaDTO(Vivienda v) {

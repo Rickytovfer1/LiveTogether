@@ -1,0 +1,148 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <!-- MENÚ IZQUIERDO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <ion-img
+      class="flecha-retorno"
+      src="assets/icon/FlechaRetorno.png"
+      (click)="volverAtras()">
+    </ion-img>
+
+    <!-- CONTENIDO -->
+    <ion-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+
+          </ion-col>
+          <ion-col size="8" style="margin-right: -35px">
+            <div class="vivienda">
+              @if (vivienda) {
+                <span>Vivienda: {{ vivienda.direccionPersonal }}</span>
+              }
+            </div>
+          </ion-col>
+          <ion-col size="2">
+            <ion-img src="assets/icon/perfiles/img.png" class="icono-boton editar-icono" (click)="editarNombreVivienda()"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="interlineado">
+        Residentes en la vivienda
+      </div>
+
+      @if (residentes.length === 0) {
+        <div class="div-sin">
+          <span>Actualmente no hay residentes en esta vivienda.</span>
+        </div>
+      }
+
+      <ion-grid class="grid-principal">
+
+        @for (residente of residentes; track residente.id) {
+          <ion-row class="row-residente">
+            <ion-col size="3">
+              <img [ngSrc]="getImageUrlVecino(residente)" width="100" height="100" class="imagen-redondeada"
+                   alt="Foto de perfil">
+            </ion-col>
+            <ion-col size="6">
+              <ion-grid>
+                <ion-row>
+                  <span class="nombre-residente">{{ residente.nombre }} {{ residente.apellidos }}</span>
+                </ion-row>
+                <ion-row>
+                  <span class="info-residente">{{ comprobarIdentidad(residente) }}</span>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+
+            @if (!propietario) {
+              <ion-col size="1.5">
+                <ion-img (click)="confirmarAsignacion(residente)" class="icono-pequeno" src="assets/icon/icono-llave.png"></ion-img>
+              </ion-col>
+            }
+            <ion-col size="1.5">
+              @if (comprobarIdentidad(residente) === 'Residente' || comprobarIdentidad(residente) === 'Propietario de la vivienda') {
+                <ion-img src="assets/icon/eliminar-residente.png" class="icono-pequeno" (click)="confirmarEliminacion(residente)"></ion-img>
+              }
+            </ion-col>
+          </ion-row>
+        }
+
+        <ion-img src="assets/icon/documentacion/anadir.png" (click)="generarCodigo()"></ion-img>
+
+      </ion-grid>
+
+      <div class="interlineado">Sanciones</div>
+
+      @if (sanciones.length > 0) {
+        <ion-grid class="grid-principal">
+
+          @for (sancion of sanciones; track sancion.id) {
+            <ion-row class="sancion">
+              <div class="motivo-div">
+                <span>Motivo: </span>
+                <span>{{ sancion.motivo }}</span>
+              </div>
+              <div class="sancion-div">
+                <span>Sanción: </span>
+                <span>{{ sancion.sancion }}</span>
+              </div>
+            </ion-row>
+          }
+        </ion-grid>
+      }
+
+      @if (sanciones.length === 0) {
+        <div class="div-sin">
+          <span>No hay sanciones.</span>
+        </div>
+      }
+
+      @if (!propietario) {
+        <div class="div-sin">
+          <span>Vivienda aún sin propietario.</span>
+        </div>
+      }
+
+      <div class="interlineado">Deudas</div>
+
+      <div class="deudas">
+
+        @for (gasto of deudas; track gasto.id) {
+          <div>
+            <span>{{ gasto.concepto }}</span>
+          </div>
+        }
+      </div>
+
+      @if (deudas.length === 0) {
+        <div class="div-sin">
+          <span>Sin deudas pendientes.</span>
+        </div>
+      }
+
+      @if (!propietario) {
+        <div class="div-sin">
+          <span>Vivienda aún sin propietario.</span>
+        </div>
+      }
+
+    </ion-content>
+
+    <!-- MENÚ DERECHO -->
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <!--      <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>-->
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>

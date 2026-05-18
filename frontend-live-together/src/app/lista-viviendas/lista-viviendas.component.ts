@@ -130,4 +130,8 @@ export class ListaViviendasComponent  implements OnInit {
     this.router.navigate(["/notificaciones-comunidad"])
   }
 
+  verInfoVvivienda(idVivienda: number) {
+    this.router.navigate(["/info-vivienda", idVivienda])
+  }
+
 }

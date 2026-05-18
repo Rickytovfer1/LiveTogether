@@ -82,4 +82,16 @@ export class ComunidadService {
     const options = this.comunService.autorizarPeticion();
     return this.http.get<VecinoUsuarioDTO[]>(`${this.apiUrl}/comunidad/listar/vecinos/comunidad/${idComunidad}`, options)
   }
+
+  generarCodigo(idVivienda: number, idComunidad: number): Observable<string> {
+    const options = {
+      ...this.comunService.autorizarPeticion(),
+      responseType: 'text' as 'json'
+    };
+    return this.http.post<string>(
+      `${this.apiUrl}/comunidad/generar/codigo/${idVivienda}/${idComunidad}`,
+      {},
+      options
+    );
+  }
 }

@@ -1,0 +1,279 @@
+ion-content {
+  --background: #E7F4E7;
+
+  .contenedor-vivienda {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .vivienda {
+    border-radius: 20px;
+    background-color: white;
+    color: #339F28;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+    width: 60%;
+    margin-block: 30px;
+    padding: 10px;
+  }
+
+  .editar-icono {
+    position: absolute;
+    top: 50%;
+    right: 35px;
+    margin-left: 40px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+
+  .grid-principal {
+    padding: 0;
+
+    ion-img {
+      margin: 20px auto 10px auto;
+      width: 60px;
+    }
+
+    .row-residente {
+      border: 1px solid black;
+      border-top: none;
+      background-color: white;
+
+      &:first-child {
+        border-top: 1px solid black;
+      }
+
+      ion-col {
+        display: flex;
+        align-items: center;
+
+        .nombre-residente {
+          color: #339F28;
+          font-weight: bold;
+          font-size: 16px;
+        }
+
+        .info-residente {
+          font-weight: bold;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .sancion {
+      background-color: #7CDF68;
+      padding: 15px;
+      border: 1px solid black;
+      border-top: none;
+
+      &:first-child {
+        border-top: 1px solid black;
+      }
+
+      .sancion-div {
+        background-color: red;
+        border: 2px solid white;
+        border-radius: 30px;
+        padding: 15px;
+        color: white;
+        font-weight: bold;
+        margin: 0 auto;
+
+        span {
+          &:first-child {
+            font-style: italic;
+          }
+        }
+      }
+
+      .motivo-div {
+        text-align: center;
+        color: white;
+        margin: 0 auto 15px;
+        font-weight: bold;
+        background-color: #57BF48;
+        border-radius: 30px;
+        padding: 15px;
+
+        span {
+          &:first-child {
+            font-style: italic;
+          }
+        }
+      }
+    }
+
+    img {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto;
+      border: 1px solid black;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+
+  .deudas {
+    padding-inline: 50px;
+    margin: 0 auto;
+
+    div {
+      margin-block: 15px;
+      padding: 15px;
+      background-color: #57BF48;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 10px;
+    }
+  }
+
+  .interlineado {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    color: #0E8008;
+    font-weight: bold;
+  }
+
+  .interlineado::before,
+  .interlineado::after {
+    content: "";
+    flex: 1;
+    border-bottom: 2px solid black;
+  }
+
+  .interlineado:not(:empty)::before {
+    margin-right: 10px;
+  }
+
+  .interlineado:not(:empty)::after {
+    margin-left: 10px;
+  }
+
+  .div-sin {
+    margin: 0 auto;
+    text-align: center;
+
+    span {
+      font-weight: bold
+    }
+  }
+}
+.icono-boton {
+  width: 35px;
+  height: 35px;
+}
+
+
+.flecha-retorno {
+  position: absolute;
+  top: 90px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+
+.icono-pequeno {
+  width: 35px;
+  height: 35px;
+}
+
+@media (min-width: 992px) {
+  ion-content {
+
+    .editar-icono {
+      width: 50px;
+      height: 50px;
+    }
+
+    ion-img{
+      cursor: pointer;
+    }
+    .grid-principal {
+      width: 75%;
+      margin: 0 auto;
+    }
+
+    .vivienda {
+      width: fit-content;
+      margin: 30px auto;
+      font-size: 23px;
+      padding: 12px 20px;
+    }
+
+    .row-residente {
+      min-height: 90px;
+
+      ion-col {
+
+        .nombre-residente {
+          font-size: 15px;
+        }
+
+        .info-residente {
+          font-size: 14px;
+        }
+      }
+
+      img {
+        width: 55px;
+        height: 55px;
+      }
+    }
+
+    .icono-pequeno {
+      width: 50px;
+      height: 50px;
+    }
+
+    .sancion {
+      width: 75%;
+      margin: 15px auto 0;
+      border: 1px solid black !important;
+
+      .sancion-div {
+        width: fit-content;
+        height: 70%;
+        font-size: 14px;
+      }
+
+      .motivo-div {
+        width: 50%;
+        font-size: 14px;
+      }
+    }
+
+    .deudas {
+      width: 70%;
+      padding-inline: 0;
+
+      div {
+        font-size: 20px;
+        padding: 12px;
+      }
+    }
+
+    .interlineado {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 20px;
+    }
+  }
+
+  .flecha-retorno {
+    display: none;
+  }
+
+}

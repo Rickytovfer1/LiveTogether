@@ -44,7 +44,7 @@
       </ion-grid>
 
       @for (vivienda of listaViviendas; track vivienda.id) {
-        <div class="tarjeta">
+        <div class="tarjeta" (click)="verInfoVvivienda(vivienda.id)">
           <p class="tarjeta-titulo">{{ vivienda.direccionPersonal }}</p>
         </div>
       }
