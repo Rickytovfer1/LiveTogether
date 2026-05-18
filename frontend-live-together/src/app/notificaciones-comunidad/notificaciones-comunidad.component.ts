@@ -19,6 +19,9 @@ import {ViviendaService} from "../servicios/vivienda-service";
 import {Router} from "@angular/router";
 import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../modelos/TokenDataDTO";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
     selector: 'app-notificaciones-comunidad',
@@ -31,7 +34,8 @@ import {TokenDataDTO} from "../modelos/TokenDataDTO";
     IonicModule,
     NavLateralComunidadComponent,
     NgOptimizedImage,
-    NgClass
+    NgClass,
+    NavLateralDerechoComunidadComponent
   ]
 })
 export class NotificacionesComunidadComponent  implements OnInit {

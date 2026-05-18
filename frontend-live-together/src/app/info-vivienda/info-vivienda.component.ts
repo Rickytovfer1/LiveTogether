@@ -22,6 +22,9 @@ import {Vivienda} from "../modelos/Vivienda";
 import {Sancion} from "../modelos/Sancion";
 import {Gasto} from "../modelos/Gasto";
 import {EditarVivienda} from "../modelos/EditarVivienda";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
     selector: 'app-info-vivienda',
@@ -33,7 +36,8 @@ import {EditarVivienda} from "../modelos/EditarVivienda";
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NavLateralDerechoComunidadComponent
   ]
 })
 export class InfoViviendaComponent  implements OnInit {

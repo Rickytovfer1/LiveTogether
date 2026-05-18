@@ -14,6 +14,9 @@ import {UsuarioService} from "../servicios/usuario-service";
 import {EleccionesService} from "../servicios/elecciones-service";
 import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../modelos/TokenDataDTO";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
   selector: 'app-ver-votos',
@@ -24,7 +27,8 @@ import {TokenDataDTO} from "../modelos/TokenDataDTO";
     FooterComunidadComponent,
     HeaderComponent,
     IonicModule,
-    NavLateralComunidadComponent
+    NavLateralComunidadComponent,
+    NavLateralDerechoComunidadComponent
   ]
 })
 export class VerVotosComponent  implements OnInit {

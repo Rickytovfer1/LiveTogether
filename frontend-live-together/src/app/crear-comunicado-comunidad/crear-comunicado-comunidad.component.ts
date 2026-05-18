@@ -18,6 +18,9 @@ import {ComunidadService} from "../servicios/comunidad-service";
 import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../modelos/TokenDataDTO";
 import {TipoNotificacion} from "../modelos/Notificacion";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 const font: any = Quill.import('formats/font')
 const FontStyle: any = Quill.import('attributors/style/font');
@@ -68,6 +71,7 @@ const customColors = [
     QuillModule,
     FooterComunidadComponent,
     NavLateralComunidadComponent,
+    NavLateralDerechoComunidadComponent,
   ]
 })
 export class CrearComunicadoComunidadComponent  implements OnInit {

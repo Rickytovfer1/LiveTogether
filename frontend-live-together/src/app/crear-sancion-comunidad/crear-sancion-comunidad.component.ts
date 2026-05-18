@@ -18,6 +18,9 @@ import {SancionService} from "../servicios/sancion-service";
 import {ViviendaService} from "../servicios/vivienda-service";
 import {CrearSancionComunidad} from "../modelos/CrearSancionComunidad";
 import {FormsModule} from "@angular/forms";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
     selector: 'app-crear-sancion-comunidad',
@@ -29,7 +32,8 @@ import {FormsModule} from "@angular/forms";
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
-    FormsModule
+    FormsModule,
+    NavLateralDerechoComunidadComponent
   ]
 })
 export class CrearSancionComunidadComponent  implements OnInit {

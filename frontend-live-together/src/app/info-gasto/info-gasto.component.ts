@@ -21,6 +21,9 @@ import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../modelos/TokenDataDTO";
 import {filter} from "rxjs";
 import {IonToast} from "@ionic/angular/standalone";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
     selector: 'app-info-gasto',
@@ -32,6 +35,7 @@ import {IonToast} from "@ionic/angular/standalone";
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
+    NavLateralDerechoComunidadComponent,
   ]
 })
 export class InfoGastoComponent  implements OnInit {

@@ -17,6 +17,9 @@ import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../modelos/TokenDataDTO";
 import {Vivienda} from "../modelos/Vivienda";
 import {ViviendaService} from "../servicios/vivienda-service";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
   selector: 'app-lista-viviendas',
@@ -27,7 +30,8 @@ import {ViviendaService} from "../servicios/vivienda-service";
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
-    FooterComunidadComponent
+    FooterComunidadComponent,
+    NavLateralDerechoComunidadComponent
   ]
 })
 export class ListaViviendasComponent  implements OnInit {

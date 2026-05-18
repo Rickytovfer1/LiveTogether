@@ -17,6 +17,9 @@ import {ViviendaService} from "../servicios/vivienda-service";
 import {ComunidadService} from "../servicios/comunidad-service";
 import {jwtDecode} from "jwt-decode";
 import {TokenDataDTO} from "../modelos/TokenDataDTO";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
   selector: 'app-crear-vivienda',
@@ -28,7 +31,8 @@ import {TokenDataDTO} from "../modelos/TokenDataDTO";
     HeaderComponent,
     IonicModule,
     NavLateralComunidadComponent,
-    FormsModule
+    FormsModule,
+    NavLateralDerechoComunidadComponent
   ]
 })
 export class CrearViviendaComponent  implements OnInit {

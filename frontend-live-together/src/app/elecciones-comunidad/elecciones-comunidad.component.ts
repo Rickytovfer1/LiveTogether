@@ -10,6 +10,9 @@ import {NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {LanzarEleccionComponent} from "./lanzar-eleccion/lanzar-eleccion.component";
 import {ListarEleccionesComponent} from "./listar-elecciones/listar-elecciones.component";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
     selector: 'app-elecciones-comunidad',
@@ -23,7 +26,8 @@ import {ListarEleccionesComponent} from "./listar-elecciones/listar-elecciones.c
     NavLateralComunidadComponent,
     FormsModule,
     LanzarEleccionComponent,
-    ListarEleccionesComponent
+    ListarEleccionesComponent,
+    NavLateralDerechoComunidadComponent
   ]
 })
 export class EleccionesComunidadComponent  implements OnInit {

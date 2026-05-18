@@ -9,6 +9,9 @@ import {AnadirGastoComponent} from "./anadir-gasto/anadir-gasto.component";
 import {GastosComponent} from "./gastos/gastos.component";
 import {DeudoresComponent} from "./deudores/deudores.component";
 import {NgIf} from "@angular/common";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
     selector: 'app-gastos-comunidad',
@@ -24,6 +27,7 @@ import {NgIf} from "@angular/common";
     AnadirGastoComponent,
     GastosComponent,
     DeudoresComponent,
+    NavLateralDerechoComunidadComponent,
   ]
 })
 export class GastosComunidadComponent  implements OnInit {

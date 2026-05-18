@@ -10,6 +10,9 @@ import {NgIf} from "@angular/common";
 import {ComunicadosComponent} from "./comunicados/comunicados.component";
 import {SancionesComponent} from "./sanciones/sanciones.component";
 import {FormsModule} from "@angular/forms";
+import {
+  NavLateralDerechoComunidadComponent
+} from "../nav-lateral-derecho-comunidad/nav-lateral-derecho-comunidad.component";
 
 @Component({
     selector: 'app-documentacion-comunidad',
@@ -23,7 +26,8 @@ import {FormsModule} from "@angular/forms";
     NavLateralComunidadComponent,
     ComunicadosComponent,
     SancionesComponent,
-    FormsModule
+    FormsModule,
+    NavLateralDerechoComunidadComponent
   ]
 })
 export class DocumentacionComunidadComponent  implements OnInit {
