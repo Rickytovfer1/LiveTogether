@@ -125,4 +125,8 @@ export const routes: Routes = [
     path: 'info-vivienda/:id',
     loadComponent: () => import('./info-vivienda/info-vivienda.component').then((m) => m.InfoViviendaComponent)
   },
+  {
+    path: 'perfil',
+    loadComponent: () => import('./perfil/perfil.component').then((m) => m.PerfilComponent),
+  },
 ];

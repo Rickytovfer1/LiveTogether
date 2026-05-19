@@ -52,4 +52,9 @@ export class VecinoService {
     return this.http.post(`${this.apiUrl}/vecino/eliminar/notificacion/${idNotificacion}/${idVecino}`, {}, options)
   }
 
+  editarPerfil(formData: FormData, idVecino: number): Observable<any> {
+    const options = this.comunService.autorizarPeticionFormData();
+    return this.http.put(`${this.apiUrl}/vecino/actualizar/${idVecino}`, formData, options);
+  }
+
 }

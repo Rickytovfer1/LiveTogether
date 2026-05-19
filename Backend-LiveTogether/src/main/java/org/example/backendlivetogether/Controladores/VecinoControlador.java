@@ -6,8 +6,10 @@ import org.example.backendlivetogether.Modelos.Usuario;
 import org.example.backendlivetogether.Seguridad.UsuarioAdapter;
 import org.example.backendlivetogether.Servicios.UsuarioServicio;
 import org.example.backendlivetogether.Servicios.VecinoServicio;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -80,4 +82,17 @@ public class VecinoControlador {
         vecinoServicio.eliminarNotificacion(idNotificacion, idVecino);
     }
 
+    @PutMapping(value = "/actualizar/{idVecino}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void actualizarVecino(
+            @RequestPart("dto") EditarVecinoDTO dto,
+            @RequestPart(value = "fotoPerfil", required = false) MultipartFile fotoPerfil,
+            @PathVariable Integer idVecino) {
+
+        if (fotoPerfil != null && !fotoPerfil.isEmpty()) {
+            String urlFoto = vecinoServicio.guardarFoto(fotoPerfil);
+            dto.setFotoPerfil(urlFoto);
+        }
+
+        vecinoServicio.actualizarVecino(dto, idVecino);
+    }
 }

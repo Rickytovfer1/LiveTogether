@@ -4,26 +4,51 @@ import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.*;
 import org.example.backendlivetogether.Modelos.*;
 import org.example.backendlivetogether.Repositorios.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
-@AllArgsConstructor
 public class VecinoServicio {
 
-    private IVecinoRepositorio iVecinoRepositorio;
+    private final IVecinoRepositorio iVecinoRepositorio;
 
-    private IViviendaRepositorio iViviendaRepositorio;
+    private final IUsuarioRepositorio iUsuarioRepositorio;
 
-    private ViviendaServicio viviendaServicio;
+    private final IViviendaRepositorio iViviendaRepositorio;
 
-    private IComunidadRepositorio iComunidadRepositorio;
+    private final IComunidadRepositorio iComunidadRepositorio;
 
-    private ISolicitudRepositorio iSolicitudRepositorio;
+    private final ISolicitudRepositorio iSolicitudRepositorio;
 
-    private INotificacionRepositorio iNotificacionRepositorio;
+    private final INotificacionRepositorio iNotificacionRepositorio;
+
+    private final ViviendaServicio viviendaServicio;
+
+    @Value("${upload.dir}")
+    private String uploadDir;
+
+    public VecinoServicio(IVecinoRepositorio iVecinoRepositorio, IUsuarioRepositorio iUsuarioRepositorio,
+                          IViviendaRepositorio iViviendaRepositorio, IComunidadRepositorio iComunidadRepositorio,
+                          ISolicitudRepositorio iSolicitudRepositorio, INotificacionRepositorio iNotificacionRepositorio, ViviendaServicio viviendaServicio) {
+        this.iVecinoRepositorio = iVecinoRepositorio;
+        this.iUsuarioRepositorio = iUsuarioRepositorio;
+        this.iViviendaRepositorio = iViviendaRepositorio;
+        this.iComunidadRepositorio = iComunidadRepositorio;
+        this.iSolicitudRepositorio = iSolicitudRepositorio;
+        this.iNotificacionRepositorio = iNotificacionRepositorio;
+        this.viviendaServicio = viviendaServicio;
+    }
 
     public VecinoDTO verVecinoID(Integer idVecino){
         Vecino vecino = iVecinoRepositorio.findById(idVecino)
@@ -164,6 +189,66 @@ public class VecinoServicio {
             notificacion.getVecinos().remove(vecino);
             iNotificacionRepositorio.save(notificacion);
         }
+    }
+
+    private String getFileExtension(String filename) {
+        if (filename == null) {
+            return "";
+        }
+        int lastIndex = filename.lastIndexOf(".");
+        return (lastIndex == -1) ? "" : filename.substring(lastIndex + 1);
+    }
+
+    public String guardarFoto(MultipartFile foto) {
+        if (foto.isEmpty()) {
+            return null;
+        }
+        String extension = getFileExtension(foto.getOriginalFilename());
+        String filename = UUID.randomUUID().toString() + "." + extension;
+        Path path = Paths.get(uploadDir, filename);
+        try {
+            Files.createDirectories(path.getParent());
+            Files.copy(foto.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            return "/uploads/" + filename;
+        } catch (IOException e) {
+            throw new RuntimeException("Error al guardar la imagen", e);
+        }
+    }
+
+    public void actualizarVecino(EditarVecinoDTO dto, Integer idVecino) {
+        Vecino vecino = iVecinoRepositorio.findById(idVecino)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        Usuario usuario = vecino.getUsuario();
+        if (usuario == null) {
+            throw new IllegalStateException("El vecino no tiene un usuario asociado.");
+        }
+
+        if (dto.getNombre() != null) {
+            vecino.setNombre(dto.getNombre());
+        }
+        if (dto.getApellidos() != null) {
+            vecino.setApellidos(dto.getApellidos());
+        }
+        if (dto.getDni() != null) {
+            vecino.setDni(dto.getDni());
+        }
+        if (dto.getTelefono() != null) {
+            vecino.setTelefono(dto.getTelefono());
+        }
+
+        if (dto.getFechaNacimiento() != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate fechaNacimiento = LocalDate.parse(dto.getFechaNacimiento(), formatter);
+            vecino.setFechaNacimiento(fechaNacimiento);
+        }
+        if (dto.getFotoPerfil() != null){
+            vecino.setFotoPerfil(dto.getFotoPerfil());
+        }
+
+        iVecinoRepositorio.save(vecino);
+        iUsuarioRepositorio.save(usuario);
+
     }
 
     public VecinoUsuarioDTO getVecinoUsuarioDTO(Vecino vecino){

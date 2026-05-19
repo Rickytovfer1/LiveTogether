@@ -29,4 +29,8 @@ export class NavLateralComponent  implements OnInit {
   navigateToCrearComunidad() {
     this.router.navigate(['/crear-comunidad']);
   }
+
+  navigateToPerfil() {
+    this.router.navigate(['/perfil']);
+  }
 }
