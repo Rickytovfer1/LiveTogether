@@ -23,15 +23,13 @@
             </div>
 
             <div class="perfil-info">
-              <span class="nombre-usuario">VecinoNombre Apellidos</span>
-              <span class="info-usuario">Presidente</span>
+              @if (vecino) {
+                <span class="nombre-usuario">{{ vecino.nombre }} {{ vecino.apellidos }} </span>
+              }
+              <span class="info-usuario"> {{ comprobarIdentidad() }}</span>
             </div>
 
             <div class="perfil-derecha">
-              <span class="perfil-comunidad">
-                Comunidad: <strong>Nombre de la comunidad</strong>
-              </span>
-
               <button class="btn-salir">
                 Salir
               </button>
@@ -42,122 +40,90 @@
       </ion-grid>
 
 
-      <div class="interlineado">Vecinos en tu residencia</div>
+      <div class="interlineado">{{ textoListadoVecino() }}</div>
 
       <!-- VECINOS -->
-      <ion-grid class="grid-principal tarjetas">
-        <ion-row>
 
-          <ion-col size="12" size-md="4">
-            <div class="card">
-              <ion-row class="row-residente">
-                <ion-col size="3">
-                  <img [ngSrc]="getImageUrlVecino(vecinoFoto)" width="100" height="100"/>
-                </ion-col>
-                <ion-col size="9">
-                  <span class="nombre-usuario">Residente Nombre Apellido</span>
-                  <span class="info-usuario">Vecino</span>
-                </ion-col>
-              </ion-row>
-            </div>
-          </ion-col>
-          <ion-col size="12" size-md="4">
-            <div class="card">
-              <ion-row class="row-residente">
-                <ion-col size="3">
-                  <img [ngSrc]="getImageUrlVecino(vecinoFoto)" width="100" height="100"/>
-                </ion-col>
-                <ion-col size="9">
-                  <span class="nombre-usuario">Residente Nombre Apellido</span>
-                  <span class="info-usuario">Vecino</span>
-                </ion-col>
-              </ion-row>
-            </div>
-          </ion-col>
+      @if (residentes.length > 0) {
+        <ion-grid class="grid-principal tarjetas">
+          <ion-row>
 
-          <ion-col size="12" size-md="4">
-            <div class="card">
-              <ion-row class="row-residente">
-                <ion-col size="3">
-                  <img [ngSrc]="getImageUrlVecino(vecinoFoto)" width="100" height="100"/>
-                </ion-col>
-                <ion-col size="9">
-                  <span class="nombre-usuario">Residente Nombre Apellido</span>
-                  <span class="info-usuario">Vecino</span>
-                </ion-col>
-              </ion-row>
-            </div>
-          </ion-col>
+            <ion-col size="12" size-md="4">
+              <div class="card">
 
-          <ion-col size="12" size-md="4">
-            <div class="card">
-              <ion-row class="row-residente">
-                <ion-col size="3">
-                  <img [ngSrc]="getImageUrlVecino(vecinoFoto)" width="100" height="100"/>
-                </ion-col>
-                <ion-col size="9">
-                  <span class="nombre-usuario">Residente Nombre Apellido</span>
-                  <span class="info-usuario">Vecino</span>
-                </ion-col>
-              </ion-row>
-            </div>
-          </ion-col>
+                @for (residente of residentes; track residente.id) {
+                  <ion-row class="row-residente">
+                    <ion-col size="3">
+                      <img [ngSrc]="getImageUrlVecino(residente)" width="100" height="100" alt=""/>
+                    </ion-col>
+                    <ion-col size="9">
+                      <span class="nombre-usuario2">{{ residente.nombre }} {{ residente.apellidos }}</span>
+                      <span class="info-usuario2">{{ comprobarIdentidadResidente(residente) }}</span>
+                    </ion-col>
+                  </ion-row>
+                }
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      }
 
-        </ion-row>
-      </ion-grid>
+      @if (residentes.length === 0) {
+        <div class="div-sin">
+          <span>Actualmente no hay más vecinos en la vivienda.</span>
+        </div>
+      }
 
-
-      <div class="interlineado">Tus sanciones</div>
+      <div class="interlineado">{{ textoSanciones() }}</div>
 
       <!-- SANCIONES -->
-      <ion-grid class="grid-principal tarjetas">
-        <ion-row>
 
-          <ion-col size="12" size-md="4">
-            <div class="card card-sancion">
-              <div class="sancion-div">Sanción puesta</div>
-              <div class="motivo-div">Motivo de la sanción</div>
-            </div>
-          </ion-col>
-          <ion-col size="12" size-md="4">
-            <div class="card card-sancion">
-              <div class="sancion-div">Sanción puesta</div>
-              <div class="motivo-div">Motivo de la sanción</div>
-            </div>
-          </ion-col>
+      @if (sancionesVecino.length > 0) {
+        <ion-grid class="grid-principal tarjetas">
 
-        </ion-row>
-      </ion-grid>
 
-      <div class="interlineado">Tus deudas</div>
+            <ion-row>
+              @for (sancion of sancionesVecino; track sancion.id) {
+              <ion-col size="12" size-md="4">
+                <div class="card card-sancion">
+                  <div class="sancion-div">Sanción: {{ sancion.sancion }}</div>
+                  <div class="motivo-div">Motivo: {{ sancion.motivo }}</div>
+                </div>
+              </ion-col>
+              }
+            </ion-row>
+
+        </ion-grid>
+      }
+
+      @if (sancionesVecino.length === 0) {
+        <div class="div-sin">
+          <span>No hay impuesta ningún tipo de sanción.</span>
+        </div>
+      }
+
+      <div class="interlineado">{{ textoDeudas() }}</div>
 
       <!-- DEUDAS -->
       <ion-grid class="grid-principal tarjetas">
         <ion-row>
 
-          <ion-col size="12" size-md="4">
-            <div class="card card-deuda">
-              gastoConcepto
-            </div>
-          </ion-col>
-          <ion-col size="12" size-md="4">
-            <div class="card card-deuda">
-              gastoConcepto
-            </div>
-          </ion-col>
-          <ion-col size="12" size-md="4">
-            <div class="card card-deuda">
-              gastoConcepto
-            </div>
-          </ion-col>
-          <ion-col size="12" size-md="4">
-            <div class="card card-deuda">
-              gastoConcepto
-            </div>
-          </ion-col>
-
+          @for (gasto of deudasVecino; track gasto.id) {
+            <ion-col (click)="irGasto(gasto.id)" size="12" size-md="4">
+              <div class="card card-deuda">
+                {{ gasto.concepto }}
+              </div>
+            </ion-col>
+          }
         </ion-row>
       </ion-grid>
+
+      @if (deudasVecino.length === 0) {
+        <div class="div-sin">
+          <span>No hay deudas pendientes de tu vivienda.</span>
+        </div>
+      }
+
 
     </ion-content>
 
