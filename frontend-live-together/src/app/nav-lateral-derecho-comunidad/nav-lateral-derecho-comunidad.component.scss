@@ -57,6 +57,17 @@
     ion-label{
       margin-left: 15px;
     }
+
+
+    &:hover {
+      --background: #339F28;
+      transform: scale(1.01);
+
+      h2,
+      p {
+        color: white !important;
+      }
+    }
   }
 }
 

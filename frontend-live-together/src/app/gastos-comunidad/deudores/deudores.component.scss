@@ -18,6 +18,8 @@
       margin: 15px auto 0;
       float: right;
       border: 1px solid black;
+      cursor: pointer;
+
     }
 
     .Pagado {
@@ -54,7 +56,6 @@
     grid-template-columns: 1fr auto;
     align-items: center;
     gap: 20px;
-    cursor: pointer;
     &:hover {
       transform: translateY(-6px);
     }
