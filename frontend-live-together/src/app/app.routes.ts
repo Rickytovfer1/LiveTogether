@@ -129,4 +129,8 @@ export const routes: Routes = [
     path: 'perfil',
     loadComponent: () => import('./perfil/perfil.component').then((m) => m.PerfilComponent),
   },
+  {
+    path: 'crear-comunicado',
+    loadComponent: () => import('./crear-comunicado/crear-comunicado.component').then((m) => m.CrearComunicadoComponent),
+  },
 ];
