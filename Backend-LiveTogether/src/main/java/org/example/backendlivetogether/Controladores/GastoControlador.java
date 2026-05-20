@@ -55,6 +55,11 @@ public class GastoControlador {
         return gastoServicio.listarDeudoresIdComunidad(idComunidad);
     }
 
+    @GetMapping("/vecino/listar/deudores/comunidad/{idComunidad}")
+    public List<VecinoGastosDTO> listarDeudoresIdComunidadVecino(@PathVariable Integer idComunidad){
+        return gastoServicio.listarDeudoresIdComunidad(idComunidad);
+    }
+
     @GetMapping("/comunidad/listar/deudores/{idGasto}")
     public List<VecinoDTO> listarDeudoresIdGasto(@PathVariable Integer idGasto){
         return gastoServicio.listarDeudores(idGasto);

@@ -3,12 +3,10 @@
 <ion-grid class="grid_menus">
   <ion-row class="fila_menus">
 
-    <!-- MENÚ IZQUIERDO -->
     <ion-col size="12" size-md="2.5" class="menu-lateral">
       <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
     </ion-col>
 
-    <!-- CONTENIDO -->
     <ion-content>
       <ion-segment [(ngModel)]="seccion" mode="ios">
         <ion-segment-button value="lanzar-eleccion">
@@ -29,7 +27,6 @@
 
     </ion-content>
 
-    <!-- MENÚ DERECHO -->
     <ion-col size="12" size-md="2.5" class="menu-lateral">
             <app-nav-lateral-derecho-comunidad></app-nav-lateral-derecho-comunidad>
     </ion-col>

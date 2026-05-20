@@ -67,4 +67,9 @@ public class ViviendaControlador {
     public void eliminarResidente(@PathVariable Integer idVivienda, @PathVariable Integer idResidente) {
         viviendaServicio.eliminarResidente(idVivienda, idResidente);
     }
+
+    @PostMapping("/vecino/{idVivienda}/residentes/{idResidente}")
+    public void salirComunidad(@PathVariable Integer idVivienda, @PathVariable Integer idResidente) {
+        viviendaServicio.eliminarResidente(idVivienda, idResidente);
+    }
 }

@@ -52,6 +52,11 @@ export class GastoService {
     return this.http.get<VecinoGastos[]>(`${this.apiUrl}/comunidad/listar/deudores/comunidad/${idComunidad}`, options)
   }
 
+  listarDeudoresIdComunidadVecino(idComunidad: number): Observable<VecinoGastos[]> {
+    const options = this.comunService.autorizarPeticion();
+    return this.http.get<VecinoGastos[]>(`${this.apiUrl}/vecino/listar/deudores/comunidad/${idComunidad}`, options)
+  }
+
   verGastoComunidad(idGasto: number): Observable<Gasto> {
     const options = this.comunService.autorizarPeticion();
     return this.http.get<Gasto>(`${this.apiUrl}/comunidad/ver/gasto/${idGasto}`, options)

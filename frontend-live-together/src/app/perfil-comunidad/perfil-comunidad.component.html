@@ -4,16 +4,12 @@
 <ion-grid class="grid_menus">
   <ion-row class="fila_menus">
 
-    <!-- MENÚ IZQUIERDO -->
     <ion-col size="12" size-md="2.5" class="menu-lateral">
       <app-nav-lateral-vecino></app-nav-lateral-vecino>
     </ion-col>
 
-    <!-- CONTENIDO -->
     <ion-content>
 
-      <!-- USUARIO -->
-      <!-- USUARIO -->
       <ion-grid class="grid-principal">
         <ion-row class="row-usuario perfil-usuario">
           <ion-col size="12" class="perfil-contenido">
@@ -29,20 +25,12 @@
               <span class="info-usuario"> {{ comprobarIdentidad() }}</span>
             </div>
 
-            <div class="perfil-derecha">
-              <button class="btn-salir">
-                Salir
-              </button>
-            </div>
-
           </ion-col>
         </ion-row>
       </ion-grid>
 
 
       <div class="interlineado">{{ textoListadoVecino() }}</div>
-
-      <!-- VECINOS -->
 
       @if (residentes.length > 0) {
         <ion-grid class="grid-principal tarjetas">
@@ -76,8 +64,6 @@
 
       <div class="interlineado">{{ textoSanciones() }}</div>
 
-      <!-- SANCIONES -->
-
       @if (sancionesVecino.length > 0) {
         <ion-grid class="grid-principal tarjetas">
 
@@ -104,7 +90,6 @@
 
       <div class="interlineado">{{ textoDeudas() }}</div>
 
-      <!-- DEUDAS -->
       <ion-grid class="grid-principal tarjetas">
         <ion-row>
 
@@ -127,7 +112,6 @@
 
     </ion-content>
 
-    <!-- MENÚ DERECHO -->
     <ion-col size="12" size-md="2.5" class="menu-lateral">
       <app-nav-lateral-derecho-vecino></app-nav-lateral-derecho-vecino>
     </ion-col>
