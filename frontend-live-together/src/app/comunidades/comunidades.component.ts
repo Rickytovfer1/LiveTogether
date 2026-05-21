@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {IonicModule, Platform} from "@ionic/angular";
+import {IonicModule, Platform, ToastController} from "@ionic/angular";
 import {HeaderComponent} from "../header/header.component";
 import {FooterComponent} from "../footer/footer.component";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
@@ -13,7 +13,12 @@ import {ComunidadService} from "../servicios/comunidad-service";
 import {UsuarioService} from "../servicios/usuario-service";
 import {Vecino} from "../modelos/Vecino";
 import {Usuario} from "../modelos/Usuario";
-import {FooterVecinoComponent} from "../footer-vecino/footer-vecino.component";
+import {VecinoGastos} from "../modelos/VecinoGastos";
+import {Vivienda} from "../modelos/Vivienda";
+import {AlertController} from "@ionic/angular/standalone";
+import {GastoService} from "../servicios/gasto-service";
+import {Observable} from "rxjs";
+import {ViviendaService} from "../servicios/vivienda-service";
 
 @Component({
   selector: 'app-comunidades',
@@ -24,11 +29,7 @@ import {FooterVecinoComponent} from "../footer-vecino/footer-vecino.component";
     IonicModule,
     HeaderComponent,
     FooterComponent,
-    NgForOf,
-    NgOptimizedImage,
     NavLateralComponent,
-    NgIf,
-    FooterVecinoComponent
   ]
 })
 export class ComunidadesComponent  implements OnInit {
@@ -43,7 +44,11 @@ export class ComunidadesComponent  implements OnInit {
               private router: Router,
               private usuarioService: UsuarioService,
               private vecinoService: VecinoService,
-              private comunidadService: ComunidadService,) { }
+              private comunidadService: ComunidadService,
+              private alertController: AlertController,
+              private toastController: ToastController,
+              private gastosService: GastoService,
+              private viviendaService: ViviendaService,) { }
 
   ngOnInit() {
     this.isDesktop = this.platform.width() >= 992;
@@ -120,6 +125,95 @@ export class ComunidadesComponent  implements OnInit {
   navigateToComunidad(comunidad: Comunidad) {
     sessionStorage.setItem('comunidad', JSON.stringify(comunidad));
     this.router.navigate(['/comunidad/perfil']);
+  }
+
+  cargarViviendas(idComunidad: number): Observable<Vivienda[]> {
+    return this.viviendaService.listarViviendas(idComunidad);
+  }
+
+  async confirmarSalida(event: Event, comunidad: Comunidad) {
+    event.stopPropagation();
+
+    const alert = await this.alertController.create({
+      header: 'Confirmar salida',
+      message: `¿Estás seguro de que quieres salir de la comunidad ${comunidad.nombre}?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Salir',
+          role: 'destructive',
+          handler: async () => {
+            if (this.vecino?.id && comunidad?.id) {
+              this.gastosService.listarDeudoresIdComunidadVecino(comunidad.id).subscribe({
+                next: async (deudores: VecinoGastos[]) => {
+                  const deudor = deudores.find(d => d.id === this.vecino.id && d.gastosPendientes.length > 0);
+                  if (deudor) {
+                    const toast = await this.toastController.create({
+                      message: `No puedes salir de la comunidad. Tienes gastos pendientes.`,
+                      duration: 3000,
+                      color: 'danger',
+                      position: 'top'
+                    });
+                    await toast.present();
+                  } else {
+                    this.cargarViviendas(comunidad.id).subscribe({
+                      next: (viviendas: Vivienda[]) => {
+                        const vivienda = viviendas.find(v => Array.isArray(v.idVecinos) && v.idVecinos.includes(this.vecino.id));
+                        if (vivienda && vivienda.id) {
+                          this.viviendaService.salirComunidad(vivienda.id, this.vecino.id).subscribe({
+                            next: async () => {
+                              this.listaComunidades = this.listaComunidades.filter(c => c.id !== comunidad.id);
+                              const toast = await this.toastController.create({
+                                message: 'Has salido correctamente de la comunidad.',
+                                duration: 2000,
+                                color: 'success',
+                                position: 'top'
+                              });
+                              await toast.present();
+                            },
+                            error: async () => {
+                              const toast = await this.toastController.create({
+                                message: 'Error al salir de la comunidad.',
+                                duration: 2000,
+                                color: 'danger',
+                                position: 'top'
+                              });
+                              await toast.present();
+                            }
+                          });
+                        }                       },
+                      error: async () => {
+                        const toast = await this.toastController.create({
+                          message: 'Error al obtener las viviendas.',
+                          duration: 2000,
+                          color: 'danger',
+                          position: 'top'
+                        });
+                        await toast.present();
+                      }
+                    });
+                  }
+                },
+                error: async () => {
+                  const toast = await this.toastController.create({
+                    message: 'Error al verificar los gastos pendientes.',
+                    duration: 2000,
+                    color: 'danger',
+                    position: 'top'
+                  });
+                  await toast.present();
+                }
+              });
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

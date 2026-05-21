@@ -1,0 +1,46 @@
+@for (vecino of deudores; track vecino.id) {
+  <div class="gastos">
+    <div class="gasto">
+      <span>{{ vecino.nombre }} {{ vecino.apellidos }}</span>
+      <div class="estado Pagado" (click)="abrirModal(vecino)">
+        <span>Ver más</span>
+      </div>
+    </div>
+  </div>
+}
+
+@if (deudores.length === 0) {
+  <div class="div-sin">
+    <span>No hay deudores registrados en tu comunidad.</span>
+  </div>
+}
+
+@if (modalAbierto) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-contenido" (click)="$event.stopPropagation()">
+      <h1>Enviar recordatorio</h1>
+      <div class="lista-gastos">
+        <p>Gastos pendientes: </p>
+
+        @for (gasto of vecinoSeleccionado?.gastosPendientes; track gasto.id) {
+          <label >
+            <span class="texto-gasto">{{ gasto.concepto }} → {{ gasto.total }}€</span>
+          </label>
+        }
+      </div>
+
+      <div class="botones-modal">
+        <button (click)="aceptar(vecinoSeleccionado!.id)" [disabled]="!vecinoSeleccionado">Aceptar</button>
+        <button (click)="cerrarModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+}
+
+<ion-toast
+  id="exitoEnviado"
+  message="Notificación enviada"
+  duration="3000"
+  position="top"
+  color="success"
+></ion-toast>

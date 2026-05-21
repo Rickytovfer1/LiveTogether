@@ -97,10 +97,18 @@ export class HeaderVecinoComponent  implements OnInit {
       this.vecinoService.cargarVecinoPorIdUsuario(this.usuario.id).subscribe({
         next: data => {
           this.vecino = data;
-
+          if (!this.router.url.includes('/notificaciones')) {
+            this.cargarNotificaciones()
+          }
         }
       });
     }
+  }
+
+  cargarNotificaciones() {
+    this.vecinoService.verNotificaciones(this.vecino.id, this.comunidadObjeto.id).subscribe({
+      next: data => this.notificacionesPendientes = data.length
+    })
   }
 
 

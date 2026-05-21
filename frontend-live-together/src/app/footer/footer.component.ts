@@ -28,4 +28,11 @@ export class FooterComponent  implements OnInit {
 
   }
 
+  navigateToCrearComunidad() {
+    this.router.navigate(['/crear-comunidad']);
+  }
+
+  navigateToPerfil() {
+    this.router.navigate(['/perfil']);
+  }
 }

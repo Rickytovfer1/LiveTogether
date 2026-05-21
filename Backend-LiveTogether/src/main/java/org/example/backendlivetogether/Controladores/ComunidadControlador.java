@@ -2,10 +2,15 @@ package org.example.backendlivetogether.Controladores;
 
 import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.ComunidadDTO;
+import org.example.backendlivetogether.DTOs.VecinoDTO;
+import org.example.backendlivetogether.DTOs.VecinoUsuarioDTO;
+import org.example.backendlivetogether.Enumerados.TipoNotificacion;
+import org.example.backendlivetogether.Modelos.Solicitud;
 import org.example.backendlivetogether.Modelos.Usuario;
 import org.example.backendlivetogether.Seguridad.UsuarioAdapter;
 import org.example.backendlivetogether.Servicios.ComunidadServicio;
 import org.example.backendlivetogether.Servicios.UsuarioServicio;
+import org.example.backendlivetogether.Servicios.VecinoServicio;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +25,8 @@ public class ComunidadControlador {
 
     private UsuarioServicio usuarioServicio;
 
+    private VecinoServicio vecinoServicio;
+
     @GetMapping("/vecino/ver/comunidad/{idComunidad}")
     public ComunidadDTO verComunidadID(@PathVariable Integer idComunidad){
         return comunidadServicio.verComunnidadID(idComunidad);
@@ -30,7 +37,7 @@ public class ComunidadControlador {
         return comunidadServicio.verComunidadUsuarioID(idUsuario);
     }
 
-    @GetMapping("/vecino/listar/comunidades")
+    @GetMapping("/vecino/listar/todas/comunidades")
     public List<ComunidadDTO> listarTodasComunidades(){
         return comunidadServicio.listarTodasComunidades();
     }
@@ -52,6 +59,51 @@ public class ComunidadControlador {
     @PostMapping("/comunidad/generar/codigo/{idVivienda}/{idComunidad}")
     public String generarCodigo(@PathVariable Integer idVivienda, @PathVariable Integer idComunidad){
         return comunidadServicio.generarCodigo(idVivienda, idComunidad);
+    }
+
+    @GetMapping("/comunidad/ver/comunidad/usuario/{idUsuario}")
+    public ComunidadDTO verComunidadUsuarioIDComunidad(@PathVariable Integer idUsuario){
+        return comunidadServicio.verComunidadUsuarioID(idUsuario);
+    }
+
+    @GetMapping("/comunidad/ver/vecino/{idVecino}")
+    public VecinoDTO verVecinoID(@PathVariable Integer idVecino){
+        return vecinoServicio.verVecinoID(idVecino);
+    }
+
+    @GetMapping("comunidad/listar/propietarios/{idComunidad}")
+    public List<VecinoUsuarioDTO> listarPropietarios(@PathVariable Integer idComunidad) {
+        return vecinoServicio.listarPropietarios(idComunidad);
+    }
+
+    @GetMapping("/comunidad/listar/solicitudes/{idComunidad}")
+    public List<Solicitud> listarSolicitudesComunidad(@PathVariable Integer idComunidad){
+        return comunidadServicio.listarSolicitudes(idComunidad);
+    }
+
+    @PostMapping("/comunidad/aceptar/solicitud")
+    public void aceptarSolicitud(@RequestBody Solicitud solicitud){
+        comunidadServicio.aceptarSolicitudEntrada(solicitud);
+    }
+
+    @PostMapping("/comunidad/rechazar/solicitud")
+    public void rechazarSolicitud(@RequestBody Solicitud solicitud){
+        comunidadServicio.rechazarSolicitud(solicitud);
+    }
+
+    @PostMapping("/comunidad/enviar/notificacion/{idsVecinos}/{idComunidad}/{tipoNotificacion}")
+    public void enviarNotificacion(@PathVariable Integer[] idsVecinos, @PathVariable Integer idComunidad, @PathVariable TipoNotificacion tipoNotificacion) {
+        comunidadServicio.enviarNotificacion(idsVecinos, idComunidad, tipoNotificacion);
+    }
+
+    @PostMapping("/vecino/enviar/notificacion/{idsVecinos}/{idComunidad}/{tipoNotificacion}")
+    public void enviarNotificacionVecino(@PathVariable Integer[] idsVecinos, @PathVariable Integer idComunidad, @PathVariable TipoNotificacion tipoNotificacion) {
+        comunidadServicio.enviarNotificacion(idsVecinos, idComunidad, tipoNotificacion);
+    }
+
+    @GetMapping("comunidad/listar/vecinos/comunidad/{idComunidad}")
+    public List<VecinoUsuarioDTO> listarVecinoComunidad(@PathVariable Integer idComunidad){
+        return vecinoServicio.listarVecinosIdComunidad(idComunidad);
     }
 
 }

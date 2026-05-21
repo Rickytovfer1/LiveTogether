@@ -1,0 +1,76 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral></app-nav-lateral>
+    </ion-col>
+
+    <ion-content class="login-container">
+      <div class="contenido">
+        <img [ngSrc]="getImageUrlVecino(vecino)" width="100" height="100" class="imagen-redondeada" alt="">
+        <ion-img src="assets/icon/perfiles/img.png" class="icono-boton" (click)="visibleInput()"></ion-img>
+      </div>
+
+      <div class="input-container">
+        <ion-text>Nombre</ion-text>
+        <ion-input type="text" placeholder="Introduce tu nombre" [(ngModel)]="editarVecino.nombre"
+                   [readonly]="!editable"></ion-input>
+      </div>
+
+      <div class="input-container">
+        <ion-text>Apellido</ion-text>
+        <ion-input type="text" placeholder="Introduce tu apellido" [(ngModel)]="editarVecino.apellidos"
+                   [readonly]="!editable"></ion-input>
+      </div>
+
+      <div class="input-container">
+        <ion-text>Teléfono</ion-text>
+        <ion-input type="text" placeholder="Introduce tu teléfono" [(ngModel)]="editarVecino.telefono" [readonly]="!editable"></ion-input>
+      </div>
+
+      <div class="input-container">
+        <ion-text>Fecha Nacimiento</ion-text>
+        <ion-input type="date" placeholder="Fecha de Nacimiento" [(ngModel)]="editarVecino.fechaNacimiento" [readonly]="!editable"></ion-input>
+      </div>
+
+      <div class="input-container">
+        <ion-text>Foto perfil</ion-text>
+        <input type="file" (change)="seleccionarFoto($event)" [disabled]="!editable" accept="image/*">
+      </div>
+
+      <ion-button expand="block" class="guardar-boton" [disabled]="!editable" (click)="actualizarVecino(vecino.id)">Editar
+      </ion-button>
+    </ion-content>
+  </ion-row>
+</ion-grid>
+
+<app-footer></app-footer>
+
+<ion-toast
+  [isOpen]="toastSuccess"
+  message="Perfil actualizado correctamente"
+  duration="2000"
+  position="top"
+  color="success"
+  (didDismiss)="toastSuccess = false">
+</ion-toast>
+
+<ion-toast
+  [isOpen]="toastError"
+  message="Error al actualizar el perfil"
+  duration="2000"
+  position="top"
+  color="danger"
+  (didDismiss)="toastError = false">
+</ion-toast>
+
+<ion-toast
+  [isOpen]="toastUsuarioError"
+  message="Error al cargar el usuario"
+  duration="2000"
+  position="top"
+  color="danger"
+  (didDismiss)="toastUsuarioError = false">
+</ion-toast>

@@ -1,0 +1,34 @@
+<ion-grid>
+  <ion-row (click)="navigateToGastos()">
+    <ion-col size="3">
+      <ion-img [src]="gastosImgSrc"></ion-img>
+    </ion-col>
+    <ion-col size="9" class="despg">
+      <ion-text>Gastos</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row (click)="navigateToVivienda()">
+    <ion-col size="3">
+      <ion-img [src]="viviendasImgSrc"></ion-img>
+    </ion-col>
+    <ion-col size="9" class="despg">
+      <ion-text>Viviendas</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row (click)="navigateToElecciones()">
+    <ion-col size="3">
+      <ion-img [src]="eleccionesImgSrc"></ion-img>
+    </ion-col>
+    <ion-col size="9" class="despg">
+      <ion-text>Elecciones</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row (click)="navigateToDocumentacion()">
+    <ion-col size="3">
+      <ion-img [src]="documentacionImgSrc"></ion-img>
+    </ion-col>
+    <ion-col size="9" class="despg">
+      <ion-text>Documentación</ion-text>
+    </ion-col>
+  </ion-row>
+</ion-grid>

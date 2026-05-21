@@ -7,7 +7,6 @@
       <app-nav-lateral></app-nav-lateral>
     </ion-col>
 
-    <!-- CONTENIDO -->
     <ion-col size="12" size-md="9.5" class="contenido-principal">
       <ion-content>
 
@@ -24,11 +23,11 @@
           <div class="tarjeta" (click)="navigateToComunidad(comunidad)">
             <p class="tarjeta-titulo">{{ comunidad.nombre }}</p>
             <p class="tarjeta-subtitulo">{{ comunidad.direccion }}</p>
-            <img
-              class="salir-comunidad"
-              src="assets/icon/salir.png"
-              alt="Salir comunidad"
-            />
+
+            @if (comunidad.idPresidente !== vecino.id) {
+              <img class="salir-comunidad" src="assets/icon/salir.png" alt="Salir comunidad"
+                   (click)="confirmarSalida($event, comunidad)"/>
+            }
           </div>
         }
 

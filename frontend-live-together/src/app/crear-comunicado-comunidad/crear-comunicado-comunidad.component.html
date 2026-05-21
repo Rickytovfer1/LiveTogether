@@ -1,0 +1,38 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <ion-content>
+      <div class="titulo-container">
+        <h2 class="title">Crear comunicado</h2>
+        <h3 class="subtitle">Describa la información que deseas mostrar en su comunicado</h3>
+      </div>
+
+      <div class="input-container">
+        <ion-text>Descripción</ion-text>
+        <quill-editor
+          #quillEditor
+          [(ngModel)]="crearComunicado.descripcion"
+          placeholder="Escribe un comunicado para la comunidad..."
+          customToolbarPosition="top"
+          [modules]="quillConfig"
+          [formats]="formatos"
+        ></quill-editor>
+      </div>
+
+      <ion-button expand="block" (click)="crearComunicadoMetodo()">Crear</ion-button>
+    </ion-content>
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+            <app-nav-lateral-derecho-comunidad></app-nav-lateral-derecho-comunidad>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>

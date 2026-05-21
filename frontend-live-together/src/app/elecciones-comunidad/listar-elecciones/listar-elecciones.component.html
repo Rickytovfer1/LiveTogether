@@ -1,0 +1,26 @@
+@for (eleccion of listaElecciones; track eleccion.id) {
+  <div class="eleccion">
+    <ion-grid>
+      <ion-row>
+        @if (eleccion.abierta && !eleccion.motivo.startsWith('Elección de nuevo presidente - Candidato:')) {
+          <ion-img src="assets/icon/documentacion/cruz-roja.png" class="icono-cerrar" (click)="confirmarEleccion(eleccion.id)"></ion-img>
+        }
+      </ion-row>
+      <ion-row (click)="verVotos(eleccion)">
+        <div style="width: 100%">
+          <p>{{ eleccion.motivo }}</p>
+          <div class="eleccion-info">
+            <span class="fecha">{{ calcularFecha(eleccion.fechaHoraCreacion) }}</span>
+            <span [ngClass]="comprobarEstado(eleccion)">{{ comprobarEstado(eleccion) }}</span>
+          </div>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </div>
+}
+
+@if (listaElecciones.length === 0) {
+  <div class="div-sin">
+    <span>No hay votaciones en curso en tu comunidad.</span>
+  </div>
+}

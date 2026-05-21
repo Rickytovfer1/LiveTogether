@@ -1,0 +1,63 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <ion-content>
+      <div class="eleccion">
+        <p>{{eleccion.motivo}}</p>
+      </div>
+      <div class="votos">
+        <ion-grid>
+          <ion-row class="fila-voto">
+            <ion-col size="3">
+              <ion-img src="assets/icon/votacion/votoFavor.png" class="logo"></ion-img>
+            </ion-col>
+            <ion-col size="9">
+              <p>{{eleccion.totalAFavor}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="votos">
+        <ion-grid>
+          <ion-row class="fila-voto">
+            <ion-col size="3">
+              <ion-img src="assets/icon/votacion/votoContra.png" class="logo logo-circulo"></ion-img>
+            </ion-col>
+            <ion-col size="9">
+              <p>{{eleccion.totalEnContra}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="votos">
+        <ion-grid>
+          <ion-row class="fila-voto" >
+            <ion-col size="3">
+              <ion-img src="assets/icon/votacion/votoBlanco.png" class="logo logo-circulo"></ion-img>
+            </ion-col>
+            <ion-col size="9">
+              <p>{{eleccion.totalAbstencion}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="textoVoto">
+        <p >Número de votos: {{totalVoto}}</p>
+      </div>
+
+    </ion-content>
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+            <app-nav-lateral-derecho-comunidad></app-nav-lateral-derecho-comunidad>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>

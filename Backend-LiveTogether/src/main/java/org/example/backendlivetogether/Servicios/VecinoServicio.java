@@ -2,28 +2,53 @@ package org.example.backendlivetogether.Servicios;
 
 import lombok.AllArgsConstructor;
 import org.example.backendlivetogether.DTOs.*;
-import org.example.backendlivetogether.Modelos.Comunidad;
-import org.example.backendlivetogether.Modelos.Vecino;
-import org.example.backendlivetogether.Modelos.Vivienda;
-import org.example.backendlivetogether.Repositorios.IComunidadRepositorio;
-import org.example.backendlivetogether.Repositorios.IVecinoRepositorio;
-import org.example.backendlivetogether.Repositorios.IViviendaRepositorio;
+import org.example.backendlivetogether.Modelos.*;
+import org.example.backendlivetogether.Repositorios.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
-@AllArgsConstructor
 public class VecinoServicio {
 
-    private IVecinoRepositorio iVecinoRepositorio;
+    private final IVecinoRepositorio iVecinoRepositorio;
 
-    private IViviendaRepositorio iViviendaRepositorio;
+    private final IUsuarioRepositorio iUsuarioRepositorio;
 
-    private ViviendaServicio viviendaServicio;
+    private final IViviendaRepositorio iViviendaRepositorio;
 
-    private IComunidadRepositorio iComunidadRepositorio;
+    private final IComunidadRepositorio iComunidadRepositorio;
+
+    private final ISolicitudRepositorio iSolicitudRepositorio;
+
+    private final INotificacionRepositorio iNotificacionRepositorio;
+
+    private final ViviendaServicio viviendaServicio;
+
+    @Value("${upload.dir}")
+    private String uploadDir;
+
+    public VecinoServicio(IVecinoRepositorio iVecinoRepositorio, IUsuarioRepositorio iUsuarioRepositorio,
+                          IViviendaRepositorio iViviendaRepositorio, IComunidadRepositorio iComunidadRepositorio,
+                          ISolicitudRepositorio iSolicitudRepositorio, INotificacionRepositorio iNotificacionRepositorio, ViviendaServicio viviendaServicio) {
+        this.iVecinoRepositorio = iVecinoRepositorio;
+        this.iUsuarioRepositorio = iUsuarioRepositorio;
+        this.iViviendaRepositorio = iViviendaRepositorio;
+        this.iComunidadRepositorio = iComunidadRepositorio;
+        this.iSolicitudRepositorio = iSolicitudRepositorio;
+        this.iNotificacionRepositorio = iNotificacionRepositorio;
+        this.viviendaServicio = viviendaServicio;
+    }
 
     public VecinoDTO verVecinoID(Integer idVecino){
         Vecino vecino = iVecinoRepositorio.findById(idVecino)
@@ -124,6 +149,108 @@ public class VecinoServicio {
         return ComunidadServicio.getComunidadDTO(iComunidadRepositorio.findByCodigoComunidad(codigo));
     }
 
+    public void solicitarIngresoComunidad(Integer idVivienda, Integer idComunidad, Integer idVecino) {
+
+        Solicitud solicitud = new Solicitud();
+        solicitud.setIdComunidad(idComunidad);
+        solicitud.setIdVecino(idVecino);
+        solicitud.setIdVivienda(idVivienda);
+        iSolicitudRepositorio.save(solicitud);
+
+    }
+
+    public List<NotificacionDTO> verNotificaciones(Integer idVecino, Integer idComunidad) {
+        Vecino vecino = iVecinoRepositorio.findById(idVecino)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        List<Notificacion> notificaciones = iNotificacionRepositorio.findByComunidad(iComunidadRepositorio.findById(idComunidad)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID.")));
+
+        List<NotificacionDTO> notis = new ArrayList<>(0);
+        for (Notificacion n : notificaciones) {
+            if (n.getVecinos().contains(vecino)) {
+                notis.add(getNotificacionDTO(n));
+            }
+        }
+
+        return notis;
+    }
+
+    public void eliminarNotificacion(Integer idNotificacion, Integer idVecino) {
+        Notificacion notificacion = iNotificacionRepositorio.findById(idNotificacion)
+                .orElseThrow(() -> new RuntimeException("No existe una notificación con este id"));
+
+        Vecino vecino = iVecinoRepositorio.findById(idVecino)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        if (notificacion.getVecinos().size() == 1) {
+            iNotificacionRepositorio.delete(notificacion);
+        } else {
+            notificacion.getVecinos().remove(vecino);
+            iNotificacionRepositorio.save(notificacion);
+        }
+    }
+
+    private String getFileExtension(String filename) {
+        if (filename == null) {
+            return "";
+        }
+        int lastIndex = filename.lastIndexOf(".");
+        return (lastIndex == -1) ? "" : filename.substring(lastIndex + 1);
+    }
+
+    public String guardarFoto(MultipartFile foto) {
+        if (foto.isEmpty()) {
+            return null;
+        }
+        String extension = getFileExtension(foto.getOriginalFilename());
+        String filename = UUID.randomUUID().toString() + "." + extension;
+        Path path = Paths.get(uploadDir, filename);
+        try {
+            Files.createDirectories(path.getParent());
+            Files.copy(foto.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            return "/uploads/" + filename;
+        } catch (IOException e) {
+            throw new RuntimeException("Error al guardar la imagen", e);
+        }
+    }
+
+    public void actualizarVecino(EditarVecinoDTO dto, Integer idVecino) {
+        Vecino vecino = iVecinoRepositorio.findById(idVecino)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        Usuario usuario = vecino.getUsuario();
+        if (usuario == null) {
+            throw new IllegalStateException("El vecino no tiene un usuario asociado.");
+        }
+
+        if (dto.getNombre() != null) {
+            vecino.setNombre(dto.getNombre());
+        }
+        if (dto.getApellidos() != null) {
+            vecino.setApellidos(dto.getApellidos());
+        }
+        if (dto.getDni() != null) {
+            vecino.setDni(dto.getDni());
+        }
+        if (dto.getTelefono() != null) {
+            vecino.setTelefono(dto.getTelefono());
+        }
+
+        if (dto.getFechaNacimiento() != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate fechaNacimiento = LocalDate.parse(dto.getFechaNacimiento(), formatter);
+            vecino.setFechaNacimiento(fechaNacimiento);
+        }
+        if (dto.getFotoPerfil() != null){
+            vecino.setFotoPerfil(dto.getFotoPerfil());
+        }
+
+        iVecinoRepositorio.save(vecino);
+        iUsuarioRepositorio.save(usuario);
+
+    }
+
     public VecinoUsuarioDTO getVecinoUsuarioDTO(Vecino vecino){
         VecinoUsuarioDTO dtoNuevo  = new VecinoUsuarioDTO();
 
@@ -152,6 +279,23 @@ public class VecinoServicio {
         if (vecino.getFotoPerfil() != null){
             dtoNuevo.setFotoPerfil(vecino.getFotoPerfil());
         }
+        return dtoNuevo;
+    }
+
+    public static NotificacionDTO getNotificacionDTO(Notificacion n){
+        NotificacionDTO dtoNuevo  = new NotificacionDTO();
+
+        dtoNuevo.setId(n.getId());
+        dtoNuevo.setFecha(n.getFecha());
+        dtoNuevo.setTipo(n.getTipo());
+
+        List<Integer> idsVecinos = new ArrayList<>(0);
+        for (Vecino v : n.getVecinos()) {
+            idsVecinos.add(v.getId());
+        }
+        dtoNuevo.setIdsVecinos(idsVecinos);
+        dtoNuevo.setIdComunidad(n.getComunidad().getId());
+
         return dtoNuevo;
     }
 

@@ -1,0 +1,43 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <ion-content>
+      <ion-segment [(ngModel)]="seccion" mode="ios">
+        <ion-segment-button value="anadir-gasto">
+          <ion-label>Añadir</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="gastos">
+          <ion-label>Gastos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="deudores">
+          <ion-label>Deudores</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      @if (seccion === 'anadir-gasto') {
+        <app-anadir-gasto></app-anadir-gasto>
+      }
+
+      @if (seccion === 'gastos') {
+        <app-gastos></app-gastos>
+      }
+
+      @if (seccion === 'deudores') {
+        <app-deudores></app-deudores>
+      }
+    </ion-content>
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-derecho-comunidad></app-nav-lateral-derecho-comunidad>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>

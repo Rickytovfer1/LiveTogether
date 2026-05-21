@@ -61,7 +61,7 @@
     <div class="chat-input">
       <input [(ngModel)]="nuevoTexto" placeholder="Envía un mensaje..."
              (keydown.enter)="enviar()">
-      <ion-img (click)="enviar()" src="assets/icon/chat/botonEnviar.png"></ion-img>
+      <ion-img style="cursor: pointer" (click)="enviar()" src="assets/icon/chat/botonEnviar.png"></ion-img>
     </div>
   </div>
 </ion-footer>

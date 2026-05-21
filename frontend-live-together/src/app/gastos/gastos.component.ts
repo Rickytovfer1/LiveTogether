@@ -23,7 +23,6 @@ import {FooterVecinoComponent} from "../footer-vecino/footer-vecino.component";
     NavLateralDerechoVecinoComponent,
     NavLateralVecinoComponent,
     NgClass,
-    NgForOf,
     FooterVecinoComponent
   ]
 })

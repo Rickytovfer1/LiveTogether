@@ -1,0 +1,58 @@
+ion-content {
+  --background: #E7F4E7;
+  font-weight: bold;
+
+  .eleccion {
+    background-color: #7CDF68;
+    border-radius: 7px;
+    border: 5px #FFFFFF solid;
+    padding: 15px;
+    margin: 35px;
+    margin-block: 45px;
+    text-align: center;
+
+    p {
+      margin: 0 auto;
+      color: white;
+      font-size: 24px;
+      vertical-align: middle;
+    }
+  }
+
+  .votos{
+    background-color: #7CDF68;
+    border-radius: 7px;
+    padding: 10px;
+    margin: 25px auto 0;
+    width: 60%;
+
+    p {
+      color: white;
+      margin: 0 auto;
+      font-size: 22px;
+    }
+
+  }
+  .logo {
+    width: 70px;
+    height: auto;
+  }
+
+  .textoVoto{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #0E8008;
+    text-align: center;
+    font-size: 18px;
+  }
+}
+.fila-voto {
+  display: flex;
+  align-items: center;
+  ion-col {
+    display: flex;
+    align-items: center;
+  }
+}
+
+

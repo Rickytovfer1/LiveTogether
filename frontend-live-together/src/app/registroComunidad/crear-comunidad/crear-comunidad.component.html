@@ -1,0 +1,95 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral></app-nav-lateral>
+    </ion-col>
+
+    <ion-content class="login-container">
+
+      <div class="formulario">
+        <div class="titulo-container">
+          <h2 class="title">Crear comunidad</h2>
+          <h3 class="subtitle">Rellena lo siguiente para crear tu comunidad</h3>
+        </div>
+
+        <div class="inputs-grid">
+          <div class="col">
+
+            <div>
+              <ion-text>Nombre de comunidad</ion-text>
+              <ion-input [(ngModel)]="registroComunidad.nombre" type="text" placeholder="Introduce el nombre de tu comunidad" required minlength="3"></ion-input>
+            </div>
+
+            <div>
+              <ion-text>Dirección</ion-text>
+              <ion-input [(ngModel)]="registroComunidad.direccion" type="text" placeholder="Introduce tu dirección" required></ion-input>
+            </div>
+
+            <div>
+              <ion-text>CIF</ion-text>
+              <ion-input [(ngModel)]="registroComunidad.cif" type="text" placeholder="Introduce tu CIF" required pattern="[A-Z][0-9]{8}"></ion-input>
+            </div>
+
+          </div>
+
+          <div class="col">
+            <div>
+              <ion-text>Email</ion-text>
+              <ion-input [(ngModel)]="registroComunidad.correo" type="email" placeholder="Introduce tu email" required></ion-input>
+            </div>
+
+            <div>
+              <ion-text>Contraseña</ion-text>
+              <ion-input [(ngModel)]="registroComunidad.contrasena" type="password" placeholder="Introduce tu contraseña" required minlength="6"></ion-input>
+            </div>
+
+            <div>
+              <ion-text>Confirmar contraseña</ion-text>
+              <ion-input [(ngModel)]="repetirContrasena" type="password" placeholder="Vuelve a introducir tu contraseña" required minlength="6"></ion-input>
+            </div>
+
+          </div>
+        </div>
+
+        <ion-button expand="block" (click)="navigateToComunidades()">TERMINAR</ion-button>
+      </div>
+    </ion-content>
+  </ion-row>
+</ion-grid>
+
+<app-footer></app-footer>
+
+<ion-toast
+  id="toastRegistroExitoso"
+  message="Comunidad registrada con éxito"
+  duration="3000"
+  position="top"
+  color="success"
+></ion-toast>
+
+<ion-toast
+  id="toastError"
+  message="Error al registrar la comunidad"
+  duration="3000"
+  position="top"
+  color="danger"
+></ion-toast>
+<ion-toast
+  id="toastacio"
+  message="Por favor, completa todos los campos"
+  duration="3000"
+  position="top"
+  color="warning"
+></ion-toast>
+<ion-toast id="toastNombre" message="El nombre debe tener al menos 3 caracteres" duration="3000" position="top" color="danger"></ion-toast>
+<ion-toast id="toastCorreo" message="Correo inválido" duration="3000" position="top" color="danger"></ion-toast>
+<ion-toast id="toastContrasena" message="Contraseña demasiado corta (mínimo 6)" duration="3000" position="top" color="danger"></ion-toast>
+<ion-toast id="toastConfirmar" message="Las contraseñas no coinciden" duration="3000" position="top" color="danger"></ion-toast>
+<ion-toast id="toastDireccion" message="Debes introducir una dirección" duration="3000" position="top" color="danger"></ion-toast>
+<ion-toast id="toastCif" message="CIF inválido. Ej: A12345678" duration="3000" position="top" color="danger"></ion-toast>
+<ion-toast id="toastCifDuplicado" message="El CIF ya está registrado" duration="3000" position="top" color="danger"></ion-toast>
+<ion-toast id="errorConfirmarContrasena" message="Las contraseñas no coinciden" duration="3000" position="top" color="danger"></ion-toast>
+

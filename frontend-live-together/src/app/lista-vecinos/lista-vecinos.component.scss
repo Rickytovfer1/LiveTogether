@@ -5,6 +5,7 @@
     border: 1px solid #339F28;
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     &:nth-child(odd) {
       --background: #7CDF68;
@@ -57,6 +58,17 @@
     ion-label{
       margin-left: 15px;
     }
+
+    &:hover {
+      --background: #339F28;
+      transform: scale(1.01);
+
+      h2,
+      p {
+        color: white !important;
+      }
+    }
+
   }
 }
 

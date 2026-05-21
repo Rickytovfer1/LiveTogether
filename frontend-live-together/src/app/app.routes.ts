@@ -73,4 +73,60 @@ export const routes: Routes = [
     path: 'comunidad/documentacion',
     loadComponent: () => import('./documentacion/documentacion.component').then((m) => m.DocumentacionComponent),
   },
+  {
+    path: 'crear-comunidad',
+      loadComponent: () => import('./registroComunidad/crear-comunidad/crear-comunidad.component').then((m) => m.CrearComunidadComponent),
+  },
+  {
+    path: 'lista-viviendas',
+    loadComponent: () => import('./lista-viviendas/lista-viviendas.component').then((m) => m.ListaViviendasComponent),
+  },
+  {
+    path: 'gastos/comunidad',
+    loadComponent: () => import('./gastos-comunidad/gastos-comunidad.component').then((m) => m.GastosComunidadComponent),
+  },
+  {
+    path: 'crear-vivienda',
+    loadComponent: () => import('./crear-vivienda/crear-vivienda.component').then((m) => m.CrearViviendaComponent),
+  },
+  {
+    path: 'elecciones/comunidad',
+    loadComponent: () => import('./elecciones-comunidad/elecciones-comunidad.component').then((m) => m.EleccionesComunidadComponent),
+  },
+  {
+    path: 'ver-votos/:id',
+    loadComponent: () => import('./ver-votos/ver-votos.component').then((m) => m.VerVotosComponent),
+  },
+  {
+    path: 'notificaciones-comunidad',
+    loadComponent: () => import('./notificaciones-comunidad/notificaciones-comunidad.component').then((m) => m.NotificacionesComunidadComponent),
+  },
+  {
+    path: 'info-gasto/:id',
+    loadComponent: () => import('./info-gasto/info-gasto.component').then((m) => m.InfoGastoComponent),
+  },
+  {
+    path: 'documentacion/comunidad',
+    loadComponent: () => import('./documentacion-comunidad/documentacion-comunidad.component').then((m) => m.DocumentacionComunidadComponent),
+  },
+  {
+    path: 'crear-comunicado-comunidad',
+    loadComponent: () => import('./crear-comunicado-comunidad/crear-comunicado-comunidad.component').then((m) => m.CrearComunicadoComunidadComponent),
+  },
+  {
+    path: 'crear-sancion-comunidad',
+    loadComponent: () => import('./crear-sancion-comunidad/crear-sancion-comunidad.component').then((m) => m.CrearSancionComunidadComponent),
+  },
+  {
+    path: 'info-vivienda/:id',
+    loadComponent: () => import('./info-vivienda/info-vivienda.component').then((m) => m.InfoViviendaComponent)
+  },
+  {
+    path: 'perfil',
+    loadComponent: () => import('./perfil/perfil.component').then((m) => m.PerfilComponent),
+  },
+  {
+    path: 'crear-comunicado',
+    loadComponent: () => import('./crear-comunicado/crear-comunicado.component').then((m) => m.CrearComunicadoComponent),
+  },
 ];

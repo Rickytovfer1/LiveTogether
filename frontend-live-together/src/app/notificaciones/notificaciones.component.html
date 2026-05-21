@@ -1,3 +1,32 @@
-<p>
-  notificaciones works!
-</p>
+@if (!isDesktop) {
+  <ion-header>
+    <app-header></app-header>
+  </ion-header>
+  <app-header-vecino></app-header-vecino>
+}
+
+<ion-content>
+  <div class="notificaciones">
+    <ion-list>
+
+      @for (notificacion of notificaciones; track notificacion.id) {
+        <ion-item class="notificacion"
+                  (click)="eliminarYRedireccion(notificacion)">
+          <img [ngSrc]="getImageUrlVecino(vecino)" width="100" height="100" class="imagen-redonda" alt="Foto de perfil">
+          <ion-label>
+            <h2>{{ mensaje(notificacion.tipo) }}</h2>
+            <p>{{ calcularFecha(notificacion.fecha) }}</p>
+          </ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  </div>
+
+  @if (notificaciones.length === 0) {
+    <div class="div-sin">
+      <span>Tu buzón de notificaciones está vacío</span>
+    </div>
+  }
+</ion-content>
+
+<app-footer-vecino></app-footer-vecino>

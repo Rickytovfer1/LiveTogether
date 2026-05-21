@@ -2,10 +2,6 @@ ion-content {
   --background: #E7F4E7;
 }
 
-/* =========================
-   BASE
-   ========================= */
-
 .grid-principal {
   padding: 0;
 }
@@ -40,9 +36,11 @@ img {
   font-size: 14px;
 }
 
-/* =========================
-   TARJETAS
-   ========================= */
+.info-usuario2 {
+  font-weight: bold;
+  font-size: 14px;
+}
+
 
 .card {
   background: white;
@@ -50,10 +48,6 @@ img {
   border-radius: 12px;
   padding: 15px;
 }
-
-/* =========================
-   SANCIONES
-   ========================= */
 
 .card-sancion {
   background: #7CDF68;
@@ -77,9 +71,6 @@ img {
   text-align: center;
 }
 
-/* =========================
-   DEUDAS
-   ========================= */
 
 .card-deuda {
   background: #57BF48;
@@ -87,11 +78,8 @@ img {
   font-weight: bold;
   text-align: center;
   font-size: 18px;
+  cursor: pointer;
 }
-
-/* =========================
-   INTERLINEADO
-   ========================= */
 
 .interlineado {
   display: flex;
@@ -125,6 +113,14 @@ img {
   gap: 20px;
 }
 
+.div-sin {
+  margin: 0 auto;
+  text-align: center;
+
+  span {
+    font-weight: bold
+  }
+}
 
 @media (min-width: 768px) {
 
@@ -160,6 +156,14 @@ img {
   }
 
   .nombre-usuario {
+    font-size: 28px;
+  }
+
+  .info-usuario {
+    font-size: 19px;
+  }
+
+  .nombre-usuario2 {
     font-size: 18px;
   }
 
@@ -168,10 +172,23 @@ img {
   }
 
   .perfil-contenido {
-    justify-content: space-between;
-    img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    img {
       height: 100%;
     }
+  }
+
+  .perfil-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .perfil-derecha {
+    margin-left: 10px;
   }
 
   .perfil-derecha {

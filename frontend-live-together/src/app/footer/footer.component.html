@@ -3,7 +3,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="4">
-          <ion-img src="assets/icon/footer/perfil.png"></ion-img>
+          <ion-img src="assets/icon/footer/perfil.png" (click)="navigateToPerfil()"></ion-img>
         </ion-col>
         <ion-col size="4">
           <ion-img src="assets/icon/footer/casa.png" (click)="navigateToComunidades()"></ion-img>
@@ -14,7 +14,7 @@
             <ng-template>
               <ion-list>
                 <ion-item (click)="navigateToUnirseComunidad()" button >Unirse a una comunidad</ion-item>
-                <ion-item button >Crear una comunidad</ion-item>
+                <ion-item (click)="navigateToCrearComunidad()" button >Crear una comunidad</ion-item>
               </ion-list>
             </ng-template>
           </ion-popover>

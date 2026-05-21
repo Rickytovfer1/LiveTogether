@@ -1,27 +1,313 @@
-#container {
-  text-align: center;
+:root {
+  --primary: #339F28;
+}
+
+.landing-container {
+  --background: #f8faf8;
+}
+
+.landing-wrapper {
+  min-height: calc(100vh - 100px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 80px;
+
+  padding: 40px 80px;
+}
+
+.phone-section {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-section {
+  flex: 1;
+  max-width: 650px;
+}
+
+.device-switch {
+  display: flex;
+
+  align-items: center;
+
+  width: fit-content;
+
+  margin: 20px auto;
+
+  padding: 6px;
+
+  background: white;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, .08);
+}
+
+.device-switch button {
+  border: none;
+
+  background: transparent;
+
+  padding: 12px 22px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  color: #666;
+
+  transition: .3s;
+}
+
+.device-switch button.active {
+  background: #339F28;
+  color: white;
+}
+
+.phone-mockup {
+  width: 320px;
+  height: 650px;
+
+  background: #111;
+
+  border-radius: 40px;
+
+  padding: 12px;
+
+  overflow: hidden;
+
+  position: relative;
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.20);
+}
+
+.phone-mockup::before {
+  content: '';
 
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+
+  top: 12px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 120px;
+  height: 25px;
+
+  background: #000;
+
+  border-radius: 20px;
+
+  z-index: 10;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.phone-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 30px;
+
+  transition: .5s;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.desktop-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#container a {
-  text-decoration: none;
+.desktop-mockup {
+  width: 900px;
+  height: 480px;
+
+  background: #181818;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  position: relative;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.20);
+}
+
+.desktop-topbar {
+  height: 40px;
+
+  background: #2a2a2a;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding-left: 15px;
+}
+
+.desktop-topbar span {
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+
+  background: #666;
+}
+
+.desktop-image {
+  width: 100%;
+  height: calc(100% - 40px);
+
+  object-fit: contain;
+
+  background: #eef3ee;
+}
+
+.monitor-stand {
+  width: 140px;
+  height: 18px;
+
+  background: #555;
+
+  border-radius: 0 0 12px 12px;
+}
+
+.monitor-stand::before {
+  content: '';
+
+  display: block;
+
+  width: 70px;
+  height: 70px;
+
+  margin: -65px auto 0;
+
+  background: #666;
+}
+
+.logo-container h1 {
+  font-size: 4rem;
+  font-weight: 800;
+
+  color: #339F28;
+
+  margin-bottom: 8px;
+}
+
+.logo-container span {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.description {
+  margin-top: 30px;
+
+  font-size: 1.1rem;
+
+  line-height: 1.8;
+
+  color: #444;
+}
+
+.features {
+  margin-top: 40px;
+
+  display: grid;
+
+  gap: 18px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  color: #333;
+}
+
+.feature ion-icon {
+  color: #339F28;
+  font-size: 24px;
+}
+
+.actions {
+  margin-top: 50px;
+
+  display: flex;
+
+  gap: 15px;
+}
+
+.login-btn {
+  --background: #339F28;
+  --border-radius: 14px;
+
+  height: 52px;
+
+  font-weight: 700;
+}
+
+.registro {
+  --border-color: #339F28;
+  --border-width: 1px;
+  --border-style: solid;
+  --border-radius: 14px;
+
+  --color: #339F28;
+}
+
+@media (max-width: 1200px) {
+
+  .desktop-mockup {
+    width: 750px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 992px) {
+
+  .landing-wrapper {
+    flex-direction: column;
+
+    gap: 50px;
+
+    padding: 30px;
+  }
+
+  .content-section {
+    text-align: center;
+  }
+
+  .feature {
+    justify-content: center;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .logo-container h1 {
+    font-size: 3rem;
+  }
+
+  .desktop-mockup {
+    width: 90vw;
+  }
 }

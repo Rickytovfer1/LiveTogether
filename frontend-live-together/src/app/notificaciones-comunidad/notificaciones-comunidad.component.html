@@ -1,0 +1,56 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <ion-content>
+
+      @for (solicitud of solicitudes; track solicitud.id; let i = $index) {
+        <ion-grid [ngClass]="i % 2 === 0 ? 'fondo-a' : 'fondo-b'">
+          <ion-row>
+            <ion-col size="3">
+              <img [ngSrc]="cargarFotoVecino(solicitud.idVecino)" width="100" height="100" alt="Foto de perfil">
+            </ion-col>
+
+            <ion-col size="9">
+              <ion-label>
+                <b>{{ cargarNombreVecino(solicitud.idVecino) }}</b>
+                ha solicitado unirse a la vivienda
+                <b>{{ cargarNombreVivienda(solicitud.idVivienda) }}</b>
+                de tu comunidad
+              </ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="6">
+              <ion-button (click)="aceptarSolicitud(solicitud)">Aceptar</ion-button>
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-button (click)="rechazarSolicitud(solicitud)">Rechazar</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      }
+
+      @if (solicitudes.length === 0) {
+        <div class="div-sin">
+          <span>Tu buzón de solicitudes está vacío</span>
+        </div>
+      }
+
+    </ion-content>
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+            <app-nav-lateral-derecho-comunidad></app-nav-lateral-derecho-comunidad>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>

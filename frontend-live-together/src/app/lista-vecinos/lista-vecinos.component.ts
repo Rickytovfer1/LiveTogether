@@ -27,8 +27,6 @@ import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
     HeaderComponent,
     HeaderVecinoComponent,
     NgOptimizedImage,
-    NgForOf,
-    NgIf
   ]
 })
 export class ListaVecinosComponent  implements OnInit {

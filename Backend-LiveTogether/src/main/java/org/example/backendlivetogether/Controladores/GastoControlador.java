@@ -1,9 +1,7 @@
 package org.example.backendlivetogether.Controladores;
 
 import lombok.AllArgsConstructor;
-import org.example.backendlivetogether.DTOs.CrearGastoDTO;
-import org.example.backendlivetogether.DTOs.GastoDTO;
-import org.example.backendlivetogether.DTOs.MarcarPagadoDTO;
+import org.example.backendlivetogether.DTOs.*;
 import org.example.backendlivetogether.Servicios.GastoServicio;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +35,11 @@ public class GastoControlador {
         return gastoServicio.verGasto(idGasto);
     }
 
+    @GetMapping("/comunidad/ver/gasto/{idGasto}")
+    public GastoDTO verGastoComunidad(@PathVariable Integer idGasto){
+        return gastoServicio.verGasto(idGasto);
+    }
+
     @GetMapping("/calcular/porcentaje/{idGasto}")
     public double calcularPorcentajePagado(@PathVariable Integer idGasto){
         return gastoServicio.calcularPorcentajePagado(idGasto);
@@ -45,6 +48,21 @@ public class GastoControlador {
     @PostMapping("/marcar/pagado")
     public void marcarPagado(@RequestBody MarcarPagadoDTO dto){
         gastoServicio.marcarPagado(dto);
+    }
+
+    @GetMapping("/comunidad/listar/deudores/comunidad/{idComunidad}")
+    public List<VecinoGastosDTO> listarDeudoresIdComunidad(@PathVariable Integer idComunidad){
+        return gastoServicio.listarDeudoresIdComunidad(idComunidad);
+    }
+
+    @GetMapping("/vecino/listar/deudores/comunidad/{idComunidad}")
+    public List<VecinoGastosDTO> listarDeudoresIdComunidadVecino(@PathVariable Integer idComunidad){
+        return gastoServicio.listarDeudoresIdComunidad(idComunidad);
+    }
+
+    @GetMapping("/comunidad/listar/deudores/{idGasto}")
+    public List<VecinoDTO> listarDeudoresIdGasto(@PathVariable Integer idGasto){
+        return gastoServicio.listarDeudores(idGasto);
     }
 
 }

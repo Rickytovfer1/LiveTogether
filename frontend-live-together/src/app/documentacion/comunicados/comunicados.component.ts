@@ -26,13 +26,7 @@ import {TokenDataDTO} from "../../modelos/TokenDataDTO";
     styleUrls: ['./comunicados.component.scss'],
     standalone: true,
     imports: [
-        FooterVecinoComponent,
-        HeaderComponent,
-        HeaderVecinoComponent,
         IonicModule,
-        NavLateralDerechoVecinoComponent,
-        NavLateralVecinoComponent,
-        SancionesComponent
     ]
 })
 export class ComunicadosComponent  implements OnInit {

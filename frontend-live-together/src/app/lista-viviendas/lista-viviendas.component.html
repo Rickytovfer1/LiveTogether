@@ -1,0 +1,58 @@
+<app-header></app-header>
+
+<ion-grid class="grid_menus">
+  <ion-row class="fila_menus">
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-comunidad></app-nav-lateral-comunidad>
+    </ion-col>
+
+    <ion-content>
+      <ion-grid>
+        <ion-row class="cabecera">
+          <ion-col size="2">
+            <div class="notif-wrapper">
+              <ion-img
+                (click)="navigateToNotificaciones()"
+                class="btn-notif"
+                src="assets/icon/lista-viviendas/notificacion.png">
+              </ion-img>
+
+              @if (notificacionesPendientes > 0) {
+                <div class="notif-badge">
+                  {{ notificacionesPendientes }}
+                </div>
+              }
+            </div>
+          </ion-col>
+          <ion-col size="8">
+            <div class="buscador">
+              <ion-searchbar
+                class="searchbar-blanco"
+                placeholder="Buscar viviendas"
+                showCancelButton="focus"
+                (ionInput)="filtrarViviendas($event)"
+              ></ion-searchbar>
+            </div>
+          </ion-col>
+          <ion-col size="2" class="crearVivienda">
+            <ion-img (click)="crearVivienda()" src="assets/icon/lista-viviendas/anadir.png"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      @for (vivienda of listaViviendas; track vivienda.id) {
+        <div class="tarjeta" (click)="verInfoVvivienda(vivienda.id)">
+          <p class="tarjeta-titulo">{{ vivienda.direccionPersonal }}</p>
+        </div>
+      }
+    </ion-content>
+
+    <ion-col size="12" size-md="2.5" class="menu-lateral">
+      <app-nav-lateral-derecho-comunidad></app-nav-lateral-derecho-comunidad>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<app-footer-comunidad class="ocultarFooter"></app-footer-comunidad>
