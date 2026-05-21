@@ -1,20 +1,90 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="landing-container">
+  <div class="device-switch">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <button
+      [class.active]="deviceView === 'mobile'"
+      (click)="changeDevice('mobile')">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <ion-icon name="phone-portrait-outline"></ion-icon>
+      Móvil
+    </button>
+
+    <button
+      [class.active]="deviceView === 'desktop'"
+      (click)="changeDevice('desktop')">
+
+      <ion-icon name="desktop-outline"></ion-icon>
+      Ordenador
+    </button>
+
   </div>
+  <div class="landing-wrapper">
+    <div class="content-section">
+
+      <div class="logo-container">
+        <h1>LiveTogether</h1>
+        <span>Tu comunidad, más organizada y transparente</span>
+      </div>
+
+      <p class="description">
+        Gestiona todo lo que ocurre en tu comunidad desde un único lugar:
+        pagos de cuotas y gastos, votaciones entre vecinos, comunicados oficiales
+        y control de sanciones, de forma clara, rápida y segura.
+      </p>
+
+
+      <div class="actions">
+        <ion-button class="login-btn" (click)="navigateToInicioSesion()">
+          Iniciar sesión
+        </ion-button>
+
+        <ion-button class="registro" fill="outline" (click)="navigateToRegistrar()">
+          Registrarme
+        </ion-button>
+      </div>
+
+    </div>
+
+    <div class="phone-section">
+
+
+      @if (deviceView === 'mobile') {
+        <div class="phone-mockup">
+
+          <img
+            class="phone-image"
+            [src]="mobileImages[currentImage]">
+
+        </div>
+      }
+
+      @if (deviceView === 'desktop') {
+
+        <div class="desktop-wrapper">
+
+          <div class="desktop-mockup">
+
+            <div class="desktop-topbar">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <img
+              class="desktop-image"
+              [src]="desktopImages[currentImage]">
+
+          </div>
+
+          <div class="monitor-stand"></div>
+
+        </div>
+      }
+
+    </div>
+
+
+
+  </div>
+
 </ion-content>
