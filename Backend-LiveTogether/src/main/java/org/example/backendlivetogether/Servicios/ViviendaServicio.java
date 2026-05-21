@@ -144,6 +144,19 @@ public class ViviendaServicio {
         iComunidadRepositorio.save(comunidad);
     }
 
+    public void asignarViviendaVecino(Integer idVivienda, Integer idVecino) {
+        Vivienda vivienda = iViviendaRepositorio.findById(idVivienda)
+                .orElseThrow(() -> new RuntimeException("No existe una vivienda con este ID."));
+        Vecino vecino = iVecinoRepositorio.findById(idVecino)
+                .orElseThrow(() -> new RuntimeException("No existe un vecino con este ID."));
+
+        vivienda.getVecinos().add(vecino);
+        vecino.getViviendas().add(vivienda);
+
+        iViviendaRepositorio.save(vivienda);
+        iVecinoRepositorio.save(vecino);
+    }
+
     public static ViviendaDTO getViviendaDTO(Vivienda v) {
         ViviendaDTO dto = new ViviendaDTO();
         dto.setId(v.getId());

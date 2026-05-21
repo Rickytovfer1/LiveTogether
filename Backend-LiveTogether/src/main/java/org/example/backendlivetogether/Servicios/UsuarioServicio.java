@@ -1,10 +1,7 @@
 package org.example.backendlivetogether.Servicios;
 
 import lombok.AllArgsConstructor;
-import org.example.backendlivetogether.DTOs.LoginDTO;
-import org.example.backendlivetogether.DTOs.RegistrarComunidadDTO;
-import org.example.backendlivetogether.DTOs.RegistrarVecinoDTO;
-import org.example.backendlivetogether.DTOs.RespuestaDTO;
+import org.example.backendlivetogether.DTOs.*;
 import org.example.backendlivetogether.Enumerados.Rol;
 import org.example.backendlivetogether.Modelos.Comunidad;
 import org.example.backendlivetogether.Modelos.Usuario;
@@ -48,6 +45,7 @@ public class UsuarioServicio implements UserDetailsService{
 
     private EmailServicio emailServicio;
 
+    private ViviendaServicio viviendaServicio;
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
@@ -136,6 +134,11 @@ public class UsuarioServicio implements UserDetailsService{
         comunidad.setUsuario(usuarioGuardado);
 
         iComunidadRepositorio.save(comunidad);
+
+        viviendaServicio.crearVivienda(new RegistrarViviendaDTO("(Modifica este nombre de vivienda)", comunidad.getId()));
+        ViviendaDTO vivienda = viviendaServicio.listarViviendas(comunidad.getId()).get(0);
+        viviendaServicio.asignarViviendaVecino(vivienda.getId(), presidente.getId());
+        viviendaServicio.asignarPropietarioVivienda(vivienda.getId(), presidente.getId());
 
         String token = UUID.randomUUID().toString();
         LocalDateTime expiryDate = LocalDateTime.now().plusHours(24);
