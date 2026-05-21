@@ -24,8 +24,8 @@ public class PagoServicio {
         try {
             SessionCreateParams params = SessionCreateParams.builder()
                     .setMode(SessionCreateParams.Mode.PAYMENT)
-                    .setSuccessUrl("http://localhost:4200/exito")
-                    .setCancelUrl("http://localhost:4200/cancelado")
+                    .setSuccessUrl("https://livetogether-front.onrender.com/exito")
+                    .setCancelUrl("https://livetogether-front.onrender.com/cancelado")
                     .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                     .addLineItem(
                             SessionCreateParams.LineItem.builder()
